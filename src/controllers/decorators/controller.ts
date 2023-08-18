@@ -15,9 +15,6 @@ function bodyValidators(keys: string[]): RequestHandler {
 
         res.status(422).json({ message: `Please enter your ${key}` });
         return;
-      } else if (req.body[key] === 'email') {
-        res.send('Email already in use');
-        return;
       }
     }
     next();
