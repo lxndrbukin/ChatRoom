@@ -25,6 +25,7 @@ export interface ChatMessage {
 }
 
 export interface IChat extends Document {
+  chatId: string;
   chatName: string;
   members: ChatMember[];
   messages: ChatMessage[];
