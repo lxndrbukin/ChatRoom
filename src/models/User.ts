@@ -1,8 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
-import { IUser, UserRoles } from './types';
+import { IUser } from './types';
 
 const UserSchema: Schema = new Schema<IUser>({
+  userId: Number,
   nickname: { type: String, required: true },
+  email: { type: String, required: true },
   password: { type: String, required: true },
   role: String,
 });

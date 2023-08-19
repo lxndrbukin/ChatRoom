@@ -8,6 +8,7 @@ import { keys } from './services/keys';
 import './controllers/AuthController';
 
 import './models/User';
+import './models/Chat';
 
 const app = express();
 app.use(express.json());
