@@ -26,11 +26,16 @@ class ChatController {
 
   @post('/chats/:chatId')
   async postChat(req: Request, res: Response) {
-    const chat = await Chat.findOne({ chatId: req.params.chatId });
+    const { userId, nickname, role } = req.body;
+    const user = { userId, nickname, role };
+    let chat = await Chat.findOne({ chatId: req.params.chatId });
     if (chat) {
-      if (chat.password && await comparePasswords(chat.password, req.body.password)) {
-
+      if (chat.password && !await comparePasswords(chat.password, req.body.password)) {
+        return res.status(403).json({ message: 'Incorrect password' });
       }
+      chat.updateOne({ $push: { members: user } });
     }
+    chat = await Chat.findOne({ chatId: req.params.chatId });
+    return res.send(chat);
   }
 }

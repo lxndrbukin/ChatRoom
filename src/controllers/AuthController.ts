@@ -55,6 +55,13 @@ class AuthController {
       password: await createPassword(password),
       role: 'User'
     });
+    req.session = { userId: user.userId, email, nickname, role: user.role };
     res.send(user);
+  }
+
+  @get('/logout')
+  getLogout(req: Request, res: Response) {
+    req.session = null;
+    res.send({});
   }
 }
