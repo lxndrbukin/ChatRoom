@@ -1,4 +1,7 @@
 import React from 'react';
+import * as socketIO from 'socket.io-client';
+
+const socket = socketIO.connect('http://localhost:5000');
 
 interface AppProps {
   message: string;
