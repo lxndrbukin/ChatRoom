@@ -29,10 +29,16 @@ const socketIO = require('socket.io')(server, {
 
 socketIO.on('connection', (socket: any): void => {
   console.log(`User ${socket.id} just connected`);
-  socketIO.on('disconnect', () => {
+
+  socket.on('message', (data: any) => {
+    socketIO.emit('messageRes', data);
+  });
+
+  socket.on('disconnect', () => {
     console.log('A user disconnected');
   });
 });
+
 
 mongoose
   .connect(keys.mongoDB)

@@ -1,6 +1,7 @@
 import React from 'react';
 import * as socketIO from 'socket.io-client';
-import { Chats } from './Chats/Chats';
+import { Outlet } from 'react-router-dom';
+import { Sidebar } from './Sidebar/Sidebar';
 
 const socket = socketIO.connect('http://localhost:5000');
 
@@ -11,7 +12,8 @@ interface AppProps {
 export const App: React.FC = (): JSX.Element => {
   return (
     <div className='container'>
-      <Chats socket={socket} />
+      <Sidebar />
+      <Outlet />
     </div>
   );
 };
