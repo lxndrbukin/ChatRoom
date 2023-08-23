@@ -11,8 +11,12 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: 'chats',
+        path: 'IM',
         element: <Chats socket={socket} />,
+      },
+      {
+        path: 'settings',
+        element: <div>Settings</div>,
       },
     ],
   },

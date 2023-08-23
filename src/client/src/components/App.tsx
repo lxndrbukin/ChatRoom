@@ -1,3 +1,4 @@
+import './assets/styles.scss';
 import React from 'react';
 import * as socketIO from 'socket.io-client';
 import { Outlet } from 'react-router-dom';
