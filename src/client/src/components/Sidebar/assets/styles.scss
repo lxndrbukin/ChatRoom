@@ -1,11 +1,22 @@
+@import '../../assets/variables.scss';
+
 .sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  height: 100%;
+  background-color: $dark;
+  padding: $spacing-sm 0;
+  box-sizing: border-box;
 
   .sidebar-logo {
     display: flex;
     justify-content: center;
+    padding: $spacing-lg;
+
+    a {
+      color: $grey;
+    }
   }
 
   .sidebar-links {
@@ -15,6 +26,14 @@
     .sidebar-links-list {
       list-style-type: none;
       padding: 0;
+
+      .sidebar-link {
+        padding: $spacing-lg;
+
+        a {
+          color: $grey;
+        }
+      }
     }
   }
 }

@@ -5,6 +5,7 @@ import cookieSession from 'cookie-session';
 import http from 'http';
 import { Router } from './router';
 import { keys } from './services/keys';
+import User from './models/User';
 
 import './controllers/AuthController';
 
@@ -34,11 +35,22 @@ socketIO.on('connection', (socket: any): void => {
     socketIO.emit('messageRes', data);
   });
 
+  socket.on('event://signup-user', async (data: any) => {
+    console.log(data);
+    const user = await User.create({ ...data, role: 'User' });
+    user.save();
+    socketIO.emit('event://login-user', {
+      userId: user.userId,
+      email: user.email,
+      nickname: user.nickname,
+      role: user.role
+    });
+  });
+
   socket.on('disconnect', () => {
-    console.log('A user disconnected');
+    console.log(`User ${socket.id} just disconnected`);
   });
 });
-
 
 mongoose
   .connect(keys.mongoDB)

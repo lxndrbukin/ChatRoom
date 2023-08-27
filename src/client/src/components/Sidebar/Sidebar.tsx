@@ -19,7 +19,9 @@ export const Sidebar: React.FC = (): JSX.Element => {
   return (
     <div className='sidebar'>
       <div className='sidebar-logo'>
-        <IoMdChatboxes size={30} />
+        <Link to='/'>
+          <IoMdChatboxes size={50} />
+        </Link>
       </div>
       <nav className='sidebar-links'>
         <ul className='sidebar-links-list'>{renderLinks(mainLinks)}</ul>

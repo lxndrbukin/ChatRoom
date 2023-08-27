@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Socket } from 'socket.io-client';
-
-interface ChatsProps {
-  socket: Socket;
-}
+import { ChatsProps } from './types';
 
 export const Chats: React.FC<ChatsProps> = ({ socket }): JSX.Element => {
   useEffect(() => {
