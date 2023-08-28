@@ -1,9 +1,11 @@
 import { Socket } from 'socket.io-client';
 
-export interface ChatsProps {
+export interface ChatSharedProps {
   socket: Socket;
 }
 
-export interface ChatBoxProps {
-  socket: Socket;
-}
+export interface ChatsProps extends ChatSharedProps { }
+
+export interface ChatBoxProps extends ChatSharedProps { }
+
+export interface CreateChatProps extends ChatSharedProps { }

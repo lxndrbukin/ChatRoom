@@ -2,13 +2,13 @@ import './assets/styles.scss';
 import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, loginUser } from '../../store';
+import { AppDispatch, RootState, login } from '../../store';
 import { AuthFormProps } from './types';
 
 export const SignupAuth: React.FC<AuthFormProps> = ({
   socket,
 }): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
   );
@@ -16,7 +16,7 @@ export const SignupAuth: React.FC<AuthFormProps> = ({
   useEffect(() => {
     socket.on('event://login-user', (data) => {
       console.log(data);
-      dispatch(loginUser(data));
+      dispatch(login(data));
     });
   }, [socket, userData]);
 

@@ -11,3 +11,6 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export * from './slices/sessionSlice';
+export * from './slices/chatsSlice';
+export * from './thunks/signup';
+export * from './thunks/login';

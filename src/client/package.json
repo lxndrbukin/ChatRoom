@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.2.7",
     "@types/react-redux": "^7.1.26",
     "axios": "^1.4.0",
+    "http-proxy-middleware": "^1.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
