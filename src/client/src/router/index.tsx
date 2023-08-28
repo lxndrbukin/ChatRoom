@@ -4,6 +4,7 @@ import { App } from '../components/App';
 import { SignupAuth } from '../components/Auth/SignupAuth';
 import { LoginAuth } from '../components/Auth/LoginAuth';
 import { Chats } from '../components/Chats/Chats';
+import { ChatBox } from '../components/Chats/ChatBox';
 
 const socket = socketIO.connect('http://localhost:5000');
 
@@ -15,6 +16,12 @@ export const router = createBrowserRouter([
       {
         path: 'IM',
         element: <Chats socket={socket} />,
+        children: [
+          {
+            path: ':chatId',
+            element: <ChatBox socket={socket} />,
+          },
+        ],
       },
       {
         path: 'settings',
