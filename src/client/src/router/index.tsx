@@ -4,6 +4,7 @@ import { App } from '../components/App';
 import { SignupAuth } from '../components/Auth/SignupAuth';
 import { LoginAuth } from '../components/Auth/LoginAuth';
 import { Chats } from '../components/Chats/Chats';
+import { ChatsList } from '../components/Chats/ChatsList';
 import { ChatBox } from '../components/Chats/ChatBox';
 import { CreateChat } from '../components/Chats/CreateChat';
 
@@ -16,8 +17,12 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'IM',
-        element: <Chats socket={socket} />,
+        element: <Chats />,
         children: [
+          {
+            path: 'IM',
+            element: <ChatsList socket={socket} />,
+          },
           {
             path: ':chatId',
             element: <ChatBox socket={socket} />,

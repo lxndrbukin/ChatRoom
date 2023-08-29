@@ -10,11 +10,11 @@ const chatsSlice = createSlice({
   name: Slices.Chats,
   initialState,
   reducers: {
-    createChat(state: ChatsState, action: PayloadAction<Chat>) {
+    getChat(state: ChatsState, action: PayloadAction<Chat>) {
       state.chatsList.push(action.payload);
     }
   }
 });
 
 export default chatsSlice.reducer;
-export const { createChat } = chatsSlice.actions;
+export const { getChat } = chatsSlice.actions;

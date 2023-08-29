@@ -6,6 +6,7 @@ import http from 'http';
 import { Router } from './router';
 import { keys } from './services/keys';
 import User from './models/User';
+import Chat from './models/Chat';
 
 import './controllers/AuthController';
 
@@ -31,10 +32,6 @@ const socketIO = require('socket.io')(server, {
 socketIO.on('connection', (socket: any): void => {
   console.log(`User ${socket.id} just connected`);
 
-  socket.on('message', (data: any) => {
-    socketIO.emit('messageRes', data);
-  });
-
   socket.on('event://signup-user', async (data: any) => {
     console.log(data);
     const user = await User.create({ ...data, role: 'User' });
@@ -44,6 +41,18 @@ socketIO.on('connection', (socket: any): void => {
       email: user.email,
       nickname: user.nickname,
       role: user.role
+    });
+  });
+
+  socket.on('event://create-chat', async (data: any) => {
+    console.log(data);
+    const chat = await Chat.create(data);
+    chat.save();
+    socketIO.emit('event://get-chat', {
+      chatId: chat.chatId,
+      chatName: chat.chatName,
+      members: chat.members,
+      messages: chat.messages
     });
   });
 
