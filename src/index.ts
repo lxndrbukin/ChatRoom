@@ -49,14 +49,31 @@ socketIO.on('connection', (socket: any): void => {
   socket.on('event://signup-user', async (data: any) => {
     const user = await User.create({ ...data, role: 'User' });
     user.save();
+    const { userId, email, nickname, role } = user;
     socketIO.emit('event://login-user', {
-      userId: user.userId,
-      email: user.email,
-      nickname: user.nickname,
-      role: user.role,
+      userId,
+      email,
+      nickname,
+      role,
     });
-    socket.handshake.session = data;
+    socket.handshake.session = { userId, email, nickname, role };
     socket.handshake.session.save();
+  });
+
+  socket.io('event://login-user', async (data: any) => {
+    const user = await User.findOne({ email: data.email });
+    if (user) {
+      const { userId, email, nickname, role } = user;
+      socketIO.emit('event://login-user', {
+        userId,
+        email,
+        nickname,
+        role
+      });
+      socket.handshake.session = { userId, email, nickname, role };
+      socket.handshake.session.save();
+    }
+    return;
   });
 
   socket.on('event://create-chat', async (data: any) => {
