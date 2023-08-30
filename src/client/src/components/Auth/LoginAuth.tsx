@@ -1,6 +1,25 @@
-import React from 'react';
+import './assets/styles.scss';
+import React, { useEffect } from 'react';
+import { AuthFormProps } from './types';
+import { Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, AppDispatch, RootState } from '../../store';
 
-export const LoginAuth: React.FC = (): JSX.Element => {
+export const LoginAuth: React.FC<AuthFormProps> = ({ socket }): JSX.Element => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { userData, isLoggedIn } = useSelector(
+    (state: RootState) => state.session
+  );
+
+  useEffect(() => {
+    socket.on('event://login-user', (data) => {
+      dispatch(login(data));
+    });
+  }, [socket]);
+
+  if (isLoggedIn) {
+    return <Navigate replace to='/' />;
+  }
   return (
     <form className='auth-form'>
       <label htmlFor='email'>Email:</label>

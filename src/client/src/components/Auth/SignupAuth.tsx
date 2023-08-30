@@ -1,9 +1,9 @@
 import './assets/styles.scss';
 import React, { useEffect } from 'react';
+import { AuthFormProps } from './types';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState, login } from '../../store';
-import { AuthFormProps } from './types';
 
 export const SignupAuth: React.FC<AuthFormProps> = ({
   socket,

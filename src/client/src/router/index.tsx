@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
         path: 'login',
         element: (
           <div className='auth'>
-            <LoginAuth />
+            <LoginAuth socket={socket} />
           </div>
         ),
       },

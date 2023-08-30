@@ -48,11 +48,12 @@ socketIO.on('connection', (socket: any): void => {
     console.log(data);
     const chat = await Chat.create(data);
     chat.save();
+    const { chatId, chatName, members, messages } = chat;
     socketIO.emit('event://get-chat', {
-      chatId: chat.chatId,
-      chatName: chat.chatName,
-      members: chat.members,
-      messages: chat.messages
+      chatId,
+      chatName,
+      members,
+      messages
     });
   });
 

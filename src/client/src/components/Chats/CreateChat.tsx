@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux';
 export const CreateChat: React.FC<CreateChatProps> = ({
   socket,
 }): JSX.Element => {
-  const createNewChat = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleCreateNewChat = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
     const target = e.target as typeof e.target & {
       chatName: { value: string };
       password?: { value: string };
@@ -15,7 +16,7 @@ export const CreateChat: React.FC<CreateChatProps> = ({
   };
 
   return (
-    <form onSubmit={createNewChat} className='form'>
+    <form onSubmit={handleCreateNewChat} className='form'>
       <label htmlFor='chat-name'>Chat Name:</label>
       <input placeholder='Chat Name' id='chat-name' name='chatName' />
       <label htmlFor='chat-password'>Password (optional):</label>
