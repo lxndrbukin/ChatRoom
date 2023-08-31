@@ -2,7 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieSession from 'cookie-session';
-import sharedsession from 'express-socket.io-session';
 import http from 'http';
 import { Router } from './router';
 import { keys } from './services/keys';
@@ -14,21 +13,13 @@ import './controllers/AuthController';
 import './models/User';
 import './models/Chat';
 
-const session = require('express-session')({
-  secret: 'my-secret',
-  resave: true,
-  saveUninitialized: true,
-});
-
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(
   cookieSession({
     keys: ['123safa'],
   })
 );
-app.use(session);
 app.use(Router.getInstance());
 app.use(cors());
 
@@ -36,12 +27,6 @@ const server = http.createServer(app);
 const socketIO = require('socket.io')(server, {
   cors: 'http://localhost:3000',
 });
-
-socketIO.use(
-  sharedsession(session, {
-    autoSave: true,
-  })
-);
 
 socketIO.on('connection', (socket: any): void => {
   console.log(`User ${socket.id} just connected`);
@@ -56,11 +41,9 @@ socketIO.on('connection', (socket: any): void => {
       nickname,
       role,
     });
-    socket.handshake.session = { userId, email, nickname, role };
-    socket.handshake.session.save();
   });
 
-  socket.io('event://login-user', async (data: any) => {
+  socket.on('event://login-user', async (data: any) => {
     const user = await User.findOne({ email: data.email });
     if (user) {
       const { userId, email, nickname, role } = user;
@@ -70,8 +53,6 @@ socketIO.on('connection', (socket: any): void => {
         nickname,
         role
       });
-      socket.handshake.session = { userId, email, nickname, role };
-      socket.handshake.session.save();
     }
     return;
   });

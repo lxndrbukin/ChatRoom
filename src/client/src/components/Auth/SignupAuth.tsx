@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { AuthFormProps } from './types';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState, login } from '../../store';
+import { AppDispatch, RootState, login, signup } from '../../store';
 
 export const SignupAuth: React.FC<AuthFormProps> = ({
   socket,
@@ -12,13 +12,6 @@ export const SignupAuth: React.FC<AuthFormProps> = ({
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
   );
-
-  useEffect(() => {
-    socket.on('event://login-user', (data) => {
-      console.log(data);
-      dispatch(login(data));
-    });
-  }, [socket, userData]);
 
   const signupUser = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -33,7 +26,7 @@ export const SignupAuth: React.FC<AuthFormProps> = ({
       nickname: nickname.value,
       password: password.value,
     };
-    socket.emit('event://signup-user', user);
+    dispatch(signup(user));
   };
 
   if (isLoggedIn) {

@@ -57,7 +57,7 @@ class AuthController {
     });
     const { userId, role } = user;
     req.session = { userId, email, nickname, role };
-    return res.send(user);
+    return res.send(req.session);
   }
 
   @get('/logout')
