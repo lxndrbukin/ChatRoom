@@ -28,6 +28,9 @@ class AuthController {
         res.status(403).json({ message: 'Incorrect password' });
         return;
       }
+      const { userId, role, nickname, email } = user;
+      req.session = { userId, email, nickname, role };
+      return res.send(req.session);
     }
   }
 

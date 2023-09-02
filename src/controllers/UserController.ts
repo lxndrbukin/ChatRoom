@@ -6,21 +6,23 @@ import User from '../models/User';
 class UserController {
   @get('/current_user')
   async getCurrentUser(req: Request, res: Response) {
-    if (req.session && req.session.id) {
-      const currentUser = await User.findOne({ _id: req.session.id }).select('-password -email -__v');
+    if (req.session && req.session.userId) {
+      const currentUser = await User.findOne({ userId: req.session.userId }).select('-_id -password -__v');
       if (currentUser) {
-        res.send(currentUser);
+        return res.send(currentUser);
       }
     }
+    return res.send(undefined);
   }
 
   @get('/users/:userId')
   async getUser(req: Request, res: Response) {
     if (req.params && req.params.userId) {
-      const user = await User.findOne({ _id: req.params.userId }).select('-password -email -__v');
+      const user = await User.findOne({ userId: req.params.userId }).select('-password -email -__v');
       if (user) {
-        res.send(user);
+        return res.send(user);
       }
     }
+    return res.send(undefined);
   }
 }

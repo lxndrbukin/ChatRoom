@@ -13,6 +13,12 @@ export const SignupAuth: React.FC<AuthFormProps> = ({
     (state: RootState) => state.session
   );
 
+  useEffect(() => {
+    socket.on('event://signup-user', (data) => {
+      console.log(data);
+    });
+  }, [socket]);
+
   const signupUser = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const target = e.target as typeof e.target & {

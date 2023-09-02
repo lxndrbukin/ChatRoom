@@ -14,3 +14,5 @@ export * from './slices/sessionSlice';
 export * from './slices/chatsSlice';
 export * from './thunks/signup';
 export * from './thunks/login';
+export * from './thunks/logout';
+export * from './thunks/getSession';

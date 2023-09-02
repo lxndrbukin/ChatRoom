@@ -5,10 +5,10 @@ import cookieSession from 'cookie-session';
 import http from 'http';
 import { Router } from './router';
 import { keys } from './services/keys';
-import User from './models/User';
 import Chat from './models/Chat';
 
 import './controllers/AuthController';
+import './controllers/UserController';
 
 import './models/User';
 import './models/Chat';
@@ -30,32 +30,6 @@ const socketIO = require('socket.io')(server, {
 
 socketIO.on('connection', (socket: any): void => {
   console.log(`User ${socket.id} just connected`);
-
-  socket.on('event://signup-user', async (data: any) => {
-    const user = await User.create({ ...data, role: 'User' });
-    user.save();
-    const { userId, email, nickname, role } = user;
-    socketIO.emit('event://login-user', {
-      userId,
-      email,
-      nickname,
-      role,
-    });
-  });
-
-  socket.on('event://login-user', async (data: any) => {
-    const user = await User.findOne({ email: data.email });
-    if (user) {
-      const { userId, email, nickname, role } = user;
-      socketIO.emit('event://login-user', {
-        userId,
-        email,
-        nickname,
-        role
-      });
-    }
-    return;
-  });
 
   socket.on('event://create-chat', async (data: any) => {
     console.log(data);

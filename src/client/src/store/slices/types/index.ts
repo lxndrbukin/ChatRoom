@@ -4,6 +4,7 @@ export enum Slices {
 }
 
 export interface UserData {
+  userId: number;
   email: string;
   nickname: string;
   role: string;

@@ -29,6 +29,8 @@
 
       .sidebar-link {
         padding: $spacing-lg;
+        color: $grey;
+        cursor: pointer;
 
         a {
           color: $grey;

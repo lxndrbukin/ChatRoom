@@ -11,12 +11,6 @@ export const LoginAuth: React.FC<AuthFormProps> = ({ socket }): JSX.Element => {
     (state: RootState) => state.session
   );
 
-  useEffect(() => {
-    socket.on('event://login-user', (data) => {
-      dispatch(login(data));
-    });
-  }, [socket]);
-
   if (isLoggedIn) {
     return <Navigate replace to='/' />;
   }
