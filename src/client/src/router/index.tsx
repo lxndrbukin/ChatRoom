@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
         element: <Chats />,
         children: [
           {
-            path: 'IM',
+            path: '',
             element: <ChatsList socket={socket} />,
           },
           {
@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
             element: <ChatBox socket={socket} />,
           },
           {
-            path: 'create-chat',
+            path: 'create',
             element: <CreateChat socket={socket} />,
           },
         ],

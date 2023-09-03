@@ -17,7 +17,7 @@ export const ChatsList: React.FC<ChatsListProps> = ({
 
   return (
     <div className='chats-list-wrapper'>
-      <Link to='/IM/create-chat'>
+      <Link to='/IM/create'>
         <button>Create a Chat</button>
       </Link>
       <div className='chats-list'></div>

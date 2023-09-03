@@ -21,6 +21,7 @@ export const CreateChat: React.FC<CreateChatProps> = ({
       <input placeholder='Chat Name' id='chat-name' name='chatName' />
       <label htmlFor='chat-password'>Password (optional):</label>
       <input placeholder='Password' id='chat-password' name='password' />
+      <button>Create</button>
     </form>
   );
 };
