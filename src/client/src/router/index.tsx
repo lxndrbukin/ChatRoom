@@ -39,19 +39,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'signup',
-        element: (
-          <div className='auth'>
-            <SignupAuth socket={socket} />
-          </div>
-        ),
+        element: <SignupAuth />,
       },
       {
         path: 'login',
-        element: (
-          <div className='auth'>
-            <LoginAuth socket={socket} />
-          </div>
-        ),
+        element: <LoginAuth />,
       },
     ],
   },

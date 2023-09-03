@@ -13,6 +13,7 @@ export interface UserData {
 export interface UserState {
   isLoggedIn: boolean;
   userData: UserData | undefined;
+  message: string | undefined;
 }
 
 export interface Chat {

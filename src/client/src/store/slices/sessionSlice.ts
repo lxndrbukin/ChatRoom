@@ -7,7 +7,8 @@ import { getSession } from '../thunks/getSession';
 
 const initialState: UserState = {
   isLoggedIn: false,
-  userData: undefined
+  userData: undefined,
+  message: undefined
 };
 
 const sessionSlice = createSlice({
@@ -18,6 +19,9 @@ const sessionSlice = createSlice({
     builder.addCase(signup.fulfilled, (state: UserState, action: PayloadAction<UserData>) => {
       state.isLoggedIn = true;
       state.userData = action.payload;
+    });
+    builder.addCase(signup.rejected, (state: UserState) => {
+      state.message = 'Email or Nickname already in use.';
     });
     builder.addCase(login.fulfilled, (state: UserState, action: PayloadAction<UserData>) => {
       state.isLoggedIn = true;

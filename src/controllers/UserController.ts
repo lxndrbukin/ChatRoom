@@ -12,7 +12,7 @@ class UserController {
         return res.send(currentUser);
       }
     }
-    return res.send(undefined);
+    return res.send(null);
   }
 
   @get('/users/:userId')
@@ -23,6 +23,6 @@ class UserController {
         return res.send(user);
       }
     }
-    return res.send(undefined);
+    return res.send(null);
   }
 }

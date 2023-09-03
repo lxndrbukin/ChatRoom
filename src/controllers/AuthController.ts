@@ -21,12 +21,10 @@ class AuthController {
     if (req.body.email) {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
-        res.status(403).json({ message: 'User does not exist' });
-        return;
+        return res.status(403).json({ message: 'User does not exist' });
       }
       if (user && !await comparePasswords(user.password, req.body.password)) {
-        res.status(403).json({ message: 'Incorrect password' });
-        return;
+        return res.status(403).json({ message: 'Incorrect password' });
       }
       const { userId, role, nickname, email } = user;
       req.session = { userId, email, nickname, role };
@@ -50,6 +48,10 @@ class AuthController {
   @bodyValidator('email', 'nickname', 'password')
   async postSignup(req: Request, res: Response) {
     const { email, nickname, password } = req.body;
+    const existingUser = await User.findOne({ email: req.body.email });
+    if (existingUser) {
+      return res.status(403).json({ message: 'Email or Nickname already in use.' });
+    }
     const num = await User.count();
     const user = await User.create({
       userId: num + 1,

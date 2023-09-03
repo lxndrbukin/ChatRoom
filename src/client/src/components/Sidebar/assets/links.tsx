@@ -27,9 +27,9 @@ export const mainLinks: SidebarLink[] = [
     ifLoggedIn: true,
   },
   {
-    name: 'Sign Up',
+    name: 'Login',
     icon: <RiLoginBoxLine size={24} />,
-    path: '/signup',
+    path: '/login',
     ifLoggedIn: false,
   },
 ];

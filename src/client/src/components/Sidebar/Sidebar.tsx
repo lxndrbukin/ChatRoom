@@ -20,13 +20,18 @@ export const Sidebar: React.FC = (): JSX.Element => {
       if (link.ifLoggedIn === isLoggedIn) {
         if (link.path !== '/logout') {
           return (
-            <li className='sidebar-link' key={link.name}>
+            <li title={link.name} className='sidebar-link' key={link.name}>
               <Link to={link.path}>{link.icon}</Link>
             </li>
           );
         }
         return (
-          <li onClick={logoutUser} className='sidebar-link' key={link.name}>
+          <li
+            title={link.name}
+            onClick={logoutUser}
+            className='sidebar-link'
+            key={link.name}
+          >
             {link.icon}
           </li>
         );

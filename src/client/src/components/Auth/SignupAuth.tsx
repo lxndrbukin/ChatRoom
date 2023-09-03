@@ -5,19 +5,11 @@ import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState, login, signup } from '../../store';
 
-export const SignupAuth: React.FC<AuthFormProps> = ({
-  socket,
-}): JSX.Element => {
+export const SignupAuth: React.FC<AuthFormProps> = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
-  const { userData, isLoggedIn } = useSelector(
+  const { isLoggedIn, message } = useSelector(
     (state: RootState) => state.session
   );
-
-  useEffect(() => {
-    socket.on('event://signup-user', (data) => {
-      console.log(data);
-    });
-  }, [socket]);
 
   const signupUser = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -39,14 +31,17 @@ export const SignupAuth: React.FC<AuthFormProps> = ({
     return <Navigate replace to='/' />;
   }
   return (
-    <form onSubmit={signupUser} className='auth-form'>
-      <label htmlFor='email'>Email:</label>
-      <input placeholder='Email' id='email' name='email' />
-      <label htmlFor='nickname'>Nickname:</label>
-      <input placeholder='Nickname' id='nickname' name='nickname' />
-      <label htmlFor='password'>Password:</label>
-      <input placeholder='Password' id='password' name='password' />
-      <button className='auth-form-button'>Sign Up</button>
-    </form>
+    <div className='auth'>
+      <form onSubmit={signupUser} className='auth-form'>
+        <label htmlFor='email'>Email:</label>
+        <input placeholder='Email' id='email' name='email' />
+        <label htmlFor='nickname'>Nickname:</label>
+        <input placeholder='Nickname' id='nickname' name='nickname' />
+        <label htmlFor='password'>Password:</label>
+        <input placeholder='Password' id='password' name='password' />
+        <button className='auth-form-button'>Sign Up</button>
+      </form>
+      <div className='auth-error-message'>{message ? message : ''}</div>
+    </div>
   );
 };
