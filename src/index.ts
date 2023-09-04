@@ -36,7 +36,7 @@ socketIO.on('connection', (socket: any): void => {
     const chat = await Chat.create(data);
     chat.save();
     const { chatId, chatName, members, messages } = chat;
-    socketIO.emit('event://get-chat', {
+    socketIO.emit('event://create-chat-res', {
       chatId,
       chatName,
       members,

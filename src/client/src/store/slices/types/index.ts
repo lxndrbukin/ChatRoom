@@ -17,6 +17,7 @@ export interface UserState {
 }
 
 export interface Chat {
+  chatId: string;
   name: string;
   password?: string;
   messages: ChatMessage[];
