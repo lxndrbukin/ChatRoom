@@ -32,9 +32,8 @@ socketIO.on('connection', (socket: any): void => {
   console.log(`User ${socket.id} just connected`);
 
   socket.on('event://create-chat', async (data: any) => {
-    console.log(data);
-    const chat = await Chat.create(data);
-    chat.save();
+    const id = await Chat.count() + 1;
+    const chat = await Chat.create({ chatId: id, chatName: data.chatName, messages: [], members: [data.createdBy], password: data.password });
     const { chatId, chatName, members, messages } = chat;
     socketIO.emit('event://create-chat-res', {
       chatId,

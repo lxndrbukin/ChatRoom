@@ -1,6 +1,5 @@
 import React from 'react';
 import { ChatsListItemProps } from './types';
-import { Chat } from '../../store';
 
 export const ChatsListItem: React.FC<ChatsListItemProps> = ({
   chat,
