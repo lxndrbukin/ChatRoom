@@ -1,10 +1,19 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { ChatBoxProps } from './types';
-import { Socket } from 'socket.io-client';
+import { fetchChat } from '../../store';
 
 export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
+  const dispatch = useDispatch();
+  const { chatId } = useParams();
+
   useEffect(() => {
-    socket.on('event://get-message', (data) => {
+    socket.emit('event://fetch-chat', chatId);
+    socket.on('event://fetch-chat-res', (data) => {
+      dispatch(fetchChat(data));
+    });
+    socket.on('event://send-message-res', (data) => {
       console.log(data);
     });
   }, [socket]);

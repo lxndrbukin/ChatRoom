@@ -30,6 +30,6 @@ export interface ChatMessage {
 }
 
 export interface ChatsState {
-  currentChat: ChatMessage[],
+  currentChat: Chat | undefined,
   chatsList: Chat[];
 }

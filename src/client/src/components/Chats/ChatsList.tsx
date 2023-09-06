@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ChatsListProps } from './types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { RootState } from '../../store';
+import { RootState, fetchAllChats } from '../../store';
 import { ChatsListItem } from './ChatsListItem';
 
 export const ChatsList: React.FC<ChatsListProps> = ({
   socket,
 }): JSX.Element => {
+  const dispatch = useDispatch();
   const { chatsList } = useSelector((state: RootState) => state.chats);
+
+  useEffect(() => {
+    socket.emit('event://fetch-chats');
+    socket.on('event://fetch-chats-res', (data) => {
+      dispatch(fetchAllChats(data));
+    });
+  }, [socket]);
 
   const renderChatList = () => {
     return chatsList.map((chat) => {

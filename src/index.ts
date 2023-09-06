@@ -43,6 +43,16 @@ socketIO.on('connection', (socket: any): void => {
     });
   });
 
+  socket.on('event://fetch-chats', async () => {
+    const chats = await Chat.find();
+    socketIO.emit('event://fetch-chats-res', chats);
+  });
+
+  socket.on('event://fetch-chat', async (data: any) => {
+    const chat = await Chat.findOne({ chatId: data });
+    socketIO.emit('event://fetch-chat-res', chat);
+  });
+
   socket.on('disconnect', () => {
     console.log(`User ${socket.id} just disconnected`);
   });

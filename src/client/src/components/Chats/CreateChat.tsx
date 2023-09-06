@@ -28,7 +28,7 @@ export const CreateChat: React.FC<CreateChatProps> = ({
       password: password ? password.value : undefined,
       createdBy: userData,
     };
-    socket.emit('event://create-chat', { ...chat });
+    socket.emit('event://create-chat', chat);
   };
 
   return (
