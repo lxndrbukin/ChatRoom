@@ -2,13 +2,16 @@ import React, { useEffect } from 'react';
 import { CreateChatProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, createChat } from '../../store';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export const CreateChat: React.FC<CreateChatProps> = ({
   socket,
 }): JSX.Element => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userData } = useSelector((state: RootState) => state.session);
+  const { userData, isLoggedIn } = useSelector(
+    (state: RootState) => state.session
+  );
 
   useEffect(() => {
     socket.on('event://create-chat-res', (data) => {
@@ -29,8 +32,12 @@ export const CreateChat: React.FC<CreateChatProps> = ({
       createdBy: userData,
     };
     socket.emit('event://create-chat', chat);
+    navigate('/IM');
   };
 
+  if (!isLoggedIn) {
+    return <Navigate to='/' />;
+  }
   return (
     <form onSubmit={handleCreateNewChat} className='form'>
       <label htmlFor='chat-name'>Chat Name:</label>

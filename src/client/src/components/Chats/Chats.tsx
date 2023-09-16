@@ -1,3 +1,4 @@
+import './assets/styles.scss';
 import React, { useEffect } from 'react';
 import { ChatsProps } from './types';
 import { Outlet } from 'react-router-dom';

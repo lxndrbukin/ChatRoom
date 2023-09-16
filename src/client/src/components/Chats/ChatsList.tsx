@@ -18,10 +18,13 @@ export const ChatsList: React.FC<ChatsListProps> = ({
     });
   }, [socket]);
 
-  const renderChatList = () => {
-    return chatsList.map((chat) => {
-      return <ChatsListItem chat={chat} />;
-    });
+  const renderChatList = (): JSX.Element | JSX.Element[] => {
+    if (chatsList) {
+      return chatsList.map((chat) => {
+        return <ChatsListItem chat={chat} />;
+      });
+    }
+    return <div>Loading...</div>;
   };
 
   return (

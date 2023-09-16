@@ -44,7 +44,7 @@ socketIO.on('connection', (socket: any): void => {
   });
 
   socket.on('event://fetch-chats', async () => {
-    const chats = await Chat.find();
+    const chats = await Chat.find().select('-_id -__v');
     socketIO.emit('event://fetch-chats-res', chats);
   });
 

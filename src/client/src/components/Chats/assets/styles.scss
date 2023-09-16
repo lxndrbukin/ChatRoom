@@ -4,4 +4,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .chats-list-wrapper {
+    width: 80%;
+
+    .chats-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: $spacing-lg;
+
+      .chat-item {
+        box-shadow: $box-shadow;
+        min-height: 150px;
+      }
+    }
+  }
 }
