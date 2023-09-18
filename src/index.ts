@@ -43,17 +43,17 @@ socketIO.on('connection', (socket: any): void => {
     });
   });
 
-  socket.on('event://fetch-chats', async () => {
+  socket.on('event://fetch-chats', async (): Promise<void> => {
     const chats = await Chat.find().select('-_id -__v');
     socketIO.emit('event://fetch-chats-res', chats);
   });
 
-  socket.on('event://fetch-chat', async (data: any) => {
+  socket.on('event://fetch-chat', async (data: any): Promise<void> => {
     const chat = await Chat.findOne({ chatId: data });
     socketIO.emit('event://fetch-chat-res', chat);
   });
 
-  socket.on('disconnect', () => {
+  socket.on('disconnect', (): void => {
     console.log(`User ${socket.id} just disconnected`);
   });
 });
@@ -64,4 +64,4 @@ mongoose
   .catch((error) => console.log(error));
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log('Server running on port', PORT));
+server.listen(PORT, (): void => console.log('Server running on port', PORT));

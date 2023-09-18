@@ -1,20 +1,26 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ChatBoxProps } from './types';
-import { fetchChat } from '../../store';
+import {
+  fetchChat,
+  sendMessage,
+  Chat,
+  ChatMessage,
+  RootState,
+} from '../../store';
 
 export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
   const dispatch = useDispatch();
-  const { chatId } = useParams();
+  const { chatIdParam } = useParams();
 
   useEffect(() => {
-    socket.emit('event://fetch-chat', chatId);
-    socket.on('event://fetch-chat-res', (data) => {
+    socket.emit('event://fetch-chat', chatIdParam);
+    socket.on('event://fetch-chat-res', (data: Chat): void => {
       dispatch(fetchChat(data));
     });
-    socket.on('event://send-message-res', (data) => {
-      console.log(data);
+    socket.on('event://send-message-res', (data: ChatMessage): void => {
+      dispatch(sendMessage(data));
     });
   }, [socket]);
 
@@ -31,7 +37,7 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
       <div className='chat-messages'></div>
       <form onSubmit={handleSendMessage}>
         <input name='message' />
-        <button>Send</button>
+        <button className='chat-button'>Send</button>
       </form>
     </div>
   );

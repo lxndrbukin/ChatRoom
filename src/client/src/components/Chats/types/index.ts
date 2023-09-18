@@ -1,5 +1,5 @@
 import { Socket } from 'socket.io-client';
-import { Chat } from '../../../store';
+import { ChatsListItem } from '../../../store';
 
 export interface ChatSharedProps {
   socket: Socket;
@@ -14,5 +14,5 @@ export interface CreateChatProps extends ChatSharedProps { }
 export interface ChatsListProps extends ChatSharedProps { }
 
 export interface ChatsListItemProps {
-  chat: Chat;
+  chat: ChatsListItem;
 }

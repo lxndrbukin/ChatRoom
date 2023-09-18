@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Slices, ChatsState, Chat, ChatMessage } from './types';
+import { Slices, ChatsState, Chat, ChatsListItem, ChatMessage } from './types';
 
 const initialState: ChatsState = {
   currentChat: undefined,
@@ -10,13 +10,13 @@ const chatsSlice = createSlice({
   name: Slices.Chats,
   initialState,
   reducers: {
-    createChat(state: ChatsState, action: PayloadAction<Chat>) {
+    createChat(state: ChatsState, action: PayloadAction<ChatsListItem>) {
       state.chatsList.push(action.payload);
     },
-    fetchAllChats(state: ChatsState, action: PayloadAction<Chat[]>) {
+    fetchAllChats(state: ChatsState, action: PayloadAction<ChatsListItem[]>) {
       state.chatsList = action.payload;
     },
-    deleteChat(state: ChatsState, action: PayloadAction<Chat>) {
+    deleteChat(state: ChatsState, action: PayloadAction<ChatsListItem>) {
       const filtered = state.chatsList.filter(chat => chat.chatId !== action.payload.chatId);
       state.chatsList = filtered;
     },
@@ -35,4 +35,4 @@ const chatsSlice = createSlice({
 });
 
 export default chatsSlice.reducer;
-export const { createChat, fetchAllChats, deleteChat, selectChat, fetchChat } = chatsSlice.actions;
+export const { createChat, fetchAllChats, deleteChat, selectChat, fetchChat, sendMessage } = chatsSlice.actions;

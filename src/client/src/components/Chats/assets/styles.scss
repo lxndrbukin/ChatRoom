@@ -16,7 +16,14 @@
       .chat-item {
         box-shadow: $box-shadow;
         min-height: 150px;
+        border-radius: 7px;
       }
+    }
+
+    .create-button {
+      border-radius: 7px;
+      border: none;
+      background-color: $grey;
     }
   }
 }

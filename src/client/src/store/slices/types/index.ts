@@ -16,10 +16,15 @@ export interface UserState {
   message: string | undefined;
 }
 
-export interface Chat {
+export interface ChatsListItem {
   chatId: string;
   chatName: string;
   password?: string;
+}
+
+export interface Chat {
+  chatId: string;
+  members: UserData[];
   messages: ChatMessage[];
 }
 
@@ -31,5 +36,5 @@ export interface ChatMessage {
 
 export interface ChatsState {
   currentChat: Chat | undefined,
-  chatsList: Chat[];
+  chatsList: ChatsListItem[];
 }
