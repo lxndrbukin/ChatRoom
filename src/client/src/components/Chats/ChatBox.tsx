@@ -1,40 +1,73 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { ChatBoxProps } from './types';
 import {
   fetchChat,
   sendMessage,
   Chat,
   ChatMessage,
+  SendMessageRes,
+  getChat,
   RootState,
+  AppDispatch,
 } from '../../store';
 
 export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
-  const dispatch = useDispatch();
-  const { chatIdParam } = useParams();
+  const dispatch = useDispatch<AppDispatch>();
+  const { chatId } = useParams();
+  const { userData, isLoggedIn } = useSelector(
+    (state: RootState) => state.session
+  );
+  const { currentChat } = useSelector((state: RootState) => state.chats);
 
   useEffect(() => {
-    socket.emit('event://fetch-chat', chatIdParam);
-    socket.on('event://fetch-chat-res', (data: Chat): void => {
-      dispatch(fetchChat(data));
+    if (chatId) {
+      dispatch(getChat(chatId));
+    }
+    socket.on('event://send-message-res', (data: SendMessageRes): void => {
+      if (chatId === data.chatId) {
+        dispatch(sendMessage(data));
+      }
     });
-    socket.on('event://send-message-res', (data: ChatMessage): void => {
-      dispatch(sendMessage(data));
-    });
-  }, [socket]);
+    return () => {
+      socket.off('event://send-message-res');
+    };
+  }, [socket, dispatch]);
+
+  const renderMessages = (): JSX.Element[] | null => {
+    if (currentChat && currentChat.messages) {
+      return currentChat.messages.map((messageData, id) => {
+        return <div key={id}>{messageData.message}</div>;
+      });
+    }
+    return null;
+  };
 
   const handleSendMessage = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
       message: { value: string };
     };
-    socket.emit('event://send-message', target.message.value);
+    if (currentChat) {
+      console.log('send');
+      if (chatId === JSON.stringify(currentChat.chatId)) {
+        socket.emit('event://send-message', {
+          chatId,
+          userId: userData?.userId,
+          nickname: userData?.nickname,
+          message: target.message.value,
+        });
+      }
+    }
   };
 
+  if (!isLoggedIn) {
+    return <Navigate to='/' />;
+  }
   return (
     <div className='chat-box'>
-      <div className='chat-messages'></div>
+      <div className='chat-messages'>{renderMessages()}</div>
       <form onSubmit={handleSendMessage}>
         <input name='message' />
         <button className='chat-button'>Send</button>

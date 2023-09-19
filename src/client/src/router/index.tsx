@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
             element: <ChatsList socket={socket} />,
           },
           {
-            path: ':chatId',
+            path: '/IM/:chatId',
             element: <ChatBox socket={socket} />,
           },
           {

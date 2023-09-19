@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Slices, ChatsState, Chat, ChatsListItem, ChatMessage } from './types';
+import { Slices, ChatsState, Chat, ChatsListItem, ChatMessage, SendMessageRes } from './types';
+import { getChat } from '../thunks/getChat';
 
 const initialState: ChatsState = {
   currentChat: undefined,
@@ -26,11 +27,20 @@ const chatsSlice = createSlice({
     fetchChat(state: ChatsState, action: PayloadAction<Chat>) {
       state.currentChat = action.payload;
     },
-    sendMessage(state: ChatsState, action: PayloadAction<ChatMessage>) {
+    sendMessage(state: ChatsState, action: PayloadAction<SendMessageRes>) {
+      const { userId, nickname, message, chatId } = action.payload;
+      const messageData = { userId, nickname, message };
       if (state.currentChat) {
-        state.currentChat.messages.push(action.payload);
+        if (chatId === JSON.stringify(state.currentChat.chatId)) {
+          state.currentChat.messages = [...state.currentChat.messages, messageData];
+        }
       }
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getChat.fulfilled, (state: ChatsState, action: PayloadAction<Chat>) => {
+      state.currentChat = action.payload;
+    });
   }
 });
 

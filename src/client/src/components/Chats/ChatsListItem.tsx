@@ -6,7 +6,7 @@ export const ChatsListItem: React.FC<ChatsListItemProps> = ({
   chat,
 }): JSX.Element => {
   return (
-    <Link key={chat.chatId} to={chat.chatId}>
+    <Link key={chat.chatId} to={`/IM/${chat.chatId}`}>
       <div className='chat-item'>
         <div className='chat-item-name'>{chat.chatName}</div>
       </div>

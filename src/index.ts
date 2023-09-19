@@ -9,6 +9,7 @@ import Chat from './models/Chat';
 
 import './controllers/AuthController';
 import './controllers/UserController';
+import './controllers/ChatController';
 
 import './models/User';
 import './models/Chat';
@@ -51,6 +52,11 @@ socketIO.on('connection', (socket: any): void => {
   socket.on('event://fetch-chat', async (data: any): Promise<void> => {
     const chat = await Chat.findOne({ chatId: data });
     socketIO.emit('event://fetch-chat-res', chat);
+  });
+
+  socket.on('event://send-message', async (data: any): Promise<void> => {
+    await Chat.updateOne({ chatId: data.chatId }, { $push: { messages: { userId: data.userId, nickname: data.nickname, message: data.message } } });
+    socketIO.emit('event://send-message-res', { chatId: data.chatId, userId: data.userId, nickname: data.nickname, message: data.message });
   });
 
   socket.on('disconnect', (): void => {

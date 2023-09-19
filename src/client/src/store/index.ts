@@ -20,3 +20,4 @@ export * from './thunks/signup';
 export * from './thunks/login';
 export * from './thunks/logout';
 export * from './thunks/getSession';
+export * from './thunks/getChat';

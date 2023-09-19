@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { controller, get, post, bodyValidator, use } from './decorators';
+import { controller, get, post, bodyValidator, use, put } from './decorators';
 import Chat from '../models/Chat';
 import { createPassword, comparePasswords } from './helpers';
 
@@ -7,8 +7,8 @@ import { createPassword, comparePasswords } from './helpers';
 class ChatController {
   @get('/chats')
   async getChats(req: Request, res: Response) {
-    const chats = await Chat.find({ members: { $all: [{ userId: req.params.userId }] } });
-    res.send(chats);
+    const chats = await Chat.find();
+    return res.send(chats);
   }
 
   @post('/chats')
@@ -36,6 +36,13 @@ class ChatController {
       chat.updateOne({ $push: { members: user } });
     }
     chat = await Chat.findOne({ chatId: req.params.chatId });
+    return res.send(chat);
+  }
+
+  @get('/chats/:chatId')
+  async getChat(req: Request, res: Response) {
+    const { chatId } = req.params;
+    const chat = await Chat.findOne({ chatId });
     return res.send(chat);
   }
 }

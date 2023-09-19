@@ -23,15 +23,19 @@ export interface ChatsListItem {
 }
 
 export interface Chat {
-  chatId: string;
+  chatId: number;
   members: UserData[];
   messages: ChatMessage[];
 }
 
 export interface ChatMessage {
-  userId: string,
+  userId: number,
   nickname: string,
   message: string;
+}
+
+export interface SendMessageRes extends ChatMessage {
+  chatId: string;
 }
 
 export interface ChatsState {
