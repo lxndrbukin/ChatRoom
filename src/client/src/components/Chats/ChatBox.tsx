@@ -12,6 +12,7 @@ import {
   RootState,
   AppDispatch,
 } from '../../store';
+import { ChatMessages } from './ChatMessages';
 
 export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -67,7 +68,7 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
   }
   return (
     <div className='chat-box'>
-      <div className='chat-messages'>{renderMessages()}</div>
+      <ChatMessages messages={currentChat ? currentChat.messages : []} />
       <form onSubmit={handleSendMessage}>
         <input name='message' />
         <button className='chat-button'>Send</button>

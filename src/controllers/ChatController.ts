@@ -42,7 +42,7 @@ class ChatController {
   @get('/chats/:chatId')
   async getChat(req: Request, res: Response) {
     const { chatId } = req.params;
-    const chat = await Chat.findOne({ chatId });
+    const chat = await Chat.findOne({ chatId }).select('-__v -_id');
     return res.send(chat);
   }
 }

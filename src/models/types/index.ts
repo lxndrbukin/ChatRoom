@@ -19,6 +19,7 @@ export interface ChatMember {
 }
 
 export interface ChatMessage {
+  messageId: string;
   userId: number;
   nickname: string;
   message: string;

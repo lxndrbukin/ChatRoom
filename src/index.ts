@@ -6,6 +6,7 @@ import http from 'http';
 import { Router } from './router';
 import { keys } from './services/keys';
 import Chat from './models/Chat';
+import { nanoid } from 'nanoid';
 
 import './controllers/AuthController';
 import './controllers/UserController';
@@ -55,7 +56,8 @@ socketIO.on('connection', (socket: any): void => {
   });
 
   socket.on('event://send-message', async (data: any): Promise<void> => {
-    await Chat.updateOne({ chatId: data.chatId }, { $push: { messages: { userId: data.userId, nickname: data.nickname, message: data.message } } });
+    const chat = await Chat.findOne({ chatId: data.chatId });
+    await Chat.updateOne({ chatId: data.chatId }, { $push: { messages: { messageId: nanoid(), userId: data.userId, nickname: data.nickname, message: data.message } } });
     socketIO.emit('event://send-message-res', { chatId: data.chatId, userId: data.userId, nickname: data.nickname, message: data.message });
   });
 

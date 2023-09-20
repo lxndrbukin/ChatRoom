@@ -28,8 +28,8 @@ const chatsSlice = createSlice({
       state.currentChat = action.payload;
     },
     sendMessage(state: ChatsState, action: PayloadAction<SendMessageRes>) {
-      const { userId, nickname, message, chatId } = action.payload;
-      const messageData = { userId, nickname, message };
+      const { messageId, userId, nickname, message, chatId } = action.payload;
+      const messageData = { messageId, userId, nickname, message };
       if (state.currentChat) {
         if (chatId === JSON.stringify(state.currentChat.chatId)) {
           state.currentChat.messages = [...state.currentChat.messages, messageData];
