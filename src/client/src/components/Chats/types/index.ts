@@ -1,5 +1,7 @@
+import { RefObject } from 'react';
 import { Socket } from 'socket.io-client';
 import { ChatsListItem, ChatMessage } from '../../../store';
+import { useRef } from 'react';
 
 export interface ChatSharedProps {
   socket: Socket;
@@ -15,6 +17,8 @@ export interface ChatsListProps extends ChatSharedProps { }
 
 export interface ChatMessagesProps {
   messages: ChatMessage[];
+  typingStatus: string;
+  lastMessageRef: RefObject<HTMLDivElement>;
 }
 
 export interface ChatMessageProps {

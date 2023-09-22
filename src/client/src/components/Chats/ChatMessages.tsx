@@ -5,6 +5,7 @@ import { ChatMessageItem } from './ChatMessageItem';
 
 export const ChatMessages: React.FC<ChatMessagesProps> = ({
   messages,
+  lastMessageRef,
 }): JSX.Element => {
   const renderMessages = () => {
     return messages.map((messageData: ChatMessage) => {
@@ -17,5 +18,10 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({
     });
   };
 
-  return <div className='messages'>{renderMessages()}</div>;
+  return (
+    <div className='messages-box'>
+      {renderMessages()}
+      <div ref={lastMessageRef} />
+    </div>
+  );
 };

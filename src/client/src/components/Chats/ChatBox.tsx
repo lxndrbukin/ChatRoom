@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Navigate } from 'react-router-dom';
 import { ChatBoxProps } from './types';
@@ -15,12 +15,14 @@ import {
 import { ChatMessages } from './ChatMessages';
 
 export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
+  const lastMessageRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch<AppDispatch>();
   const { chatId } = useParams();
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
   );
   const { currentChat } = useSelector((state: RootState) => state.chats);
+  const [typingStatus, setTypingStatus] = useState('');
 
   useEffect(() => {
     if (chatId) {
@@ -31,18 +33,20 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
         dispatch(sendMessage(data));
       }
     });
+    socket.on('event://typing-message-res', (data: string) => {
+      setTypingStatus(data);
+    });
     return () => {
       socket.off('event://send-message-res');
     };
   }, [socket, dispatch]);
 
-  const renderMessages = (): JSX.Element[] | null => {
-    if (currentChat && currentChat.messages) {
-      return currentChat.messages.map((messageData, id) => {
-        return <div key={id}>{messageData.message}</div>;
-      });
-    }
-    return null;
+  useEffect(() => {
+    lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [currentChat?.messages]);
+
+  const handleTyping = (): void => {
+    socket.emit('event://typing-message', `${userData?.nickname} is typing...`);
   };
 
   const handleSendMessage = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -68,9 +72,14 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
   }
   return (
     <div className='chat-box'>
-      <ChatMessages messages={currentChat ? currentChat.messages : []} />
+      <ChatMessages
+        typingStatus={typingStatus}
+        lastMessageRef={lastMessageRef}
+        messages={currentChat ? currentChat.messages : []}
+      />
+      <div>{typingStatus}</div>
       <form onSubmit={handleSendMessage}>
-        <input name='message' />
+        <input onKeyDown={handleTyping} name='message' />
         <button className='chat-button'>Send</button>
       </form>
     </div>

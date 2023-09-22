@@ -27,3 +27,44 @@
     }
   }
 }
+
+.chat-box {
+  width: 100%;
+
+  .messages-box {
+    overflow: auto;
+    height: calc(100vh - 21px);
+
+    .message {
+      width: 100%;
+      display: flex;
+      padding: $spacing-md;
+      box-sizing: border-box;
+
+      .message-side-two {
+        padding: 0 $spacing-md;
+
+        .message-text {
+          background-color: $light-blue;
+          border: 1px solid $light-blue;
+          width: fit-content;
+          padding: $spacing-md $spacing-lg;
+          border-radius: 3px 8px 8px 8px;
+        }
+      }
+    }
+
+    .current-user {
+      display: flex;
+      flex-direction: row-reverse;
+
+      .message-side-two {
+        .message-text {
+          border-radius: 8px 3px 8px 8px;
+          background-color: $white;
+          border: 1px solid $grey;
+        }
+      }
+    }
+  }
+}
