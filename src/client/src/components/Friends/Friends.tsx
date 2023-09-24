@@ -1,10 +1,9 @@
-import './assets/styles.scss';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-export const Chats: React.FC = (): JSX.Element => {
+export const Friends: React.FC = (): JSX.Element => {
   return (
-    <div className='chats'>
+    <div className='friends'>
       <Outlet />
     </div>
   );

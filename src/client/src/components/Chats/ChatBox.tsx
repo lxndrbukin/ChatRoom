@@ -3,16 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Navigate } from 'react-router-dom';
 import { ChatBoxProps } from './types';
 import {
-  fetchChat,
   sendMessage,
-  Chat,
-  ChatMessage,
   SendMessageRes,
   getChat,
   RootState,
   AppDispatch,
 } from '../../store';
 import { ChatMessages } from './ChatMessages';
+import { ChatForm } from './ChatForm';
 
 export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
   const lastMessageRef = useRef<HTMLDivElement>(null);
@@ -39,7 +37,7 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
     return () => {
       socket.off('event://send-message-res');
     };
-  }, [socket, dispatch]);
+  }, [socket, chatId]);
 
   useEffect(() => {
     lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -78,10 +76,10 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
         messages={currentChat ? currentChat.messages : []}
       />
       <div>{typingStatus}</div>
-      <form onSubmit={handleSendMessage}>
-        <input onKeyDown={handleTyping} name='message' />
-        <button className='chat-button'>Send</button>
-      </form>
+      <ChatForm
+        handleTyping={handleTyping}
+        handleSendMessage={handleSendMessage}
+      />
     </div>
   );
 };

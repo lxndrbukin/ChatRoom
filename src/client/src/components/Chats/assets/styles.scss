@@ -1,22 +1,21 @@
 @import '../../assets/variables.scss';
 
 .chats {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 250px 1fr;
 
   .chats-list-wrapper {
-    width: 80%;
 
     .chats-list {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-gap: $spacing-lg;
+      grid-template-columns: 1fr;
+      width: fit-content;
 
       .chat-item {
         box-shadow: $box-shadow;
-        min-height: 150px;
+        min-height: 75px;
         border-radius: 7px;
+        width: 250px;
       }
     }
 

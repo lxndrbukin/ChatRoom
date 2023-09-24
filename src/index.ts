@@ -6,6 +6,7 @@ import http from 'http';
 import { Router } from './router';
 import { keys } from './services/keys';
 import Chat from './models/Chat';
+import User from './models/User';
 
 import './controllers/AuthController';
 import './controllers/UserController';
@@ -62,6 +63,11 @@ socketIO.on('connection', (socket: any): void => {
 
   socket.on('event://typing-message', (data: any): void => {
     socketIO.emit('event://typing-message-res', data);
+  });
+
+  socket.on('event://user-search', async (data: any): Promise<void> => {
+    const searchResults = await User.find({ nickname: { $regex: data } }).select('-_id -__v -password');
+    socketIO.emit('event://user-search-res', searchResults);
   });
 
   socket.on('disconnect', (): void => {

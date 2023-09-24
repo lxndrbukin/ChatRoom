@@ -1,17 +1,19 @@
 import { SidebarLink } from '../types';
-import { FaUserCircle, FaBell } from 'react-icons/fa';
+import { FaUserCircle, FaBell, FaUserPlus, FaUsers } from 'react-icons/fa';
 import { BiSolidMessage } from 'react-icons/bi';
-import {
-  RiSettings3Fill,
-  RiLoginBoxLine,
-  RiLogoutBoxLine,
-} from 'react-icons/ri';
+import { RiSettings3Fill, RiLoginBoxLine } from 'react-icons/ri';
 
 export const mainLinks: SidebarLink[] = [
   {
-    name: 'Profile',
-    icon: <FaUserCircle size={24} />,
-    path: '/',
+    name: 'Friend',
+    icon: <FaUsers size={24} />,
+    path: '/friends',
+    ifLoggedIn: true,
+  },
+  {
+    name: 'Add Friend',
+    icon: <FaUserPlus size={24} />,
+    path: '/friends/add',
     ifLoggedIn: true,
   },
   {
@@ -39,12 +41,6 @@ export const additionalLinks: SidebarLink[] = [
     name: 'Settings',
     icon: <RiSettings3Fill size={24} />,
     path: '/settings',
-    ifLoggedIn: true,
-  },
-  {
-    name: 'Logout',
-    icon: <RiLogoutBoxLine size={24} />,
-    path: '/logout',
     ifLoggedIn: true,
   },
 ];

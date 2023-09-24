@@ -1,3 +1,4 @@
+import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import * as socketIO from 'socket.io-client';
 import { App } from '../components/App';
@@ -7,6 +8,8 @@ import { Chats } from '../components/Chats/Chats';
 import { ChatsList } from '../components/Chats/ChatsList';
 import { ChatBox } from '../components/Chats/ChatBox';
 import { CreateChat } from '../components/Chats/CreateChat';
+import { Friends } from '../components/Friends/Friends';
+import { AddFriend } from '../components/Friends/AddFriend';
 
 const socket = socketIO.connect('http://localhost:5000');
 
@@ -25,11 +28,26 @@ export const router = createBrowserRouter([
           },
           {
             path: '/IM/:chatId',
-            element: <ChatBox socket={socket} />,
+            element: (
+              <React.Fragment>
+                <ChatsList socket={socket} />
+                <ChatBox socket={socket} />
+              </React.Fragment>
+            ),
           },
           {
             path: 'create',
             element: <CreateChat socket={socket} />,
+          },
+        ],
+      },
+      {
+        path: 'friends',
+        element: <Friends />,
+        children: [
+          {
+            path: 'add',
+            element: <AddFriend socket={socket} />,
           },
         ],
       },

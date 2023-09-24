@@ -1,9 +1,8 @@
 @import '../../assets/variables.scss';
 
 .sidebar {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 82px 1fr 56px 62px;
   height: 100%;
   background-color: $dark;
   padding: $spacing-sm 0;
@@ -21,7 +20,7 @@
 
   .sidebar-links {
     display: flex;
-    justify-content: center;
+    height: fit-content;
 
     .sidebar-links-list {
       list-style-type: none;
@@ -34,8 +33,49 @@
 
         a {
           color: $grey;
+          display: grid;
+          grid-template-columns: 24px 1fr;
+          grid-gap: 10px;
+          text-decoration: none;
+
+          .sidebar-link-name {
+            align-self: center;
+          }
         }
       }
     }
+  }
+
+  .additional {
+    height: fit-content;
+    align-self: flex-end;
+  }
+
+  .sidebar-profile {
+    padding: $spacing-lg;
+    display: grid;
+    grid-template-columns: 1fr 24px;
+    grid-gap: 15px;
+    color: $grey;
+    height: 30px;
+    align-self: flex-end;
+
+    .user-link {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      grid-gap: 5px;
+      text-decoration: none;
+      color: $grey;
+
+      .username {
+        align-self: center;
+      }
+    }
+
+    svg {
+      align-self: center;
+      cursor: pointer;
+    }
+
   }
 }
