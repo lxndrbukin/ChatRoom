@@ -43,3 +43,8 @@ export interface ChatsState {
   currentChat: Chat | undefined,
   chatsList: ChatsListItem[];
 }
+
+export interface SearchState {
+  searchReq: string;
+  users: UserData[];
+}

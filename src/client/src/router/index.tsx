@@ -9,7 +9,7 @@ import { ChatsList } from '../components/Chats/ChatsList';
 import { ChatBox } from '../components/Chats/ChatBox';
 import { CreateChat } from '../components/Chats/CreateChat';
 import { Friends } from '../components/Friends/Friends';
-import { AddFriend } from '../components/Friends/AddFriend';
+import { FindFriend } from '../components/Friends/FindFriend';
 
 const socket = socketIO.connect('http://localhost:5000');
 
@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: 'add',
-            element: <AddFriend socket={socket} />,
+            element: <FindFriend socket={socket} />,
           },
         ],
       },
