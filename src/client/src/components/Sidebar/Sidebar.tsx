@@ -40,9 +40,11 @@ export const Sidebar: React.FC = (): JSX.Element => {
           <img
             src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
             style={{ height: '30px' }}
-            alt={userData?.nickname}
+            alt={userData?.fullName.firstName}
           />
-          <span className='username'>{userData?.nickname}</span>
+          <span className='username'>
+            {userData?.fullName.firstName} {userData?.fullName.lastName[0]}.
+          </span>
         </Link>
         <RiLogoutBoxLine onClick={logoutUser} size={22} />
       </nav>

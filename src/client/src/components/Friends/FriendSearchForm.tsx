@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState, findUser } from '../../store';
 import { AddFriendProps } from './types';
 
-export const FindFriendsForm: React.FC<AddFriendProps> = ({
+export const FriendSearchForm: React.FC<AddFriendProps> = ({
   socket,
 }): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();

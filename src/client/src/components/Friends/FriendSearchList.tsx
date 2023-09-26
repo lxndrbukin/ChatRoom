@@ -9,7 +9,7 @@ export const FriendSearchList: React.FC = (): JSX.Element => {
 
   const renderSearchList = (): JSX.Element[] => {
     return users.map((user: UserData) => {
-      return <FriendSearchItem userData={user} />;
+      return <FriendSearchItem key={user.userId} userData={user} />;
     });
   };
 

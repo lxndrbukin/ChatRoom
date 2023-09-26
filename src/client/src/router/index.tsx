@@ -9,8 +9,8 @@ import { ChatsList } from '../components/Chats/ChatsList';
 import { ChatBox } from '../components/Chats/ChatBox';
 import { CreateChat } from '../components/Chats/CreateChat';
 import { Friends } from '../components/Friends/Friends';
-import { FindFriendsForm } from '../components/Friends/FindFriendsForm';
-import { FindFriendsList } from '../components/Friends/FindFriendsList';
+import { FriendSearchForm } from '../components/Friends/FriendSearchForm';
+import { FriendSearchList } from '../components/Friends/FriendSearchList';
 
 const socket = socketIO.connect('http://localhost:5000');
 
@@ -50,8 +50,8 @@ export const router = createBrowserRouter([
             path: 'add',
             element: (
               <React.Fragment>
-                <FindFriendsForm socket={socket} />
-                <FindFriendsList />
+                <FriendSearchForm socket={socket} />
+                <FriendSearchList />
               </React.Fragment>
             ),
           },

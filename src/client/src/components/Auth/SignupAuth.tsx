@@ -15,16 +15,22 @@ export const SignupAuth: React.FC<AuthFormProps> = (): JSX.Element => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
       email: { value: string };
-      nickname: { value: string };
+      firstName: { value: string };
+      lastName: { value: string };
       password: { value: string };
     };
-    const { email, nickname, password } = target;
+    const { email, firstName, lastName, password } = target;
     const user = {
       email: email.value,
-      nickname: nickname.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
       password: password.value,
     };
     dispatch(signup(user));
+  };
+
+  const renderErrorMessage = (): JSX.Element => {
+    return <div className='auth-error-message'>{message}</div>;
   };
 
   if (isLoggedIn) {
@@ -35,13 +41,15 @@ export const SignupAuth: React.FC<AuthFormProps> = (): JSX.Element => {
       <form onSubmit={signupUser} className='auth-form'>
         <label htmlFor='email'>Email:</label>
         <input placeholder='Email' id='email' name='email' />
-        <label htmlFor='nickname'>Nickname:</label>
-        <input placeholder='Nickname' id='nickname' name='nickname' />
+        <label htmlFor='first-name'>First Name:</label>
+        <input placeholder='First Name' id='first-name' name='firstName' />
+        <label htmlFor='last-name'>Last Name:</label>
+        <input placeholder='Last Name' id='last-name' name='lastName' />
         <label htmlFor='password'>Password:</label>
         <input placeholder='Password' id='password' name='password' />
         <button className='auth-form-button'>Sign Up</button>
       </form>
-      <div className='auth-error-message'>{message ? message : ''}</div>
+      {message && renderErrorMessage()}
     </div>
   );
 };

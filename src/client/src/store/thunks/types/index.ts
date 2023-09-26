@@ -1,5 +1,6 @@
 export interface AuthFormValues {
   email: string;
-  nickname?: string;
+  firstName?: string;
+  lastName?: string;
   password: string;
 }
