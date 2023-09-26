@@ -36,7 +36,7 @@ export const Sidebar: React.FC = (): JSX.Element => {
   const renderUserNav = (): JSX.Element => {
     return (
       <nav className='sidebar-profile'>
-        <Link to='/profile' className='user-link'>
+        <Link to={`/profile/${userData?.userId}`} className='user-link'>
           <img
             src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
             style={{ height: '30px' }}

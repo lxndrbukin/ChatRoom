@@ -5,7 +5,7 @@ import { RiSettings3Fill, RiLoginBoxLine } from 'react-icons/ri';
 
 export const mainLinks: SidebarLink[] = [
   {
-    name: 'Friend',
+    name: 'Friends',
     icon: <FaUsers size={24} />,
     path: '/friends',
     ifLoggedIn: true,

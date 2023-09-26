@@ -45,6 +45,5 @@ export interface ChatsState {
 }
 
 export interface SearchState {
-  searchReq: string;
   users: UserData[];
 }
