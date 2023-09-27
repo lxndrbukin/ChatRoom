@@ -1,6 +1,8 @@
 export enum Slices {
   Session = 'session',
-  Chats = 'chats'
+  Chats = 'chats',
+  Profile = 'profile',
+  Search = 'search'
 }
 
 export interface UserData {
@@ -10,7 +12,7 @@ export interface UserData {
     firstName: string;
     lastName: string;
   };
-  nickname: string;
+  username: string;
   role: string;
 }
 
@@ -35,8 +37,9 @@ export interface Chat {
 export interface ChatMessage {
   messageId: string;
   userId: number;
-  nickname: string;
+  username: string;
   message: string;
+  sentAt: number;
 }
 
 export interface SendMessageRes extends ChatMessage {
@@ -50,4 +53,24 @@ export interface ChatsState {
 
 export interface SearchState {
   users: UserData[];
+}
+
+export interface ProfileState {
+  userData: {
+    fullName: {
+      firstName: string;
+      lastName: string;
+    },
+    age: number | null;
+    username: string | null;
+  };
+  about: {
+    occupation: {
+      desc: string | null;
+      type: string | null;
+    },
+    info: {
+      brief: string | null;
+    };
+  };
 }

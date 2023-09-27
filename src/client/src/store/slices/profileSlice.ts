@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Slices, ProfileState } from './types';
 
 const initialState = {
 
 };
 
 const profileSlice = createSlice({
-  name: 'profile',
+  name: Slices.Profile,
   initialState,
   reducers: {}
 });

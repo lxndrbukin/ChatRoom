@@ -6,7 +6,11 @@ export enum UserRoles {
 
 export interface IUser extends Document {
   userId: number;
-  nickname: string;
+  fullName: {
+    firstName: string;
+    lastName: string;
+  },
+  username: string;
   email: string;
   password: string;
   role: UserRoles;
@@ -31,4 +35,26 @@ export interface IChat extends Document {
   members: ChatMember[];
   messages: ChatMessage[];
   password?: string;
+}
+
+export interface AboutProfile {
+  occupation: {
+    desc: string;
+    type: string;
+  };
+  info: {
+    brief: string;
+  };
+}
+
+export interface IProfile extends Document {
+  userId: number;
+  fullName: {
+    firstName: string;
+    lastName: string;
+  },
+  email: string;
+  username: string;
+  age: number;
+  about: AboutProfile;
 }

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { controller, get, post, bodyValidator, use } from './decorators';
 import User from '../models/User';
+import Profile from '../models/Profile';
 import { createPassword, comparePasswords } from './helpers';
 
 @controller('/auth')
@@ -26,8 +27,8 @@ class AuthController {
       if (user && !await comparePasswords(user.password, req.body.password)) {
         return res.status(403).json({ message: 'Incorrect password' });
       }
-      const { userId, role, nickname, email } = user;
-      req.session = { userId, email, nickname, role };
+      const { userId, role, fullName, username, email } = user;
+      req.session = { userId, email, fullName, username, role };
       return res.send(req.session);
     }
   }
@@ -47,21 +48,26 @@ class AuthController {
   @post('/signup')
   @bodyValidator('email', 'nickname', 'password')
   async postSignup(req: Request, res: Response) {
-    const { email, nickname, password } = req.body;
+    const { email, firstName, lastName, password } = req.body;
+    const fullName = { firstName, lastName };
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
       return res.status(403).json({ message: 'Email or Nickname already in use.' });
     }
-    const num = await User.count();
+    const userNum = await User.count();
     const user = await User.create({
-      userId: num + 1,
-      nickname,
+      userId: userNum + 1,
+      fullName,
       email,
-      password: await createPassword(password),
-      role: 'User'
+      password: await createPassword(password)
+    });
+    const profile = await Profile.create({
+      userId: userNum + 1,
+      fullName,
+      email,
     });
     const { userId, role } = user;
-    req.session = { userId, email, nickname, role };
+    req.session = { userId, email, fullName, role };
     return res.send(req.session);
   }
 

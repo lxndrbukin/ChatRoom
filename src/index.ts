@@ -14,6 +14,7 @@ import './controllers/ChatController';
 
 import './models/User';
 import './models/Chat';
+import './models/Profile';
 
 const app = express();
 app.use(express.json());

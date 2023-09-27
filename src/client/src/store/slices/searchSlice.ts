@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { SearchState, UserData } from './types';
+import { Slices, SearchState, UserData } from './types';
 import { findUser } from '../thunks/findUser';
 
 const initialState: SearchState = {
@@ -7,7 +7,7 @@ const initialState: SearchState = {
 };
 
 const searchSlice = createSlice({
-  name: 'search',
+  name: Slices.Search,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
