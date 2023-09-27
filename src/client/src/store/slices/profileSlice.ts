@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Slices, ProfileState } from './types';
 
-const initialState = {
-
+const initialState: ProfileState = {
+  info: undefined
 };
 
 const profileSlice = createSlice({

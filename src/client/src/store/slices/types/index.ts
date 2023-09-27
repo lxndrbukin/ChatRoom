@@ -56,21 +56,23 @@ export interface SearchState {
 }
 
 export interface ProfileState {
-  userData: {
-    fullName: {
-      firstName: string;
-      lastName: string;
-    },
-    age: number | null;
-    username: string | null;
-  };
-  about: {
-    occupation: {
-      desc: string | null;
-      type: string | null;
-    },
-    info: {
-      brief: string | null;
+  info: {
+    userData: {
+      fullName: {
+        firstName: string;
+        lastName: string;
+      },
+      age: number | null;
+      username: string | null;
     };
-  };
+    about: {
+      occupation: {
+        desc: string | null;
+        type: string | null;
+      },
+      info: {
+        brief: string | null;
+      };
+    };
+  } | undefined;
 }
