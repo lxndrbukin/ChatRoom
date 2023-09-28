@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState, findUser } from '../../store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, findUser } from '../../store';
 import { AddFriendProps } from './types';
 
 export const FriendSearchForm: React.FC<AddFriendProps> = ({
@@ -9,7 +9,14 @@ export const FriendSearchForm: React.FC<AddFriendProps> = ({
   const dispatch = useDispatch<AppDispatch>();
   const [searchReq, setSearchReq] = useState('');
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      if (searchReq.length) {
+        dispatch(findUser(searchReq));
+      }
+    }, 500);
+    return () => clearTimeout(timeOut);
+  }, [searchReq, dispatch]);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();

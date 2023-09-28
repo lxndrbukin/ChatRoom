@@ -1,9 +1,9 @@
 import './assets/styles.scss';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AuthFormProps } from './types';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState, login, signup } from '../../store';
+import { AppDispatch, RootState, signup } from '../../store';
 
 export const SignupAuth: React.FC<AuthFormProps> = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Slices, ChatsState, Chat, ChatsListItem, ChatMessage, SendMessageRes } from './types';
+import { Slices, ChatsState, Chat, ChatsListItem, SendMessageRes } from './types';
 import { getChat } from '../thunks/getChat';
 
 const initialState: ChatsState = {
@@ -28,8 +28,8 @@ const chatsSlice = createSlice({
       state.currentChat = action.payload;
     },
     sendMessage(state: ChatsState, action: PayloadAction<SendMessageRes>) {
-      const { messageId, userId, nickname, message, chatId } = action.payload;
-      const messageData = { messageId, userId, nickname, message };
+      const { messageId, userId, fullName, username, message, chatId, sentAt } = action.payload;
+      const messageData = { messageId, userId, fullName, username, message, sentAt };
       if (state.currentChat) {
         if (chatId === JSON.stringify(state.currentChat.chatId)) {
           state.currentChat.messages = [...state.currentChat.messages, messageData];

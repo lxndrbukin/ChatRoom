@@ -7,7 +7,11 @@ export interface AddFriendProps {
 export interface UserData {
   userId: number;
   email: string;
-  nickname: string;
+  fullName: {
+    firstName: string;
+    lastName: string;
+  };
+  username: string;
 }
 
 export interface FriendSearchItemProps {

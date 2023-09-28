@@ -17,7 +17,12 @@ class UserController {
 
   @get('/users')
   async getUsers(req: Request, res: Response) {
-    const searchResults = await User.find({ nickname: { $regex: req.query.searchReq } }).select('-_id -__v -password');
+    const searchResults = await User.find({
+      $or: [
+        { 'fullName.firstName': { $regex: req.query.searchReq } },
+        { 'fullName.lastName': { $regex: req.query.searchReq } }
+      ]
+    }).select('-_id -__v -password');
     return res.send(searchResults);
   }
 

@@ -19,6 +19,7 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
   );
+  const { firstName, lastName } = userData?.fullName!;
   const { currentChat } = useSelector((state: RootState) => state.chats);
   const [typingStatus, setTypingStatus] = useState('');
 
@@ -37,14 +38,17 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
     return () => {
       socket.off('event://send-message-res');
     };
-  }, [socket, chatId]);
+  }, [socket, chatId, dispatch]);
 
   useEffect(() => {
     lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [currentChat?.messages]);
 
   const handleTyping = (): void => {
-    socket.emit('event://typing-message', `${userData?.nickname} is typing...`);
+    socket.emit(
+      'event://typing-message',
+      `${firstName} ${lastName[0]}. is typing...`
+    );
   };
 
   const handleSendMessage = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -58,7 +62,6 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
         socket.emit('event://send-message', {
           chatId,
           userId: userData?.userId,
-          nickname: userData?.nickname,
           message: target.message.value,
         });
       }

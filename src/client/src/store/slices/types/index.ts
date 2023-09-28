@@ -37,6 +37,10 @@ export interface Chat {
 export interface ChatMessage {
   messageId: string;
   userId: number;
+  fullName: {
+    firstName: string;
+    lastName: string;
+  };
   username: string;
   message: string;
   sentAt: number;
