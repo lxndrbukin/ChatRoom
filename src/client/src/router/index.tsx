@@ -4,6 +4,8 @@ import * as socketIO from 'socket.io-client';
 import { App } from '../components/App';
 import { SignupAuth } from '../components/Auth/SignupAuth';
 import { LoginAuth } from '../components/Auth/LoginAuth';
+import { Profile } from '../components/Profile/Profile';
+import { ProfileEdit } from '../components/Profile/ProfileEdit';
 import { Chats } from '../components/Chats/Chats';
 import { ChatsList } from '../components/Chats/ChatsList';
 import { ChatBox } from '../components/Chats/ChatBox';
@@ -19,6 +21,15 @@ export const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
+      {
+        path: '/profile/:userId',
+        element: <Profile />,
+        children: [],
+      },
+      {
+        path: '/profile/:userId/edit',
+        element: <ProfileEdit />,
+      },
       {
         path: 'IM',
         element: <Chats />,

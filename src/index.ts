@@ -9,6 +9,7 @@ import { io } from './socket';
 
 import './controllers/AuthController';
 import './controllers/UserController';
+import './controllers/ProfileController';
 import './controllers/ChatController';
 
 import './models/User';

@@ -20,15 +20,14 @@ class AuthController {
   @post('/login')
   async postLogin(req: Request, res: Response) {
     if (req.body.email) {
-      const user = await User.findOne({ email: req.body.email });
+      const user = await User.findOne({ email: req.body.email }).select('-_id -password -__v');
       if (!user) {
         return res.status(403).json({ message: 'User does not exist' });
       }
       if (user && !await comparePasswords(user.password, req.body.password)) {
         return res.status(403).json({ message: 'Incorrect password' });
       }
-      const { userId, role, fullName, username, email } = user;
-      req.session = { userId, email, fullName, username, role };
+      req.session = user;
       return res.send(req.session);
     }
   }
@@ -46,7 +45,7 @@ class AuthController {
   }
 
   @post('/signup')
-  @bodyValidator('email', 'nickname', 'password')
+  @bodyValidator('email', 'firstName', 'lastName', 'password')
   async postSignup(req: Request, res: Response) {
     const { email, firstName, lastName, password } = req.body;
     const fullName = { firstName, lastName };

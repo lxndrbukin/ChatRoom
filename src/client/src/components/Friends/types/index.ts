@@ -11,7 +11,7 @@ export interface UserData {
     firstName: string;
     lastName: string;
   };
-  username: string;
+  domain: string;
 }
 
 export interface FriendSearchItemProps {

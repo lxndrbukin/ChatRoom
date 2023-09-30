@@ -12,7 +12,8 @@ export interface UserData {
     firstName: string;
     lastName: string;
   };
-  username: string;
+  mainPhoto: string;
+  domain: string;
   role: string;
 }
 

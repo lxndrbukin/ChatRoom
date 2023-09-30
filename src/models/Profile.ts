@@ -8,8 +8,9 @@ const ProfileSchema: Schema = new Schema<IProfile>({
     lastName: String,
   },
   email: String,
-  username: { type: String, default: null },
+  domain: String,
   age: { type: Number, default: null },
+  mainPhoto: { type: String, default: null },
   about: {
     occupation: {
       desc: { type: String, default: null },

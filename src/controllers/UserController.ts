@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { controller, get } from './decorators';
+import { controller, get, post } from './decorators';
 import User from '../models/User';
 
 @controller('/_api')
@@ -35,5 +35,10 @@ class UserController {
       }
     }
     return res.send(null);
+  }
+
+  @post('/users/:userId/edit')
+  async updateUser(req: Request, res: Response) {
+
   }
 }

@@ -10,6 +10,7 @@ export interface IUser extends Document {
     firstName: string;
     lastName: string;
   },
+  mainPhoto: string;
   username: string;
   email: string;
   password: string;
@@ -53,6 +54,7 @@ export interface IProfile extends Document {
     firstName: string;
     lastName: string;
   },
+  mainPhoto: string;
   email: string;
   username: string;
   age: number;
