@@ -20,7 +20,7 @@ class AuthController {
   @post('/login')
   async postLogin(req: Request, res: Response) {
     if (req.body.email) {
-      const user = await User.findOne({ email: req.body.email }).select('-_id -password -__v');
+      const user = await User.findOne({ email: req.body.email }).select('-_id -__v');
       if (!user) {
         return res.status(403).json({ message: 'User does not exist' });
       }

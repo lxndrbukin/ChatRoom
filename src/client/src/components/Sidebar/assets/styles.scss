@@ -4,9 +4,9 @@
   display: grid;
   grid-template-rows: 82px 1fr 56px 62px;
   height: 100%;
-  background-color: $dark;
-  padding: $spacing-sm 0;
+  background-color: $white;
   box-sizing: border-box;
+  border-right: 1px solid $light-blue;
 
   .sidebar-logo {
     display: flex;
@@ -14,7 +14,7 @@
     padding: $spacing-lg;
 
     a {
-      color: $grey;
+      color: $dark;
     }
   }
 
@@ -25,14 +25,15 @@
     .sidebar-links-list {
       list-style-type: none;
       padding: 0;
+      margin: 0;
+      font-size: 15px;
 
       .sidebar-link {
         padding: $spacing-lg;
-        color: $grey;
         cursor: pointer;
 
         a {
-          color: $grey;
+          color: $dark;
           display: grid;
           grid-template-columns: 24px 1fr;
           grid-gap: 10px;
@@ -56,7 +57,7 @@
     display: grid;
     grid-template-columns: 1fr 24px;
     grid-gap: 15px;
-    color: $grey;
+    color: $dark;
     height: 30px;
     align-self: flex-end;
 
@@ -65,7 +66,7 @@
       grid-template-columns: 30px 1fr;
       grid-gap: 5px;
       text-decoration: none;
-      color: $grey;
+      color: $dark;
 
       .username {
         align-self: center;

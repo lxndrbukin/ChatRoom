@@ -1,5 +1,5 @@
 import { SidebarLink } from '../types';
-import { FaUserCircle, FaBell, FaUserPlus, FaUsers } from 'react-icons/fa';
+import { FaBell, FaUserPlus, FaUsers } from 'react-icons/fa';
 import { BiSolidMessage } from 'react-icons/bi';
 import { RiSettings3Fill, RiLoginBoxLine } from 'react-icons/ri';
 
