@@ -4,6 +4,7 @@ import { signup } from '../thunks/signup';
 import { login } from '../thunks/login';
 import { logout } from '../thunks/logout';
 import { getSession } from '../thunks/getSession';
+import { updateProfile } from '../thunks/updateProfile';
 
 const initialState: UserState = {
   isLoggedIn: false,
@@ -36,6 +37,9 @@ const sessionSlice = createSlice({
         state.isLoggedIn = true;
         state.userData = action.payload;
       }
+    });
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
+      state.userData = action.payload.user;
     });
   }
 });

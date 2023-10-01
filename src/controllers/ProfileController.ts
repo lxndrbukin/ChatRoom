@@ -32,9 +32,9 @@ class ProfileController {
     const response = await cloudinary.uploader.upload(dataURI, {
       resource_type: 'auto',
     });
-    const user = await User.findOneAndUpdate({ userId: req.session!.userId }, { mainPhoto: response.url }).select('-_id -password -__v');
-    await Profile.findOneAndUpdate({ userId: req.session!.userId }, { mainPhoto: response.url });
+    const user = await User.findOneAndUpdate({ userId: req.session!.userId }, { mainPhoto: response.url }, { new: true }).select('-_id -password -__v');
+    const profile = await Profile.findOneAndUpdate({ userId: req.session!.userId }, { mainPhoto: response.url }, { new: true }).select('-_id -__v');
     req.session = user;
-    return res.send(req.session);
+    return res.send({ user, profile });
   }
 }

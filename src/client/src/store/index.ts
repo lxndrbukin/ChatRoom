@@ -25,3 +25,4 @@ export * from './thunks/logout';
 export * from './thunks/getSession';
 export * from './thunks/getChat';
 export * from './thunks/findUser';
+export * from './thunks/updateProfile';

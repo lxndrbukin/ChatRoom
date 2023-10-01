@@ -1,9 +1,9 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
-import { RootState } from '../../store';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState, updateProfile } from '../../store';
 
 export const ProfileEdit: React.FC = (): JSX.Element => {
+  const dispatch = useDispatch<AppDispatch>();
   const { userData } = useSelector((state: RootState) => state.session);
   const [file, setFile] = useState<File | null>(null);
 
@@ -17,7 +17,7 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
     e.preventDefault();
     const data = new FormData();
     data.append('my_file', file as File);
-    await axios.post(`/_api/profile/edit`, data);
+    dispatch(updateProfile(data));
   };
 
   return (

@@ -60,7 +60,7 @@ class AuthController {
       email,
       password: await createPassword(password)
     });
-    const profile = await Profile.create({
+    await Profile.create({
       userId: userNum + 1,
       fullName,
       email,
