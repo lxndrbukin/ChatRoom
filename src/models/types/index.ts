@@ -1,7 +1,7 @@
 export enum UserRoles {
   Admin = 'Administrator',
   Moderator = 'Moderator',
-  User = 'User'
+  User = 'User',
 }
 
 export interface IUser extends Document {
@@ -9,7 +9,7 @@ export interface IUser extends Document {
   fullName: {
     firstName: string;
     lastName: string;
-  },
+  };
   mainPhoto: string;
   username: string;
   email: string;
@@ -53,10 +53,26 @@ export interface IProfile extends Document {
   fullName: {
     firstName: string;
     lastName: string;
-  },
+  };
   mainPhoto: string;
   email: string;
   username: string;
   age: number;
   about: AboutProfile;
+}
+
+export interface Friend {
+  userId: number;
+  fullName: {
+    firstName: string;
+    lastName: string;
+  };
+  photo: string;
+}
+
+export interface IFriendsList extends Document {
+  userId: number;
+  friendsList: Friend[];
+  requestsList: Friend[];
+  sentRequests: Friend[];
 }

@@ -16,10 +16,21 @@ class ChatController {
     if (req.session) {
       const num = await Chat.count();
       if (req.body.password) {
-        const chat = await Chat.create({ chatId: num, chatName: req.body.chatName, password: createPassword(req.body.password), members: [req.body.user], messages: [] });
+        const chat = await Chat.create({
+          chatId: num,
+          chatName: req.body.chatName,
+          password: createPassword(req.body.password),
+          members: [req.body.user],
+          messages: [],
+        });
         return res.send(chat);
       }
-      const chat = await Chat.create({ chatId: num, chatName: req.body.chatName, members: [req.body.user], messages: [] });
+      const chat = await Chat.create({
+        chatId: num,
+        chatName: req.body.chatName,
+        members: [req.body.user],
+        messages: [],
+      });
       return res.send(chat);
     }
   }
@@ -28,14 +39,19 @@ class ChatController {
   async postChat(req: Request, res: Response) {
     const { userId, nickname, role } = req.body;
     const user = { userId, nickname, role };
-    let chat = await Chat.findOne({ chatId: req.params.chatId });
+    const chat = await Chat.findOneAndUpdate(
+      { chatId: req.params.chatId },
+      { $push: { members: user } },
+      { new: true }
+    );
     if (chat) {
-      if (chat.password && !await comparePasswords(chat.password, req.body.password)) {
+      if (
+        chat.password &&
+        !(await comparePasswords(chat.password, req.body.password))
+      ) {
         return res.status(403).json({ message: 'Incorrect password' });
       }
-      chat.updateOne({ $push: { members: user } });
     }
-    chat = await Chat.findOne({ chatId: req.params.chatId });
     return res.send(chat);
   }
 
