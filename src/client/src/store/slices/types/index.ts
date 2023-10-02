@@ -60,25 +60,27 @@ export interface SearchState {
   users: UserData[];
 }
 
+export interface AboutProfile {
+  occupation: {
+    desc: string | null;
+    type: string | null;
+  };
+  info: {
+    brief: string | null;
+  };
+}
+
 export interface ProfileInfo {
-  userData: {
-    fullName: {
-      firstName: string;
-      lastName: string;
-    };
-    age: number | null;
-    username: string | null;
+  userId: number;
+  fullName: {
+    firstName: string;
+    lastName: string;
   };
   mainPhoto: string | null;
-  about: {
-    occupation: {
-      desc: string | null;
-      type: string | null;
-    };
-    info: {
-      brief: string | null;
-    };
-  };
+  email: string;
+  username: string | null;
+  age: number | null;
+  about: AboutProfile;
 }
 
 export interface ProfileState {

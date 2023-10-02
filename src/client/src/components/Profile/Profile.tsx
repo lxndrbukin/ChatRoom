@@ -1,11 +1,12 @@
+import './assets/styles.scss';
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState, getProfile } from '../../store';
+import { ProfileMainButtons } from './ProfileMainButtons';
 
 export const Profile: React.FC = (): JSX.Element | null => {
   const dispatch = useDispatch<AppDispatch>();
-  const { userData } = useSelector((state: RootState) => state.session);
   const { info } = useSelector((state: RootState) => state.profile);
   const { userId } = useParams();
 
@@ -16,27 +17,34 @@ export const Profile: React.FC = (): JSX.Element | null => {
     if (userId) {
       dispatch(getProfile(userId));
     }
-  }, [info, dispatch]);
+  }, [dispatch]);
 
   if (info) {
     const { mainPhoto } = info;
-    const { firstName, lastName } = info.userData.fullName;
+    const { firstName, lastName } = info.fullName;
     return (
       <div className='profile'>
         <div className='profile-header'>
           <div className='profile-header-bg-img'></div>
           <div className='profile-header-main'>
-            <div className='profile-header-data'>
+            <div className='profile-header-details'>
               <img
-                className='profile-header-data-avatar'
+                className='profile-header-details-avatar'
                 src={mainPhoto ? mainPhoto : defaultAvatar}
                 alt={`${firstName} ${lastName}`}
               />
-              <span className='profile-header-data-fullname'>
-                {firstName} {lastName}
-              </span>
+              <div className='profile-header-data'>
+                <span className='profile-header-data-fullname'>
+                  {firstName} {lastName}
+                </span>
+                <span className='profile-header-data-friends-num'>
+                  0 Friends
+                </span>
+              </div>
             </div>
-            <div className='profile-header-main-links'></div>
+            <div className='profile-header-main-links'>
+              <ProfileMainButtons profileUserId={info.userId} />
+            </div>
           </div>
         </div>
       </div>

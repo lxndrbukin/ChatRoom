@@ -26,10 +26,11 @@
   }
 
   .header-search {
+    border-left: 1px solid $light-blue;
+    padding: 0 $spacing-lg;
+    align-self: center;
+
     .header-search-form {
-      border-left: 1px solid $light-blue;
-      padding: 0 $spacing-lg;
-      align-self: center;
       color: $dark-grey;
       display: grid;
       grid-template-columns: 16px 1fr;
@@ -45,6 +46,10 @@
           outline: none;
         }
       }
+    }
+
+    .header-search-box {
+      position: absolute;
     }
   }
 
@@ -76,7 +81,7 @@
         .header-profile-avatar {
           width: 30px;
           height: 30px;
-          background-size: auto;
+          object-fit: cover;
           border-radius: 50%;
         }
 
@@ -119,6 +124,7 @@
               height: 40px;
               width: 40px;
               border-radius: 50%;
+              object-fit: cover;
             }
           }
         }
@@ -138,6 +144,7 @@
             grid-template-columns: 16px 1fr;
             align-items: center;
             box-sizing: border-box;
+            cursor: pointer;
 
             &:hover {
               background-color: $light-blue;
