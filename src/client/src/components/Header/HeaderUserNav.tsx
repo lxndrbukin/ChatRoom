@@ -7,6 +7,8 @@ import { headerUserNavLinks } from './assets/links';
 
 export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
   userData,
+  menuRef,
+  handleInsideClick,
 }): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -22,7 +24,10 @@ export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
       if (link.name === 'Sign out') {
         return (
           <div
-            onClick={handleLogout}
+            onClick={() => {
+              handleLogout();
+              handleInsideClick();
+            }}
             className='header-user-nav-link'
             key={link.name}
           >
@@ -41,7 +46,7 @@ export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
   };
 
   return (
-    <nav className='header-user-nav'>
+    <nav ref={menuRef} className='header-user-nav'>
       <div className='header-user-nav-data-wrapper'>
         <Link to={`/profile/${userId}`} className='header-user-nav-data'>
           <img

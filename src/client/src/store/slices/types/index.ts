@@ -2,7 +2,7 @@ export enum Slices {
   Session = 'session',
   Chats = 'chats',
   Profile = 'profile',
-  Search = 'search'
+  Search = 'search',
 }
 
 export interface UserData {
@@ -52,7 +52,7 @@ export interface SendMessageRes extends ChatMessage {
 }
 
 export interface ChatsState {
-  currentChat: Chat | undefined,
+  currentChat: Chat | undefined;
   chatsList: ChatsListItem[];
 }
 
@@ -65,15 +65,16 @@ export interface ProfileInfo {
     fullName: {
       firstName: string;
       lastName: string;
-    },
+    };
     age: number | null;
     username: string | null;
   };
+  mainPhoto: string | null;
   about: {
     occupation: {
       desc: string | null;
       type: string | null;
-    },
+    };
     info: {
       brief: string | null;
     };

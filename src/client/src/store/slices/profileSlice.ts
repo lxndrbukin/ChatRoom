@@ -3,7 +3,7 @@ import { Slices, ProfileState, ProfileInfo } from './types';
 import { getProfile } from '../thunks/getProfile';
 
 const initialState: ProfileState = {
-  info: undefined
+  info: undefined,
 };
 
 const profileSlice = createSlice({
@@ -11,10 +11,13 @@ const profileSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProfile.fulfilled, (state: ProfileState, action: PayloadAction<ProfileInfo>) => {
-      state.info = action.payload;
-    });
-  }
+    builder.addCase(
+      getProfile.fulfilled,
+      (state: ProfileState, action: PayloadAction<ProfileInfo>) => {
+        state.info = action.payload;
+      }
+    );
+  },
 });
 
 export default profileSlice.reducer;

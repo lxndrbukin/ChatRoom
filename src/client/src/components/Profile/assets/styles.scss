@@ -1,0 +1,24 @@
+@import '../../assets/variables.scss';
+
+.profile {
+  width: 100%;
+
+  .profile-header {
+    height: 500px;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 300px 200px;
+
+    .profile-header-main {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+
+      .profile-header-data-avatar {
+        height: 150px;
+        width: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+  }
+}
