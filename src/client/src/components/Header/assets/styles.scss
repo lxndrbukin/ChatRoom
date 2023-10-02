@@ -26,22 +26,24 @@
   }
 
   .header-search {
-    border-left: 1px solid $light-blue;
-    padding: 0 $spacing-lg;
-    align-self: center;
-    color: $dark-grey;
-    display: grid;
-    grid-template-columns: 16px 1fr;
-    align-items: center;
+    .header-search-form {
+      border-left: 1px solid $light-blue;
+      padding: 0 $spacing-lg;
+      align-self: center;
+      color: $dark-grey;
+      display: grid;
+      grid-template-columns: 16px 1fr;
+      align-items: center;
 
-    input {
-      border: none;
-      height: 25px;
-      width: 150px;
-      margin-left: $spacing-sm;
+      input {
+        border: none;
+        height: 25px;
+        width: 150px;
+        margin-left: $spacing-sm;
 
-      &:focus {
-        outline: none;
+        &:focus {
+          outline: none;
+        }
       }
     }
   }
@@ -85,7 +87,7 @@
 
       .header-user-nav {
         position: absolute;
-        right: 0;
+        right: $spacing-sm;
         background-color: $white;
         border-radius: 5px;
         border: 1px solid $light-blue;

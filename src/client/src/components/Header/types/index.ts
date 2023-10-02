@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { UserData } from '../../../store';
 
 export interface HeaderUserNavLink {
@@ -10,5 +10,19 @@ export interface HeaderUserNavLink {
 export interface HeaderUserNavProps {
   userData: UserData;
   menuRef: React.RefObject<HTMLDivElement>;
-  handleInsideClick: Function;
+  showMenu: boolean;
+  handleInsideClick: MouseEventHandler<Element>;
+}
+
+export interface HeaderSearchBoxProps {
+  users: UserData[];
+}
+
+export interface HeaderSearchBoxItemProps {
+  userId: number;
+  fullName: {
+    firstName: string;
+    lastName: string;
+  };
+  mainPhoto: string;
 }

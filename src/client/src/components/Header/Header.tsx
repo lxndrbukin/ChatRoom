@@ -45,7 +45,11 @@ export const Header: React.FC = (): JSX.Element => {
     return (
       <nav className='header-profile'>
         <div className='header-profile-wrapper'>
-          <div ref={profileFrame} className='header-profile-icon'>
+          <div
+            onClick={() => showMenu(!menu)}
+            ref={profileFrame}
+            className='header-profile-icon'
+          >
             <img
               src={userData?.mainPhoto}
               alt={userData?.fullName.firstName}
@@ -54,6 +58,7 @@ export const Header: React.FC = (): JSX.Element => {
             <GoTriangleDown size={16} />
           </div>
           <HeaderUserNav
+            showMenu={menu}
             handleInsideClick={handleInsideClick}
             menuRef={profileMenu}
             userData={userData!}
