@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sessionSlice from './slices/sessionSlice';
 import chatsSlice from './slices/chatsSlice';
+import profileSlice from './slices/profileSlice';
 import searchSlice from './slices/searchSlice';
 
 export const store = configureStore({
   reducer: {
     session: sessionSlice,
     chats: chatsSlice,
+    profile: profileSlice,
     search: searchSlice
   }
 });
@@ -25,4 +27,5 @@ export * from './thunks/logout';
 export * from './thunks/getSession';
 export * from './thunks/getChat';
 export * from './thunks/findUser';
+export * from './thunks/getProfile';
 export * from './thunks/updateProfile';

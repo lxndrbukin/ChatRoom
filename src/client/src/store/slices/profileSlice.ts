@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Slices, ProfileState } from './types';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { Slices, ProfileState, ProfileInfo } from './types';
+import { getProfile } from '../thunks/getProfile';
 
 const initialState: ProfileState = {
   info: undefined
@@ -8,7 +9,12 @@ const initialState: ProfileState = {
 const profileSlice = createSlice({
   name: Slices.Profile,
   initialState,
-  reducers: {}
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getProfile.fulfilled, (state: ProfileState, action: PayloadAction<ProfileInfo>) => {
+      state.info = action.payload;
+    });
+  }
 });
 
 export default profileSlice.reducer;
