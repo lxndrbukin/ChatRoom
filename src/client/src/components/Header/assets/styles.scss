@@ -4,7 +4,7 @@
   background-color: $white;
   border-bottom: 1px solid $light-blue;
   display: grid;
-  grid-template-columns: 127px 1fr 46px;
+  grid-template-columns: 127px 1fr 100px;
   padding: 0 $spacing-lg;
   box-sizing: border-box;
 
@@ -17,7 +17,7 @@
     padding-right: $spacing-lg;
 
     svg {
-      color: $dark-grey;
+      color: $dark-blue;
     }
 
     .header-logo-text {
@@ -50,6 +50,34 @@
 
     .header-search-box {
       position: absolute;
+      background-color: $white;
+      border-radius: 5px;
+      border: 1px solid $light-blue;
+      width: 300px;
+      padding: $spacing-lg;
+
+      .header-search-box-item {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: $dark;
+        padding: $spacing-md;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: $light-blue;
+
+        }
+
+        .header-search-box-item-avatar {
+          height: 40px;
+          width: 40px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
     }
   }
 
@@ -61,15 +89,26 @@
     .header-profile-icon {
       display: flex;
       align-items: center;
+      justify-content: center;
       height: 100%;
-      padding-left: $spacing-sm;
-      display: grid;
-      grid-template-columns: 1fr 16px;
+      width: 50px;
 
 
       &:hover {
         background-color: $light-blue;
         cursor: pointer;
+      }
+
+      .header-profile-avatar {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 50%;
+        padding-left: $spacing-md;
+      }
+
+      svg {
+        color: $dark-grey;
       }
     }
 
@@ -78,16 +117,9 @@
       align-items: center;
 
       .header-profile-icon {
-        .header-profile-avatar {
-          width: 30px;
-          height: 30px;
-          object-fit: cover;
-          border-radius: 50%;
-        }
-
-        svg {
-          color: $dark-grey;
-        }
+        width: fit-content;
+        display: grid;
+        grid-template-columns: 1fr 16px;
       }
 
       .header-user-nav {
@@ -153,6 +185,10 @@
             .header-user-nav-link-text {
               margin-left: $spacing-md;
               font-size: 15px;
+            }
+
+            svg {
+              color: $dark-blue;
             }
           }
         }

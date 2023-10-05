@@ -17,18 +17,18 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
     if (profileUserId === userId) {
       return (
         <React.Fragment>
-          <Link to='/settings' className='profile-settings'>
-            <button className='custom-button'>Settings</button>
-          </Link>
           <Link to={`/profile/${userId}/edit`}>
-            <button className='custom-button'>Edit Profile</button>
+            <button className='ui-button'>Edit Profile</button>
+          </Link>
+          <Link to='/settings' className='profile-settings'>
+            <button className='ui-button'>Settings</button>
           </Link>
         </React.Fragment>
       );
     }
     return (
       <React.Fragment>
-        <button className='custom-button'>
+        <button className='ui-button'>
           <BsPersonFillAdd />
         </button>
       </React.Fragment>

@@ -15,7 +15,8 @@ export interface HeaderUserNavProps {
 }
 
 export interface HeaderSearchBoxProps {
-  users: UserData[];
+  searchBoxRef: React.RefObject<HTMLDivElement>;
+  handleInsideClick: MouseEventHandler<Element>;
 }
 
 export interface HeaderSearchBoxItemProps {

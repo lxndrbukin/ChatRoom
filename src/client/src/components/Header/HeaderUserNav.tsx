@@ -22,24 +22,14 @@ export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
 
   const renderLinks = (): JSX.Element[] => {
     return headerUserNavLinks.map((link) => {
-      if (link.name === 'Sign out') {
-        return (
-          <div
-            onClick={(e) => {
-              handleLogout();
-              handleInsideClick(e);
-            }}
-            className='header-user-nav-link'
-            key={link.name}
-          >
-            {link.icon}
-            <span className='header-user-nav-link-text'>{link.name}</span>
-          </div>
-        );
-      }
       return (
         <Link
-          onClick={handleInsideClick}
+          onClick={(e) => {
+            if (link.path === '/') {
+              handleLogout();
+            }
+            handleInsideClick(e);
+          }}
           className='header-user-nav-link'
           key={link.name}
           to={link.path}

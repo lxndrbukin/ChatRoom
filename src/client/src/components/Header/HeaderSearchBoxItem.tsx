@@ -7,6 +7,7 @@ export const HeaderSearchBoxItem: React.FC<HeaderSearchBoxItemProps> = ({
   fullName,
   mainPhoto,
 }): JSX.Element => {
+  const { firstName, lastName } = fullName;
   return (
     <Link to={`/profile/${userId}`} className='header-search-box-item'>
       <img
@@ -14,7 +15,9 @@ export const HeaderSearchBoxItem: React.FC<HeaderSearchBoxItemProps> = ({
         alt={fullName.firstName}
         className='header-search-box-item-avatar'
       />
-      <span className='header-search-box-item-fullname'></span>
+      <span className='header-search-box-item-fullname'>
+        {firstName} {lastName}
+      </span>
     </Link>
   );
 };

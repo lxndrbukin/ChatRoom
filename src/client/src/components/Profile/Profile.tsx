@@ -17,7 +17,7 @@ export const Profile: React.FC = (): JSX.Element | null => {
     if (userId) {
       dispatch(getProfile(userId));
     }
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   if (info) {
     const { mainPhoto } = info;
@@ -42,7 +42,7 @@ export const Profile: React.FC = (): JSX.Element | null => {
                 </span>
               </div>
             </div>
-            <div className='profile-header-main-links'>
+            <div className='profile-header-main-buttons'>
               <ProfileMainButtons profileUserId={info.userId} />
             </div>
           </div>

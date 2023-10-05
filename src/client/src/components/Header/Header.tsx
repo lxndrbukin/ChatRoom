@@ -1,15 +1,15 @@
 import './assets/styles.scss';
 import React, { useState, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { IoMdChatboxes } from 'react-icons/io';
 import { GoTriangleDown } from 'react-icons/go';
-import { AppDispatch, RootState, logout } from '../../store';
+import { BiSolidMessage } from 'react-icons/bi';
+import { RootState } from '../../store';
 import { HeaderSearch } from './HeaderSearch';
 import { HeaderUserNav } from './HeaderUserNav';
 
 export const Header: React.FC = (): JSX.Element => {
-  const dispatch = useDispatch<AppDispatch>();
   const profileFrame = useRef<HTMLDivElement>(null);
   const profileMenu = useRef<HTMLDivElement>(null);
 
@@ -22,10 +22,6 @@ export const Header: React.FC = (): JSX.Element => {
   useEffect(() => {
     document.addEventListener('click', handleOutsideClick);
   }, []);
-
-  const logoutUser = (): void => {
-    dispatch(logout());
-  };
 
   const handleInsideClick = () => {
     showMenu(!menu);
@@ -43,7 +39,10 @@ export const Header: React.FC = (): JSX.Element => {
 
   const renderUserNav = (): JSX.Element => {
     return (
-      <nav className='header-profile'>
+      <div className='header-profile'>
+        <Link to='/IM' className='header-profile-icon'>
+          <BiSolidMessage size={26} />
+        </Link>
         <div className='header-profile-wrapper'>
           <div
             onClick={() => showMenu(!menu)}
@@ -64,7 +63,7 @@ export const Header: React.FC = (): JSX.Element => {
             userData={userData!}
           />
         </div>
-      </nav>
+      </div>
     );
   };
 

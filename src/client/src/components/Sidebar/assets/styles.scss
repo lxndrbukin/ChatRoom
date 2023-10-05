@@ -20,17 +20,34 @@
 
   .sidebar-links {
     display: flex;
+    flex-direction: column;
     height: fit-content;
+
+    .sidebar-profile-link-wrapper {
+      width: 100%;
+
+      .sidebar-profile-link {
+        width: 100%;
+        padding: 0 $spacing-md;
+
+        .sidebar-profile-link-avatar {
+          height: 30px;
+          width: 30px;
+        }
+      }
+    }
 
     .sidebar-links-list {
       list-style-type: none;
       padding: 0;
-      margin: 0;
+      margin: $spacing-lg 0 0 0;
       font-size: 15px;
+      width: 100%;
 
       .sidebar-link {
-        padding: $spacing-lg;
+        padding: 0 $spacing-md;
         cursor: pointer;
+        display: flex;
 
         a {
           color: $dark;
@@ -38,9 +55,24 @@
           grid-template-columns: 24px 1fr;
           grid-gap: 10px;
           text-decoration: none;
+          align-self: center;
+          width: 100%;
+          padding: $spacing-sm $spacing-md;
+          border-radius: 5px;
+          height: 35px;
+
+          &:hover {
+            background-color: $light-blue;
+          }
 
           .sidebar-link-name {
             align-self: center;
+          }
+
+          svg {
+            color: $dark-blue;
+            align-self: center;
+            justify-self: center;
           }
         }
       }

@@ -21,26 +21,30 @@
 
     .profile-header-main {
       align-self: flex-end;
-      padding: $spacing-lg;
+      padding: $spacing-xl;
       box-sizing: border-box;
       display: flex;
 
       .profile-header-details {
         display: grid;
-        grid-template-columns: 180px 1fr;
+        grid-template-columns: 158px 1fr;
         flex-grow: 1;
 
         .profile-header-details-avatar {
-          height: 180px;
-          width: 180px;
+          height: 150px;
+          width: 150px;
           object-fit: cover;
           border-radius: 50%;
+          padding: $spacing-sm;
+          background-color: $white;
         }
       }
 
-      .profile-header-main-links {
+      .profile-header-main-buttons {
         align-self: flex-end;
         margin: $spacing-lg 0;
+        display: flex;
+        gap: $spacing-md;
       }
 
       .profile-header-data {
