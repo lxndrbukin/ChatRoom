@@ -35,6 +35,7 @@ export const Sidebar: React.FC = (): JSX.Element => {
       <nav className='sidebar-links'>
         <ul className='sidebar-links-list'>{renderLinks(mainLinks)}</ul>
       </nav>
+      <hr className='siderbar-separator' />
       <nav className='sidebar-links additional'>
         <ul className='sidebar-links-list'>{renderLinks(additionalLinks)}</ul>
       </nav>

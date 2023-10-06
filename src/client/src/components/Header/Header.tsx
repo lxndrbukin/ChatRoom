@@ -68,13 +68,15 @@ export const Header: React.FC = (): JSX.Element => {
   };
 
   return (
-    <header className='header'>
-      <Link className='header-logo' to='/'>
-        <IoMdChatboxes size={35} />
-        <span className='header-logo-text'>ChatRoom</span>
-      </Link>
-      <HeaderSearch />
-      {isLoggedIn ? renderUserNav() : null}
+    <header className='header-wrapper'>
+      <div className='header'>
+        <Link className='header-logo' to='/'>
+          <IoMdChatboxes size={35} />
+          <span className='header-logo-text'>ChatRoom</span>
+        </Link>
+        <HeaderSearch />
+        {isLoggedIn ? renderUserNav() : null}
+      </div>
     </header>
   );
 };

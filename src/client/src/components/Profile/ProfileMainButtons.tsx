@@ -28,8 +28,8 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
     }
     return (
       <React.Fragment>
-        <button className='ui-button'>
-          <BsPersonFillAdd />
+        <button className='ui-icon-button'>
+          <BsPersonFillAdd size={22} />
         </button>
       </React.Fragment>
     );

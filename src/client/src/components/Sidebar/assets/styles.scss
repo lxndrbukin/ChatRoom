@@ -1,12 +1,11 @@
 @import '../../assets/variables.scss';
 
 .sidebar {
-  display: grid;
-  grid-template-rows: 82px 1fr 56px 62px;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  background-color: $white;
   box-sizing: border-box;
-  border-right: 1px solid $light-blue;
+  padding-top: $spacing-lg;
 
   .sidebar-logo {
     display: flex;
@@ -21,7 +20,6 @@
   .sidebar-links {
     display: flex;
     flex-direction: column;
-    height: fit-content;
 
     .sidebar-profile-link-wrapper {
       width: 100%;
@@ -40,8 +38,8 @@
     .sidebar-links-list {
       list-style-type: none;
       padding: 0;
-      margin: $spacing-lg 0 0 0;
-      font-size: 15px;
+      margin: 0;
+      font-size: 13px;
       width: 100%;
 
       .sidebar-link {
@@ -57,7 +55,7 @@
           text-decoration: none;
           align-self: center;
           width: 100%;
-          padding: $spacing-sm $spacing-md;
+          padding: 0 $spacing-md;
           border-radius: 5px;
           height: 35px;
 
@@ -79,36 +77,14 @@
     }
   }
 
-  .additional {
-    height: fit-content;
-    align-self: flex-end;
+  .siderbar-separator {
+    height: 2px;
+    border: none;
+    width: 70%;
+    background-color: $light-blue;
   }
 
-  .sidebar-profile {
-    padding: $spacing-lg;
-    display: grid;
-    grid-template-columns: 1fr 24px;
-    grid-gap: 15px;
-    color: $dark;
-    height: 30px;
-    align-self: flex-end;
-
-    .user-link {
-      display: grid;
-      grid-template-columns: 30px 1fr;
-      grid-gap: 5px;
-      text-decoration: none;
-      color: $dark;
-
-      .username {
-        align-self: center;
-      }
-    }
-
-    svg {
-      align-self: center;
-      cursor: pointer;
-    }
-
+  .additional {
+    height: fit-content;
   }
 }

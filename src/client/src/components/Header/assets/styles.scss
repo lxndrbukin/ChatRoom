@@ -1,194 +1,209 @@
 @import '../../assets/variables.scss';
 
-.header {
+.header-wrapper {
   background-color: $white;
   border-bottom: 1px solid $light-blue;
-  display: grid;
-  grid-template-columns: 127px 1fr 100px;
-  padding: 0 $spacing-lg;
-  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  .header-logo {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    text-decoration: none;
-    font-weight: bold;
-    padding-right: $spacing-lg;
-
-    svg {
-      color: $dark-blue;
-    }
-
-    .header-logo-text {
-      color: $dark;
-    }
-  }
-
-  .header-search {
-    border-left: 1px solid $light-blue;
-    padding: 0 $spacing-lg;
-    align-self: center;
-
-    .header-search-form {
-      color: $dark-grey;
-      display: grid;
-      grid-template-columns: 16px 1fr;
-      align-items: center;
-
-      input {
-        border: none;
-        height: 25px;
-        width: 150px;
-        margin-left: $spacing-sm;
-
-        &:focus {
-          outline: none;
-        }
-      }
-    }
-
-    .header-search-box {
-      position: absolute;
-      background-color: $white;
-      border-radius: 5px;
-      border: 1px solid $light-blue;
-      width: 300px;
-      padding: $spacing-lg;
-
-      .header-search-box-item {
-        display: grid;
-        grid-template-columns: 40px 1fr;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        color: $dark;
-        padding: $spacing-md;
-        border-radius: 5px;
-
-        &:hover {
-          background-color: $light-blue;
-
-        }
-
-        .header-search-box-item-avatar {
-          height: 40px;
-          width: 40px;
-          object-fit: cover;
-          border-radius: 50%;
-        }
-      }
-    }
-  }
-
-  .header-profile {
-    display: flex;
-    height: 100%;
+  .header {
+    display: grid;
+    grid-template-columns: 200px 1fr 100px;
     box-sizing: border-box;
+    width: 100%;
+    max-width: $max-width;
+    height: 100%;
 
-    .header-profile-icon {
+    .header-logo {
       display: flex;
       align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: 50px;
-
-
-      &:hover {
-        background-color: $light-blue;
-        cursor: pointer;
-      }
-
-      .header-profile-avatar {
-        width: 30px;
-        height: 30px;
-        object-fit: cover;
-        border-radius: 50%;
-        padding-left: $spacing-md;
-      }
+      width: fit-content;
+      text-decoration: none;
+      font-weight: bold;
+      padding-right: $spacing-lg;
 
       svg {
-        color: $dark-grey;
+        color: $dark-blue;
+      }
+
+      .header-logo-text {
+        color: $dark;
       }
     }
 
-    .header-profile-wrapper {
-      width: fit-content;
-      align-items: center;
+    .header-search {
+      align-self: center;
 
-      .header-profile-icon {
-        width: fit-content;
+      .header-search-form {
+        color: $dark-grey;
         display: grid;
-        grid-template-columns: 1fr 16px;
+        grid-template-columns: 16px 1fr;
+        align-items: center;
+        width: fit-content;
+        padding: $spacing-sm $spacing-md;
+        background-color: $light-blue;
+        border-radius: 5px;
+
+        input {
+          border: none;
+          height: 25px;
+          width: 150px;
+          margin-left: $spacing-sm;
+          background-color: $light-blue;
+
+          &:focus {
+            outline: none;
+          }
+        }
       }
 
-      .header-user-nav {
+      .header-search-box {
         position: absolute;
-        right: $spacing-sm;
         background-color: $white;
         border-radius: 5px;
         border: 1px solid $light-blue;
+        width: 300px;
+        padding: $spacing-lg;
+        top: 50px;
 
-        .header-user-nav-data-wrapper {
-          padding: $spacing-lg;
+        .header-search-box-item {
+          display: grid;
+          grid-template-columns: 40px 1fr;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+          color: $dark;
+          padding: $spacing-md;
+          border-radius: 5px;
 
-          .header-user-nav-data {
-            display: grid;
-            grid-template-columns: 40px 1fr;
-            align-items: center;
-            text-decoration: none;
-            color: $dark;
-            font-weight: bold;
-            background-color: $light-grey;
-            padding: $spacing-md $spacing-lg;
-            border-radius: 5px;
+          &:hover {
+            background-color: $light-blue;
 
+          }
 
-            &:hover {
-              background-color: $light-blue;
-            }
-
-            .header-user-nav-fullname {
-              padding: 0 $spacing-md;
-            }
-
-            .header-user-nav-avatar {
-              height: 40px;
-              width: 40px;
-              border-radius: 50%;
-              object-fit: cover;
-            }
+          .header-search-box-item-avatar {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 50%;
           }
         }
+      }
+    }
 
-        .header-user-nav-links {
-          list-style-type: none;
-          padding: 0 0 $spacing-sm 0;
-          display: flex;
-          flex-direction: column;
+    .header-profile {
+      display: flex;
+      height: 100%;
+      box-sizing: border-box;
+      position: relative;
 
-          .header-user-nav-link {
-            padding: $spacing-md $spacing-lg;
-            width: 100%;
-            color: $dark;
-            text-decoration: none;
-            display: grid;
-            grid-template-columns: 16px 1fr;
-            align-items: center;
-            box-sizing: border-box;
-            cursor: pointer;
+      .header-profile-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 50px;
 
-            &:hover {
-              background-color: $light-blue;
+
+        &:hover {
+          background-color: $light-blue;
+          cursor: pointer;
+        }
+
+        .header-profile-avatar {
+          width: 30px;
+          height: 30px;
+          object-fit: cover;
+          border-radius: 50%;
+          padding-left: $spacing-md;
+        }
+
+        svg {
+          color: $dark-grey;
+        }
+      }
+
+      .header-profile-wrapper {
+        width: fit-content;
+        align-items: center;
+
+        .header-profile-icon {
+          width: fit-content;
+          display: grid;
+          grid-template-columns: 1fr 16px;
+        }
+
+        .header-user-nav {
+          position: absolute;
+          right: -1px;
+          background-color: $white;
+          border-radius: 5px;
+          border: 1px solid $light-blue;
+          width: 250px;
+          top: 50px;
+
+          .header-user-nav-data-wrapper {
+            padding: $spacing-lg;
+
+            .header-user-nav-data {
+              display: grid;
+              grid-template-columns: 40px 1fr;
+              align-items: center;
+              text-decoration: none;
+              color: $dark;
+              font-weight: bold;
+              background-color: $light-grey;
+              padding: $spacing-md $spacing-lg;
+              border-radius: 5px;
+
+
+              &:hover {
+                background-color: $light-blue;
+              }
+
+              .header-user-nav-fullname {
+                padding: 0 $spacing-md;
+              }
+
+              .header-user-nav-avatar {
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+              }
             }
+          }
 
-            .header-user-nav-link-text {
-              margin-left: $spacing-md;
-              font-size: 15px;
-            }
+          .header-user-nav-links {
+            list-style-type: none;
+            padding: 0 0 $spacing-sm 0;
+            display: flex;
+            flex-direction: column;
 
-            svg {
-              color: $dark-blue;
+            .header-user-nav-link {
+              padding: $spacing-md $spacing-lg;
+              width: 100%;
+              color: $dark;
+              text-decoration: none;
+              display: grid;
+              grid-template-columns: 16px 1fr;
+              align-items: center;
+              box-sizing: border-box;
+              cursor: pointer;
+
+              &:hover {
+                background-color: $light-blue;
+              }
+
+              .header-user-nav-link-text {
+                margin-left: $spacing-md;
+                font-size: 15px;
+              }
+
+              svg {
+                color: $dark-blue;
+              }
             }
           }
         }

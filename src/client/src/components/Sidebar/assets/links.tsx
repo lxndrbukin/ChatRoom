@@ -1,12 +1,13 @@
 import { SidebarLink } from '../types';
-import { FaBell, FaUserPlus, FaUsers, FaUser } from 'react-icons/fa';
+import { FaBell, FaUsers, FaUser } from 'react-icons/fa';
 import { BiSolidMessage } from 'react-icons/bi';
 import { RiSettings3Fill, RiLoginBoxLine } from 'react-icons/ri';
+import { IoMdPhotos } from 'react-icons/io';
 
 export const mainLinks: SidebarLink[] = [
   {
     name: 'My Profile',
-    icon: <FaUser size={21} />,
+    icon: <FaUser size={20} />,
     path: '/profile',
     ifLoggedIn: true,
   },
@@ -14,12 +15,6 @@ export const mainLinks: SidebarLink[] = [
     name: 'Friends',
     icon: <FaUsers size={24} />,
     path: '/friends',
-    ifLoggedIn: true,
-  },
-  {
-    name: 'Add Friend',
-    icon: <FaUserPlus size={24} />,
-    path: '/friends/add',
     ifLoggedIn: true,
   },
   {
@@ -32,6 +27,12 @@ export const mainLinks: SidebarLink[] = [
     name: 'Messages',
     icon: <BiSolidMessage size={24} />,
     path: '/IM',
+    ifLoggedIn: true,
+  },
+  {
+    name: 'Photos',
+    icon: <IoMdPhotos size={24} />,
+    path: '/photos',
     ifLoggedIn: true,
   },
   {

@@ -17,8 +17,10 @@ export const App: React.FC = (): JSX.Element => {
     <div className='container'>
       <Header />
       <div className='body-wrapper'>
-        <Sidebar />
-        <Outlet />
+        <div className='body'>
+          <Sidebar />
+          <Outlet />
+        </div>
       </div>
     </div>
   );

@@ -2,14 +2,14 @@
 
 .profile {
   width: 100%;
-  padding: $spacing-xl;
+  padding: $spacing-lg 0 0 0;
   box-sizing: border-box;
 
   .profile-header {
-    height: 450px;
+    height: 370px;
     width: 100%;
     display: grid;
-    grid-template-rows: 350px 100px;
+    grid-template-rows: 270px 100px;
     background-color: $white;
     border-radius: 7px;
     border: 1px solid $light-blue;

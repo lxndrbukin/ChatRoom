@@ -1,6 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import './variables.scss';
 
+.ui-icon-button {
+  border: 1px solid $light-blue;
+  background-color: $light-blue;
+  border-radius: 7px;
+  padding: 0 $spacing-md;
+  font-weight: bold;
+  cursor: pointer;
+  color: $dark-blue;
+  height: 33px;
+}
+
 .ui-button {
   border: 1px solid $light-blue;
   background-color: $light-blue;
@@ -24,7 +35,15 @@ body {
   background-color: $light-grey;
 
   .body-wrapper {
-    display: grid;
-    grid-template-columns: 200px 1fr;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .body {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      max-width: $max-width;
+      width: 100%;
+    }
   }
 }
