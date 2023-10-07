@@ -6,7 +6,6 @@ export interface AddFriendProps {
 
 export interface UserData {
   userId: number;
-  email: string;
   fullName: {
     firstName: string;
     lastName: string;

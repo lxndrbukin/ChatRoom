@@ -1,20 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ProfileMainButtonsProps } from './types';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  AppDispatch,
+  FriendRequestAction,
+  RootState,
+  changeFriendStatus,
+} from '../../store';
 import { BsPersonFillAdd } from 'react-icons/bs';
 
 export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
-  profileUserId,
+  profileUserData,
 }): JSX.Element | null => {
+  const dispatch = useDispatch<AppDispatch>();
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
   );
 
+  const handleAddFriend = () => {
+    dispatch(
+      changeFriendStatus({
+        ...profileUserData,
+        requestAction: FriendRequestAction.Send,
+      })
+    );
+  };
+
   if (userData && isLoggedIn) {
     const { userId } = userData;
-    if (profileUserId === userId) {
+    if (profileUserData.userId === userId) {
       return (
         <React.Fragment>
           <Link to={`/profile/${userId}/edit`}>
@@ -29,7 +44,7 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
     return (
       <React.Fragment>
         <button className='ui-icon-button'>
-          <BsPersonFillAdd size={22} />
+          <BsPersonFillAdd onClick={handleAddFriend} size={22} />
         </button>
       </React.Fragment>
     );

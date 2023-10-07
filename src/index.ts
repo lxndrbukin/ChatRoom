@@ -11,6 +11,7 @@ import './controllers/AuthController';
 import './controllers/UserController';
 import './controllers/ProfileController';
 import './controllers/ChatController';
+import './controllers/FriendsListController';
 
 import './models/User';
 import './models/Chat';

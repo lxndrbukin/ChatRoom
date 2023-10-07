@@ -61,18 +61,17 @@ export interface IProfile extends Document {
   about: AboutProfile;
 }
 
-export interface Friend {
+export interface UserId {
   userId: number;
-  fullName: {
-    firstName: string;
-    lastName: string;
-  };
-  photo: string;
+}
+
+export interface Requests extends UserId {
+  checked: boolean;
 }
 
 export interface IFriendsList extends Document {
   userId: number;
-  friendsList: Friend[];
-  requestsList: Friend[];
-  sentRequests: Friend[];
+  friendsList: UserId[];
+  requestsList: UserId[];
+  sentRequests: UserId[];
 }

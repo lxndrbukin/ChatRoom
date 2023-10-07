@@ -3,18 +3,17 @@ export enum Slices {
   Chats = 'chats',
   Profile = 'profile',
   Search = 'search',
+  FriendsList = 'friendsList'
 }
 
 export interface UserData {
   userId: number;
-  email: string;
   fullName: {
     firstName: string;
     lastName: string;
   };
   mainPhoto: string;
   domain: string;
-  role: string;
 }
 
 export interface UserState {
@@ -81,6 +80,7 @@ export interface ProfileInfo {
   username: string | null;
   age: number | null;
   about: AboutProfile;
+  friends: UserData[];
 }
 
 export interface ProfileState {

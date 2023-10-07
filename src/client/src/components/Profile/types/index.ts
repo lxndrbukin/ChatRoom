@@ -1,3 +1,9 @@
 export interface ProfileMainButtonsProps {
-  profileUserId: number;
+  profileUserData: {
+    userId: number;
+    fullName: {
+      firstName: string;
+      lastName: string;
+    };
+  };
 }

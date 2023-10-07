@@ -19,7 +19,7 @@ const upload = Multer({ storage });
 class ProfileController {
   @get('/profile')
   async getProfile(req: Request, res: Response) {
-    const profile = await Profile.findOne({ userId: req.query.userId });
+    const profile = await Profile.findOne({ userId: req.query.userId }).select('-_id -__v');
     return res.send(profile);
   }
 
