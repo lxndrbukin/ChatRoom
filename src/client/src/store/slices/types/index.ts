@@ -85,4 +85,25 @@ export interface ProfileInfo {
 
 export interface ProfileState {
   info: ProfileInfo | undefined;
+  friends: UserData[] | undefined;
+}
+
+export interface UpdateProfilePayload {
+  user: UserData;
+  profile: ProfileInfo;
+}
+
+export interface RequestsList {
+  userId: number;
+  checked: boolean;
+}
+
+export interface SentRequests {
+  userId: number;
+}
+
+export interface FriendsRequests {
+  friendsList: UserData[];
+  requestsList: RequestsList[];
+  sentRequests: SentRequests[];
 }

@@ -2,7 +2,12 @@ import './assets/styles.scss';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState, getProfile } from '../../store';
+import {
+  AppDispatch,
+  RootState,
+  getProfile,
+  getProfileFriends,
+} from '../../store';
 import { ProfileMainButtons } from './ProfileMainButtons';
 
 export const Profile: React.FC = (): JSX.Element | null => {
@@ -16,6 +21,7 @@ export const Profile: React.FC = (): JSX.Element | null => {
   useEffect(() => {
     if (userId) {
       dispatch(getProfile(userId));
+      dispatch(getProfileFriends(JSON.parse(userId)));
     }
   }, [dispatch, userId]);
 

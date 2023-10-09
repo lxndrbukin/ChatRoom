@@ -3,14 +3,14 @@ import sessionSlice from './slices/sessionSlice';
 import chatsSlice from './slices/chatsSlice';
 import profileSlice from './slices/profileSlice';
 import searchSlice from './slices/searchSlice';
-import friendsListSlice from './slices/friendsListSlice';
+import friendRequestsSlice from './slices/friendsRequestsSlice';
 
 export const store = configureStore({
   reducer: {
     session: sessionSlice,
     chats: chatsSlice,
     profile: profileSlice,
-    friends: friendsListSlice,
+    friends: friendRequestsSlice,
     search: searchSlice
   }
 });
@@ -32,3 +32,5 @@ export * from './thunks/findUser';
 export * from './thunks/getProfile';
 export * from './thunks/updateProfile';
 export * from './thunks/changeFriendStatus';
+export * from './thunks/getProfileFriends';
+export * from './thunks/getUserFriends';

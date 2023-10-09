@@ -8,7 +8,8 @@ export interface AuthFormValues {
 export enum FriendRequestAction {
   Accept = 'accept',
   Decline = 'decline',
-  Send = 'send'
+  Send = 'send',
+  Remove = 'remove'
 }
 
 export interface FriendRequestData {

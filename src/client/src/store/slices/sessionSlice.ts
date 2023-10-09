@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserState, UserData, Slices } from './types';
+import { UserState, UserData, Slices, UpdateProfilePayload } from './types';
 import { signup } from '../thunks/signup';
 import { login } from '../thunks/login';
 import { logout } from '../thunks/logout';
@@ -38,7 +38,7 @@ const sessionSlice = createSlice({
         state.userData = action.payload;
       }
     });
-    builder.addCase(updateProfile.fulfilled, (state, action) => {
+    builder.addCase(updateProfile.fulfilled, (state: UserState, action: PayloadAction<UpdateProfilePayload>) => {
       state.userData = action.payload.user;
     });
   }

@@ -8,7 +8,12 @@ import {
   RootState,
   changeFriendStatus,
 } from '../../store';
-import { BsPersonFillAdd } from 'react-icons/bs';
+import {
+  BsPersonFillAdd,
+  BsPersonFillDash,
+  BsPersonFillSlash,
+  BsPersonFillX,
+} from 'react-icons/bs';
 
 export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
   profileUserData,
@@ -17,12 +22,14 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
   );
+  const { requestsList } = useSelector((state: RootState) => state.friends);
+  const { info } = useSelector((state: RootState) => state.profile);
 
-  const handleAddFriend = () => {
+  const handleFriendStatus = (requestAction: FriendRequestAction) => {
     dispatch(
       changeFriendStatus({
         ...profileUserData,
-        requestAction: FriendRequestAction.Send,
+        requestAction,
       })
     );
   };
@@ -40,14 +47,35 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
           </Link>
         </React.Fragment>
       );
-    }
-    return (
-      <React.Fragment>
+    } else {
+      if (requestsList.filter((request) => request.userId === userId)) {
+        return (
+          <button className='ui-icon-button'>
+            <BsPersonFillX
+              onClick={() => handleFriendStatus(FriendRequestAction.Decline)}
+            />
+          </button>
+        );
+      }
+      if (info?.friends.filter((friend) => friend.userId === userId)) {
+        return (
+          <button className='ui-icon-button'>
+            <BsPersonFillDash
+              onClick={() => handleFriendStatus(FriendRequestAction.Remove)}
+              size={22}
+            />
+          </button>
+        );
+      }
+      return (
         <button className='ui-icon-button'>
-          <BsPersonFillAdd onClick={handleAddFriend} size={22} />
+          <BsPersonFillAdd
+            onClick={() => handleFriendStatus(FriendRequestAction.Send)}
+            size={22}
+          />
         </button>
-      </React.Fragment>
-    );
+      );
+    }
   }
   return null;
 };

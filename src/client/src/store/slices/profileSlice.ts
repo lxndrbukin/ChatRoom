@@ -1,10 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Slices, ProfileState, ProfileInfo } from './types';
+import { Slices, ProfileState, ProfileInfo, UpdateProfilePayload, UserData } from './types';
 import { getProfile } from '../thunks/getProfile';
 import { updateProfile } from '../thunks/updateProfile';
+import { getProfileFriends } from '../thunks/getProfileFriends';
 
 const initialState: ProfileState = {
   info: undefined,
+  friends: undefined
 };
 
 const profileSlice = createSlice({
@@ -18,8 +20,11 @@ const profileSlice = createSlice({
         state.info = action.payload;
       }
     );
-    builder.addCase(updateProfile.fulfilled, (state, action) => {
+    builder.addCase(updateProfile.fulfilled, (state: ProfileState, action: PayloadAction<UpdateProfilePayload>) => {
       state.info = action.payload.profile;
+    });
+    builder.addCase(getProfileFriends.fulfilled, (state: ProfileState, action: PayloadAction<UserData[]>) => {
+      state.friends = action.payload;
     });
   },
 });
