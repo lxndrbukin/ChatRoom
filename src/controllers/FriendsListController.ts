@@ -5,34 +5,41 @@ import FriendsList from '../models/FriendsList';
 @controller('/_api')
 class FriendsListController {
   @get('/friends_list')
-  async getFriendsList(req: Request, res: Response) {
+  async getUserFriendsList(req: Request, res: Response) {
+    const lists = await FriendsList.findOne({ userId: req.query.userId }).select('-_id -__v');
+    return res.send(lists);
+  }
 
+  @get('/profile_friends_list')
+  async getProfileFriendsList(req: Request, res: Response) {
+    const lists = await FriendsList.findOne({ userId: req.query.userId }).select('-_id -__v -sentRequests -requestsList');
+    return res.send(lists?.friendsList);
   }
 
   @post('/friend_requests')
   async postFriendRequest(req: Request, res: Response) {
     if (req.session) {
-      const currentUserReqs = await FriendsList.findOne({
+      let currentUserReqs = await FriendsList.findOne({
         userId: req.session.userId,
       });
-      const otherUserReqs = await FriendsList.findOne({
+      let otherUserReqs = await FriendsList.findOne({
         userId: req.body.userId,
       });
       const sessionUser = req.session.userId;
       const otherUser = req.body.userId;
       if (req.body.requestAction === 'send') {
         if (currentUserReqs) {
-          await currentUserReqs.updateOne({ $push: { sentRequests: { userId: otherUser } } });
+          currentUserReqs = await FriendsList.findOneAndUpdate({ userId: sessionUser }, { $push: { sentRequests: { userId: otherUser } } }, { new: true });
         } else {
-          await FriendsList.create({
+          currentUserReqs = await FriendsList.create({
             userId: req.session.userId,
             sentRequests: [{ userId: otherUser }],
           });
         }
         if (otherUserReqs) {
-          await otherUserReqs.updateOne({ $push: { requestsList: { userId: sessionUser, checked: false } } });
+          otherUserReqs = await FriendsList.findOneAndUpdate({ userId: otherUser }, { $push: { requestsList: { userId: sessionUser, checked: false } } }, { new: true });
         } else {
-          await FriendsList.create({
+          otherUserReqs = await FriendsList.create({
             userId: req.body.userId,
             requestsList: [{ userId: sessionUser, checked: false }],
           });
@@ -41,13 +48,13 @@ class FriendsListController {
         req.body.requestAction === 'accept' ||
         req.body.requestAction === 'decline'
       ) {
-        await currentUserReqs?.updateOne({ $pull: { 'requestsList.userId': otherUser } });
-        await otherUserReqs?.updateOne({ $pull: { 'sentRequests.userId': sessionUser } });
+        currentUserReqs = await FriendsList.findOneAndUpdate({ userId: sessionUser }, { $pull: { requestsList: { userId: otherUser } } }, { new: true });
+        otherUserReqs = await FriendsList.findOneAndUpdate({ userId: otherUser }, { $pull: { sentRequests: { userId: sessionUser } } }, { new: true });
       } else if (req.body.requestAction === 'cancel') {
-        await currentUserReqs?.updateOne({ $pull: { 'sentRequests.userId': otherUser } });
-        await otherUserReqs?.updateOne({ $pull: { 'requestsList.userId': sessionUser } });
+        currentUserReqs = await FriendsList.findOneAndUpdate({ userId: sessionUser }, { $pull: { sentRequests: { userId: otherUser } } }, { new: true });
+        otherUserReqs = await FriendsList.findOneAndUpdate({ userId: otherUser }, { $pull: { requestsList: { userId: sessionUser } } }, { new: true });
       }
-      return res.send({ ...otherUser, requestAction: req.body.requestAction });
+      return res.send(currentUserReqs);
     }
   }
 }

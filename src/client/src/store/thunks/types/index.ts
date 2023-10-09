@@ -9,7 +9,8 @@ export enum FriendRequestAction {
   Accept = 'accept',
   Decline = 'decline',
   Send = 'send',
-  Remove = 'remove'
+  Remove = 'remove',
+  Cancel = 'cancel'
 }
 
 export interface FriendRequestData {

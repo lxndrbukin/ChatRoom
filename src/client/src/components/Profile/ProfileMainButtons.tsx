@@ -22,7 +22,9 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
   );
-  const { requestsList } = useSelector((state: RootState) => state.friends);
+  const { requestsList, sentRequests } = useSelector(
+    (state: RootState) => state.friends
+  );
   const { info } = useSelector((state: RootState) => state.profile);
 
   const handleFriendStatus = (requestAction: FriendRequestAction) => {
@@ -48,24 +50,41 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
         </React.Fragment>
       );
     } else {
-      if (requestsList.filter((request) => request.userId === userId)) {
-        return (
-          <button className='ui-icon-button'>
-            <BsPersonFillX
-              onClick={() => handleFriendStatus(FriendRequestAction.Decline)}
-            />
-          </button>
-        );
+      if (requestsList.length) {
+        if (requestsList.filter((request) => request.userId === userId)) {
+          return (
+            <button className='ui-icon-button'>
+              <BsPersonFillX
+                onClick={() => handleFriendStatus(FriendRequestAction.Decline)}
+                size={22}
+              />
+            </button>
+          );
+        }
       }
-      if (info?.friends.filter((friend) => friend.userId === userId)) {
-        return (
-          <button className='ui-icon-button'>
-            <BsPersonFillDash
-              onClick={() => handleFriendStatus(FriendRequestAction.Remove)}
-              size={22}
-            />
-          </button>
-        );
+      if (sentRequests.length) {
+        if (sentRequests.filter((request) => request.userId === userId)) {
+          return (
+            <button className='ui-icon-button'>
+              <BsPersonFillSlash
+                onClick={() => handleFriendStatus(FriendRequestAction.Cancel)}
+                size={22}
+              />
+            </button>
+          );
+        }
+      }
+      if (info && info.friends) {
+        if (info.friends.find((friend) => friend.userId === userId)) {
+          return (
+            <button className='ui-icon-button'>
+              <BsPersonFillDash
+                onClick={() => handleFriendStatus(FriendRequestAction.Remove)}
+                size={22}
+              />
+            </button>
+          );
+        }
       }
       return (
         <button className='ui-icon-button'>
