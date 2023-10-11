@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ProfileMainButtonsProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -8,13 +8,7 @@ import {
   RootState,
   changeFriendStatus,
 } from '../../store';
-import {
-  BsPersonPlusFill,
-  BsPersonDashFill,
-  BsPersonFillSlash,
-  BsPersonFillX,
-  BsPersonCheckFill,
-} from 'react-icons/bs';
+import { BsPersonPlusFill, BsPersonCheckFill } from 'react-icons/bs';
 
 export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
   profileUserData,
@@ -23,7 +17,7 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
   );
-  const { requestsList, sentRequests, friendsList } = useSelector(
+  const { requestsList, sentRequests } = useSelector(
     (state: RootState) => state.friends
   );
   const { info } = useSelector((state: RootState) => state.profile);
@@ -52,7 +46,11 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
       );
     } else {
       if (requestsList.length) {
-        if (requestsList.filter((request) => request.userId === userId)) {
+        if (
+          requestsList.find(
+            (request) => request.userId === profileUserData.userId
+          )
+        ) {
           return (
             <button
               onClick={() => handleFriendStatus(FriendRequestAction.Accept)}
@@ -64,7 +62,11 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
         }
       }
       if (sentRequests.length) {
-        if (sentRequests.filter((request) => request.userId === userId)) {
+        if (
+          sentRequests.find(
+            (request) => request.userId === profileUserData.userId
+          )
+        ) {
           return (
             <button
               onClick={() => handleFriendStatus(FriendRequestAction.Cancel)}

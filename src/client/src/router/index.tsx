@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import * as socketIO from 'socket.io-client';
 import { App } from '../components/App';
+import { ErrorPage } from '../components/ErrorPage/ErrorPage';
 import { SignupAuth } from '../components/Auth/SignupAuth';
 import { LoginAuth } from '../components/Auth/LoginAuth';
 import { Profile } from '../components/Profile/Profile';
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/profile/:userId',

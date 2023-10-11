@@ -1,0 +1,34 @@
+@import '../../assets/variables.scss';
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  height: 100%;
+  background-color: $light-grey;
+
+  .error-page-404 {
+    font-weight: bold;
+    font-size: 100px;
+  }
+
+  .error-page-text {
+    padding: 0 0 $spacing-lg 0;
+    font-size: 17px;
+  }
+
+  .error-page-homepage-btn {
+    text-decoration: none;
+    color: $dark;
+    padding: $spacing-md $spacing-lg;
+    background-color: $light-blue;
+    border-radius: 5px;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $grey;
+    }
+  }
+}
