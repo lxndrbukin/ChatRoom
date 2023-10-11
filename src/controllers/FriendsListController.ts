@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { controller, get, post, bodyValidator, use } from './decorators';
 import FriendsList from '../models/FriendsList';
+import User from '../models/User';
 
 @controller('/_api')
 class FriendsListController {

@@ -12,7 +12,7 @@ import { ProfileMainButtons } from './ProfileMainButtons';
 
 export const Profile: React.FC = (): JSX.Element | null => {
   const dispatch = useDispatch<AppDispatch>();
-  const { info } = useSelector((state: RootState) => state.profile);
+  const { info, friends } = useSelector((state: RootState) => state.profile);
   const { userId } = useParams();
 
   const defaultAvatar =
@@ -45,7 +45,7 @@ export const Profile: React.FC = (): JSX.Element | null => {
                   {firstName} {lastName}
                 </span>
                 <span className='profile-header-data-friends-num'>
-                  0 Friends
+                  {friends?.length} Friends
                 </span>
               </div>
             </div>

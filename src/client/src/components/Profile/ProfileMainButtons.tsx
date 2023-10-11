@@ -9,10 +9,11 @@ import {
   changeFriendStatus,
 } from '../../store';
 import {
-  BsPersonFillAdd,
-  BsPersonFillDash,
+  BsPersonPlusFill,
+  BsPersonDashFill,
   BsPersonFillSlash,
   BsPersonFillX,
+  BsPersonCheckFill,
 } from 'react-icons/bs';
 
 export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
@@ -22,7 +23,7 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
   );
-  const { requestsList, sentRequests } = useSelector(
+  const { requestsList, sentRequests, friendsList } = useSelector(
     (state: RootState) => state.friends
   );
   const { info } = useSelector((state: RootState) => state.profile);
@@ -53,11 +54,11 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
       if (requestsList.length) {
         if (requestsList.filter((request) => request.userId === userId)) {
           return (
-            <button className='ui-icon-button'>
-              <BsPersonFillX
-                onClick={() => handleFriendStatus(FriendRequestAction.Decline)}
-                size={22}
-              />
+            <button
+              onClick={() => handleFriendStatus(FriendRequestAction.Accept)}
+              className='ui-button'
+            >
+              Follows You
             </button>
           );
         }
@@ -65,11 +66,11 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
       if (sentRequests.length) {
         if (sentRequests.filter((request) => request.userId === userId)) {
           return (
-            <button className='ui-icon-button'>
-              <BsPersonFillSlash
-                onClick={() => handleFriendStatus(FriendRequestAction.Cancel)}
-                size={22}
-              />
+            <button
+              onClick={() => handleFriendStatus(FriendRequestAction.Cancel)}
+              className='ui-button'
+            >
+              Request Sent
             </button>
           );
         }
@@ -78,7 +79,7 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
         if (info.friends.find((friend) => friend.userId === userId)) {
           return (
             <button className='ui-icon-button'>
-              <BsPersonFillDash
+              <BsPersonCheckFill
                 onClick={() => handleFriendStatus(FriendRequestAction.Remove)}
                 size={22}
               />
@@ -88,7 +89,7 @@ export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
       }
       return (
         <button className='ui-icon-button'>
-          <BsPersonFillAdd
+          <BsPersonPlusFill
             onClick={() => handleFriendStatus(FriendRequestAction.Send)}
             size={22}
           />

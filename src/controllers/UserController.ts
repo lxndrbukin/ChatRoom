@@ -19,8 +19,8 @@ class UserController {
   async getUsers(req: Request, res: Response) {
     const searchResults = await User.find({
       $or: [
-        { 'fullName.firstName': { $regex: req.query.searchReq } },
-        { 'fullName.lastName': { $regex: req.query.searchReq } }
+        { 'fullName.firstName': { $regex: req.query.search } },
+        { 'fullName.lastName': { $regex: req.query.search } }
       ]
     }).select('-_id -__v -password');
     return res.send(searchResults);
@@ -29,7 +29,7 @@ class UserController {
   @get('/users/:userId')
   async getUser(req: Request, res: Response) {
     if (req.params && req.params.userId) {
-      const user = await User.findOne({ userId: req.params.userId }).select('-password -email -__v');
+      const user = await User.findOne({ userId: req.params.userId }).select('-password -email -__v -_id');
       if (user) {
         return res.send(user);
       }
