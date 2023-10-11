@@ -10,7 +10,7 @@ const ProfileSchema: Schema = new Schema<IProfile>({
   email: String,
   domain: String,
   age: { type: Number, default: null },
-  mainPhoto: { type: String, default: null },
+  mainPhoto: { type: String, default: 'https://alumni.engineering.utoronto.ca/files/2022/05/Avatar-Placeholder-400x400-1.jpg' },
   about: {
     occupation: {
       desc: { type: String, default: null },

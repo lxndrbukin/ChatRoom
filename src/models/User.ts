@@ -8,7 +8,7 @@ const UserSchema: Schema = new Schema<IUser>({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true }
   },
-  mainPhoto: { type: String, default: null },
+  mainPhoto: { type: String, default: 'https://alumni.engineering.utoronto.ca/files/2022/05/Avatar-Placeholder-400x400-1.jpg' },
   domain: String,
   email: { type: String, required: true },
   password: { type: String, required: true },
