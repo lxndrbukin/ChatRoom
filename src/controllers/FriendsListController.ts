@@ -13,8 +13,13 @@ class FriendsListController {
 
   @get('/profile_friends_list')
   async getProfileFriendsList(req: Request, res: Response) {
-    const lists = await FriendsList.findOne({ userId: req.query.userId }).select('-_id -__v -sentRequests -requestsList');
-    return res.send(lists?.friendsList);
+    let friendsList: any[] = [];
+    const listRes = await FriendsList.findOne({ userId: req.query.userId }).select('-_id -__v -sentRequests -requestsList');
+    listRes?.friendsList.map(async (user: any) => {
+      const userRes = await User.findOne({ userId: user.userId }).select('-_id -__v -password');
+      friendsList.push(userRes);
+    });
+    return res.send(friendsList);
   }
 
   @post('/friend_requests')

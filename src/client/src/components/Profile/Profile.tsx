@@ -9,6 +9,7 @@ import {
   getProfileFriends,
 } from '../../store';
 import { ProfileMainButtons } from './ProfileMainButtons';
+import { ProfileFriends } from './ProfileFriends';
 
 export const Profile: React.FC = (): JSX.Element | null => {
   const dispatch = useDispatch<AppDispatch>();
@@ -54,6 +55,7 @@ export const Profile: React.FC = (): JSX.Element | null => {
             </div>
           </div>
         </div>
+        <ProfileFriends />
       </div>
     );
   }
