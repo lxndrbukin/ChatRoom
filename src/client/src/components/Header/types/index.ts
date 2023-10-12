@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, ReactNode } from 'react';
 import { UserData } from '../../../store';
 
 export interface HeaderUserNavLink {
@@ -26,4 +26,8 @@ export interface HeaderSearchBoxItemProps {
     lastName: string;
   };
   mainPhoto: string;
+}
+
+export interface HeaderNotificationProps {
+  children: ReactNode;
 }

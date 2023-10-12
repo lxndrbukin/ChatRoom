@@ -3,7 +3,7 @@ export enum Slices {
   Chats = 'chats',
   Profile = 'profile',
   Search = 'search',
-  FriendsList = 'friendsList'
+  FriendsList = 'friendsList',
 }
 
 export interface UserData {
@@ -106,4 +106,8 @@ export interface FriendsRequests {
   friendsList: UserData[];
   requestsList: RequestsList[];
   sentRequests: SentRequests[];
+}
+
+export interface Notifications {
+  friendRequests: UserData[];
 }

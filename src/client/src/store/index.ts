@@ -4,6 +4,7 @@ import chatsSlice from './slices/chatsSlice';
 import profileSlice from './slices/profileSlice';
 import searchSlice from './slices/searchSlice';
 import friendRequestsSlice from './slices/friendsRequestsSlice';
+import notificationsSlice from './slices/notificationsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,8 +12,9 @@ export const store = configureStore({
     chats: chatsSlice,
     profile: profileSlice,
     friends: friendRequestsSlice,
-    search: searchSlice
-  }
+    notifications: notificationsSlice,
+    search: searchSlice,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -34,3 +36,4 @@ export * from './thunks/updateProfile';
 export * from './thunks/changeFriendStatus';
 export * from './thunks/getProfileFriends';
 export * from './thunks/getUserFriends';
+export * from './thunks/getFriendReqNotifications';

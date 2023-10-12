@@ -12,8 +12,11 @@ import { HeaderUserNav } from './HeaderUserNav';
 export const Header: React.FC = (): JSX.Element => {
   const profileFrame = useRef<HTMLDivElement>(null);
   const profileMenu = useRef<HTMLDivElement>(null);
+  const notificationsFrame = useRef<HTMLDivElement>(null);
+  const notificationsMenu = useRef<HTMLDivElement>(null);
 
   const [menu, showMenu] = useState(false);
+  const [notifications, showNotifications] = useState(false);
 
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
@@ -23,8 +26,12 @@ export const Header: React.FC = (): JSX.Element => {
     document.addEventListener('click', handleOutsideClick);
   }, []);
 
-  const handleInsideClick = () => {
+  const handleMenuInsideClick = () => {
     showMenu(!menu);
+  };
+
+  const handleNotificationInsideClick = () => {
+    showNotifications(!notifications);
   };
 
   const handleOutsideClick = (e: MouseEvent): void => {
@@ -34,6 +41,13 @@ export const Header: React.FC = (): JSX.Element => {
       !profileMenu.current?.contains(e.target as Element)
     ) {
       showMenu(false);
+    }
+    if (
+      notificationsFrame &&
+      !notificationsFrame.current?.contains(e.target as Element) &&
+      !notificationsMenu.current?.contains(e.target as Element)
+    ) {
+      showNotifications(false);
     }
   };
 
@@ -58,7 +72,7 @@ export const Header: React.FC = (): JSX.Element => {
           </div>
           <HeaderUserNav
             showMenu={menu}
-            handleInsideClick={handleInsideClick}
+            handleInsideClick={handleMenuInsideClick}
             menuRef={profileMenu}
             userData={userData!}
           />
