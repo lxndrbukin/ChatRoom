@@ -8,6 +8,7 @@ import { BiSolidMessage } from 'react-icons/bi';
 import { RootState } from '../../store';
 import { HeaderSearch } from './HeaderSearch';
 import { HeaderUserNav } from './HeaderUserNav';
+import { HeaderNotifications } from './HeaderNotifications';
 
 export const Header: React.FC = (): JSX.Element => {
   const profileFrame = useRef<HTMLDivElement>(null);
@@ -54,6 +55,7 @@ export const Header: React.FC = (): JSX.Element => {
   const renderUserNav = (): JSX.Element => {
     return (
       <div className='header-profile'>
+        <HeaderNotifications />
         <Link to='/IM' className='header-profile-icon'>
           <BiSolidMessage size={26} />
         </Link>

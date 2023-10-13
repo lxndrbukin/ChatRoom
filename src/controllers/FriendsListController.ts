@@ -35,11 +35,13 @@ class FriendsListController {
     const response = await FriendsList.findOne({
       userId: req.query.userId,
     }).select('-friendsList -sentRequests');
-    response?.requestsList.map(async (request) => {
+    response!.requestsList.map(async (request) => {
       const { userId } = request;
       const user = await User.findOne({ userId }).select('-_id -__v -password');
       requestsList.push(user);
+      console.log(requestsList, 1);
     });
+    console.log(requestsList, 2);
     return res.send(requestsList);
   }
 
