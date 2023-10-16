@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ProfileMainButtonsProps } from './types';
+import { ProfileHeaderButtonsProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   AppDispatch,
@@ -10,7 +10,7 @@ import {
 } from '../../store';
 import { BsPersonPlusFill, BsPersonCheckFill } from 'react-icons/bs';
 
-export const ProfileMainButtons: React.FC<ProfileMainButtonsProps> = ({
+export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
   profileUserData,
 }): JSX.Element | null => {
   const dispatch = useDispatch<AppDispatch>();

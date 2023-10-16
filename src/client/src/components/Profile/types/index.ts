@@ -1,4 +1,4 @@
-export interface ProfileMainButtonsProps {
+export interface ProfileHeaderButtonsProps {
   profileUserData: {
     userId: number;
     fullName: {
@@ -6,4 +6,12 @@ export interface ProfileMainButtonsProps {
       lastName: string;
     };
   };
+}
+
+export interface ProfileFriendProps {
+  fullName: {
+    firstName: string;
+    lastName: string;
+  };
+  mainPhoto: string;
 }

@@ -20,9 +20,8 @@ export const HeaderNotifications: React.FC<HeaderNotificationsProps> = ({
   useEffect(() => {
     if (isLoggedIn && userData) {
       dispatch(getFriendReqNotifications(userData.userId));
-      console.log(friendRequests);
     }
-  }, []);
+  }, [dispatch]);
 
   const renderFriendReqs = (): JSX.Element[] | JSX.Element => {
     if (!friendRequests.length) {

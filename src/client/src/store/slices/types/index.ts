@@ -75,9 +75,9 @@ export interface ProfileInfo {
     firstName: string;
     lastName: string;
   };
-  mainPhoto: string | null;
+  mainPhoto: string;
   email: string;
-  username: string | null;
+  domain: string | null;
   age: number | null;
   about: AboutProfile;
   friends: UserData[];
