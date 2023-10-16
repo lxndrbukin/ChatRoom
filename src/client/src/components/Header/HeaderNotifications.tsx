@@ -7,7 +7,9 @@ import { BsPersonPlusFill } from 'react-icons/bs';
 
 export const HeaderNotifications: React.FC<HeaderNotificationsProps> = ({
   handleInsideClick,
-}): JSX.Element => {
+  notificationsBoxRef,
+  showNotifications,
+}): JSX.Element | null => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { friendRequests } = useSelector(
@@ -25,7 +27,7 @@ export const HeaderNotifications: React.FC<HeaderNotificationsProps> = ({
 
   const renderFriendReqs = (): JSX.Element[] | JSX.Element => {
     if (!friendRequests.length) {
-      return <div className='header-notifications-empty'>Empty</div>;
+      return <div className='header-notifications-empty'>No notifications</div>;
     }
     return friendRequests.map((request) => {
       const { firstName, lastName } = request.fullName;
@@ -53,12 +55,12 @@ export const HeaderNotifications: React.FC<HeaderNotificationsProps> = ({
     });
   };
 
-  return (
-    <div className='header-notifications-wrapper'>
-      <div className='header-notifications-icon'>
-        <FaBell size={25} />
+  if (showNotifications) {
+    return (
+      <div ref={notificationsBoxRef} className='header-notifications'>
+        {renderFriendReqs()}
       </div>
-      <div className='header-notifications'>{renderFriendReqs()}</div>
-    </div>
-  );
+    );
+  }
+  return null;
 };

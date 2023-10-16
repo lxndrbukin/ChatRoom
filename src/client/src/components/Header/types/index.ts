@@ -30,6 +30,8 @@ export interface HeaderSearchBoxItemProps {
 
 export interface HeaderNotificationsProps {
   handleInsideClick: MouseEventHandler<Element>;
+  notificationsBoxRef: React.RefObject<HTMLDivElement>;
+  showNotifications: boolean;
 }
 
 export interface HeaderNotificationProps {

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { IoMdChatboxes } from 'react-icons/io';
 import { GoTriangleDown } from 'react-icons/go';
 import { BiSolidMessage } from 'react-icons/bi';
+import { FaBell } from 'react-icons/fa';
 import { RootState } from '../../store';
 import { HeaderSearch } from './HeaderSearch';
 import { HeaderUserNav } from './HeaderUserNav';
@@ -14,7 +15,7 @@ export const Header: React.FC = (): JSX.Element => {
   const profileFrame = useRef<HTMLDivElement>(null);
   const profileMenu = useRef<HTMLDivElement>(null);
   const notificationsFrame = useRef<HTMLDivElement>(null);
-  const notificationsMenu = useRef<HTMLDivElement>(null);
+  const notificationsBox = useRef<HTMLDivElement>(null);
 
   const [menu, showMenu] = useState(false);
   const [notifications, showNotifications] = useState(false);
@@ -38,7 +39,7 @@ export const Header: React.FC = (): JSX.Element => {
     if (
       notificationsFrame &&
       !notificationsFrame.current?.contains(e.target as Element) &&
-      !notificationsMenu.current?.contains(e.target as Element)
+      !notificationsBox.current?.contains(e.target as Element)
     ) {
       showNotifications(false);
     }
@@ -47,9 +48,20 @@ export const Header: React.FC = (): JSX.Element => {
   const renderUserNav = (): JSX.Element => {
     return (
       <div className='header-profile'>
-        <HeaderNotifications
-          handleInsideClick={() => showNotifications(!notifications)}
-        />
+        <div className='header-notifications-wrapper'>
+          <div
+            onClick={() => showNotifications(!notifications)}
+            ref={notificationsFrame}
+            className='header-notifications-icon'
+          >
+            <FaBell size={25} />
+          </div>
+          <HeaderNotifications
+            showNotifications={notifications}
+            notificationsBoxRef={notificationsBox}
+            handleInsideClick={() => showNotifications(!notifications)}
+          />
+        </div>
         <Link to='/IM' className='header-profile-icon'>
           <BiSolidMessage size={26} />
         </Link>
