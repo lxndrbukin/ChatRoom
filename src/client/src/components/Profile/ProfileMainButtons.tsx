@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { ProfileMainButtonsProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
 import {

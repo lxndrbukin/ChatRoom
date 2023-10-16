@@ -27,14 +27,6 @@ export const Header: React.FC = (): JSX.Element => {
     document.addEventListener('click', handleOutsideClick);
   }, []);
 
-  const handleMenuInsideClick = () => {
-    showMenu(!menu);
-  };
-
-  const handleNotificationInsideClick = () => {
-    showNotifications(!notifications);
-  };
-
   const handleOutsideClick = (e: MouseEvent): void => {
     if (
       profileFrame &&
@@ -55,7 +47,9 @@ export const Header: React.FC = (): JSX.Element => {
   const renderUserNav = (): JSX.Element => {
     return (
       <div className='header-profile'>
-        <HeaderNotifications />
+        <HeaderNotifications
+          handleInsideClick={() => showNotifications(!notifications)}
+        />
         <Link to='/IM' className='header-profile-icon'>
           <BiSolidMessage size={26} />
         </Link>
@@ -74,7 +68,7 @@ export const Header: React.FC = (): JSX.Element => {
           </div>
           <HeaderUserNav
             showMenu={menu}
-            handleInsideClick={handleMenuInsideClick}
+            handleInsideClick={() => showMenu(!menu)}
             menuRef={profileMenu}
             userData={userData!}
           />

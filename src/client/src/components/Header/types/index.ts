@@ -28,6 +28,10 @@ export interface HeaderSearchBoxItemProps {
   mainPhoto: string;
 }
 
+export interface HeaderNotificationsProps {
+  handleInsideClick: MouseEventHandler<Element>;
+}
+
 export interface HeaderNotificationProps {
   children: ReactNode;
 }

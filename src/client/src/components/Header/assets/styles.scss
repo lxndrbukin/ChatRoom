@@ -92,6 +92,56 @@
       }
     }
 
+    .header-notifications-wrapper {
+      position: relative;
+
+      .header-notifications-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        &:hover {
+          background-color: $light-blue;
+          cursor: pointer;
+        }
+      }
+
+      .header-notifications {
+        position: absolute;
+        top: 50px;
+        width: 250px;
+        min-height: 150px;
+        background-color: $white;
+        border-radius: 5px;
+        border: 1px solid $light-blue;
+        padding: $spacing-sm;
+
+        .header-notification {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 50px 1fr 70px;
+          gap: $spacing-sm;
+
+          .header-notification-avatar {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+          }
+
+          .header-notification-text {
+            display: flex;
+
+            .header-notification-user-name {
+              padding: 0 4px 0 0;
+              font-weight: bold;
+              width: fit-content;
+            }
+          }
+        }
+      }
+    }
+
     .header-profile {
       display: flex;
       height: 100%;
@@ -104,7 +154,6 @@
         justify-content: center;
         height: 100%;
         width: 50px;
-
 
         &:hover {
           background-color: $light-blue;
