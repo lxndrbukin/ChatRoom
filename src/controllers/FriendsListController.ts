@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import { controller, get, post, bodyValidator, use } from './decorators';
-import { IUser } from '../models/types';
+import { controller, get, post } from './decorators';
 import FriendsList from '../models/FriendsList';
 import User from '../models/User';
 
@@ -39,9 +38,7 @@ class FriendsListController {
       const { userId } = request;
       const user = await User.findOne({ userId }).select('-_id -__v -password');
       requestsList.push(user);
-      console.log(requestsList, 1);
     });
-    console.log(requestsList, 2);
     return res.send(requestsList);
   }
 

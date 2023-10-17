@@ -6,6 +6,13 @@ export enum Slices {
   FriendsList = 'friendsList',
 }
 
+export enum OnlineStatus {
+  Online = 'Online',
+  Away = 'Away',
+  Busy = 'Busy',
+  Offline = 'Offline'
+}
+
 export interface UserData {
   userId: number;
   fullName: {
@@ -14,6 +21,11 @@ export interface UserData {
   };
   mainPhoto: string;
   domain: string;
+  status: {
+    onlineStatus: OnlineStatus;
+    lastSeen: Date;
+  };
+  signedUp: Date;
 }
 
 export interface UserState {
@@ -81,6 +93,11 @@ export interface ProfileInfo {
   age: number | null;
   about: AboutProfile;
   friends: UserData[];
+  status: {
+    onlineStatus: OnlineStatus;
+    lastSeen: Date;
+  };
+  signedUp: Date;
 }
 
 export interface ProfileState {

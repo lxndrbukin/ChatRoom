@@ -46,6 +46,7 @@ export const Header: React.FC = (): JSX.Element => {
   };
 
   const renderUserNav = (): JSX.Element => {
+    const { onlineStatus } = userData!.status;
     return (
       <div className='header-profile'>
         <div className='header-notifications-wrapper'>
@@ -62,7 +63,7 @@ export const Header: React.FC = (): JSX.Element => {
             handleInsideClick={() => showNotifications(!notifications)}
           />
         </div>
-        <Link to='/IM' className='header-profile-icon'>
+        <Link to='/IM' className='header-messages-icon'>
           <BiSolidMessage size={26} />
         </Link>
         <div className='header-profile-wrapper'>
@@ -77,6 +78,9 @@ export const Header: React.FC = (): JSX.Element => {
               className='header-profile-avatar'
             />
             <GoTriangleDown size={16} />
+            <div
+              className={`header-profile-icon-status-${onlineStatus.toLowerCase()}`}
+            ></div>
           </div>
           <HeaderUserNav
             showMenu={menu}

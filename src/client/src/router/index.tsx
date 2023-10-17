@@ -20,7 +20,7 @@ const socket = socketIO.connect('http://localhost:5000');
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <App socket={socket} />,
     errorElement: <ErrorPage />,
     children: [
       {

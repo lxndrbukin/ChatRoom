@@ -4,6 +4,13 @@ export enum UserRoles {
   User = 'User',
 }
 
+export enum UserStatus {
+  Online = 'Online',
+  Away = 'Away',
+  Busy = 'Busy',
+  Offline = 'Offline'
+}
+
 export interface IUser extends Document {
   userId: number;
   fullName: {
@@ -14,7 +21,11 @@ export interface IUser extends Document {
   username: string;
   email: string;
   password: string;
-  role: UserRoles;
+  status: {
+    lastSeen: Date;
+    onlineStatus: UserStatus;
+  },
+  signedUp: Date;
 }
 
 export interface ChatMember {
@@ -59,6 +70,11 @@ export interface IProfile extends Document {
   username: string;
   age: number;
   about: AboutProfile;
+  status: {
+    lastSeen: Date;
+    onlineStatus: UserStatus;
+  },
+  signedUp: Date;
 }
 
 export interface UserId {

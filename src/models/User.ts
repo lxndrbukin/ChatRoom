@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { UserRoles } from './types';
+import { UserStatus } from './types';
 import { IUser } from './types';
 
 const UserSchema: Schema = new Schema<IUser>({
@@ -9,10 +9,14 @@ const UserSchema: Schema = new Schema<IUser>({
     lastName: { type: String, required: true }
   },
   mainPhoto: { type: String, default: 'https://alumni.engineering.utoronto.ca/files/2022/05/Avatar-Placeholder-400x400-1.jpg' },
-  domain: String,
+  domain: { type: String, default: null },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  role: { type: String, default: UserRoles.User }
+  status: {
+    onlineStatus: { type: String, default: UserStatus.Online },
+    lastSeen: { type: Date, default: new Date() }
+  },
+  signedUp: { type: Date, default: new Date() },
 });
 
 export default mongoose.model<IUser>('user', UserSchema);

@@ -31,12 +31,38 @@
         flex-grow: 1;
 
         .profile-header-details-avatar {
-          height: 150px;
-          width: 150px;
-          object-fit: cover;
-          border-radius: 50%;
-          padding: $spacing-sm;
-          background-color: $white;
+          position: relative;
+
+          .profile-header-details-avatar-img {
+            height: 150px;
+            width: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            padding: $spacing-sm;
+            background-color: $white;
+          }
+
+          .profile-header-details-avatar-status-online {
+            width: 15px;
+            height: 15px;
+            background-color: green;
+            position: absolute;
+            right: 15px;
+            top: 120px;
+            border-radius: 50%;
+            border: 2px solid $white;
+          }
+
+          .profile-header-details-avatar-status-offline {
+            width: 15px;
+            height: 15px;
+            background-color: grey;
+            position: absolute;
+            right: 15px;
+            top: 120px;
+            border-radius: 50%;
+            border: 2px solid $white;
+          }
         }
       }
 

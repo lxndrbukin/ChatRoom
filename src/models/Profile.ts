@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import { IProfile } from './types';
+import { UserStatus } from './types';
 
 const ProfileSchema: Schema = new Schema<IProfile>({
   userId: Number,
@@ -8,7 +9,7 @@ const ProfileSchema: Schema = new Schema<IProfile>({
     lastName: String,
   },
   email: String,
-  domain: String,
+  domain: { type: String, default: null },
   age: { type: Number, default: null },
   mainPhoto: { type: String, default: 'https://alumni.engineering.utoronto.ca/files/2022/05/Avatar-Placeholder-400x400-1.jpg' },
   about: {
@@ -19,7 +20,12 @@ const ProfileSchema: Schema = new Schema<IProfile>({
     info: {
       brief: { type: String, default: null }
     }
-  }
+  },
+  status: {
+    onlineStatus: { type: String, default: UserStatus.Online },
+    lastSeen: { type: Date, default: new Date() }
+  },
+  signedUp: { type: Date, default: new Date() },
 });
 
 export default mongoose.model<IProfile>('profile', ProfileSchema);

@@ -1,9 +1,17 @@
 import Chat from '../models/Chat';
 import User from '../models/User';
+import Profile from '../models/Profile';
 
 export const io = (socketIO: any): void => {
   socketIO.on('connection', (socket: any): void => {
     console.log(`User ${socket.id} just connected`);
+
+    socket.on('event://update-user-status', async (data: any) => {
+      await User.findOneAndUpdate({ userId: data.userId }, { 'status.onlineStatus': data.status, 'status.lastSeen': new Date() }).select('-_id -__v -password');
+      await Profile.findOneAndUpdate({ userId: data.userId }, { 'status.onlineStatus': data.status, 'status.lastSeen': new Date() });
+      socketIO.emit('event://update-user-status-res', data.status);
+      console.log(`Status updated to ${data.status}`);
+    });
 
     socket.on('event://create-chat', async (data: any) => {
       const id = await Chat.count() + 1;
