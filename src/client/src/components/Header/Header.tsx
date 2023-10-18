@@ -2,6 +2,7 @@ import './assets/styles.scss';
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { HeaderProps } from './types';
 import { IoMdChatboxes } from 'react-icons/io';
 import { GoTriangleDown } from 'react-icons/go';
 import { BiSolidMessage } from 'react-icons/bi';
@@ -11,7 +12,7 @@ import { HeaderSearch } from './HeaderSearch';
 import { HeaderUserNav } from './HeaderUserNav';
 import { HeaderNotifications } from './HeaderNotifications';
 
-export const Header: React.FC = (): JSX.Element => {
+export const Header: React.FC<HeaderProps> = ({ socket }): JSX.Element => {
   const profileFrame = useRef<HTMLDivElement>(null);
   const profileMenu = useRef<HTMLDivElement>(null);
   const notificationsFrame = useRef<HTMLDivElement>(null);
@@ -83,6 +84,7 @@ export const Header: React.FC = (): JSX.Element => {
             ></div>
           </div>
           <HeaderUserNav
+            socket={socket}
             showMenu={menu}
             handleInsideClick={() => showMenu(!menu)}
             menuRef={profileMenu}

@@ -245,7 +245,7 @@
               font-weight: bold;
               background-color: $light-grey;
               padding: $spacing-md $spacing-lg;
-              border-radius: 5px;
+              border-radius: 5px 5px 0 0;
 
 
               &:hover {
@@ -261,6 +261,67 @@
                 width: 40px;
                 border-radius: 50%;
                 object-fit: cover;
+              }
+            }
+
+            .header-profile-user-status {
+              display: flex;
+              position: relative;
+              background-color: $light-grey;
+              border-radius: 0 0 5px 5px;
+              padding: 0 $spacing-lg;
+
+              .header-profile-user-status-name {
+                cursor: pointer;
+                display: grid;
+                grid-template-columns: 50px 16px;
+                align-items: center;
+              }
+
+              .header-profile-user-status-list {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                background-color: $white;
+                border-radius: 5px;
+                width: 100px;
+                border: 1px solid $light-blue;
+                top: 18px;
+                left: 0;
+                padding: $spacing-sm;
+
+                .header-profile-user-status-type-icon {
+                  border-radius: 50%;
+                  width: 15px;
+                  height: 15px;
+                }
+
+                .online {
+                  background-color: green;
+                }
+
+                .offline {
+                  background-color: grey;
+                }
+
+                .busy {
+                  background-color: red;
+                }
+
+                .away {
+                  background-color: yellow;
+                }
+
+                .header-profile-user-status-type {
+                  display: grid;
+                  grid-template-columns: 15px 1fr;
+                  gap: 5px;
+                  cursor: pointer;
+
+                  &:hover {
+                    background-color: $light-blue
+                  }
+                }
               }
             }
           }

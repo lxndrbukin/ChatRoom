@@ -14,6 +14,7 @@ const UserSchema: Schema = new Schema<IUser>({
   password: { type: String, required: true },
   status: {
     onlineStatus: { type: String, default: UserStatus.Online },
+    previousOnlineStatus: String,
     lastSeen: { type: Date, default: new Date() }
   },
   signedUp: { type: Date, default: new Date() },

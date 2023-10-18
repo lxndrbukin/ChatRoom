@@ -23,6 +23,7 @@ const ProfileSchema: Schema = new Schema<IProfile>({
   },
   status: {
     onlineStatus: { type: String, default: UserStatus.Online },
+    previousOnlineStatus: String,
     lastSeen: { type: Date, default: new Date() }
   },
   signedUp: { type: Date, default: new Date() },

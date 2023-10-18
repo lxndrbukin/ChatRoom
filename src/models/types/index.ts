@@ -23,6 +23,7 @@ export interface IUser extends Document {
   password: string;
   status: {
     lastSeen: Date;
+    previousOnlineStatus: UserStatus;
     onlineStatus: UserStatus;
   },
   signedUp: Date;
@@ -72,6 +73,7 @@ export interface IProfile extends Document {
   about: AboutProfile;
   status: {
     lastSeen: Date;
+    previousOnlineStatus: UserStatus;
     onlineStatus: UserStatus;
   },
   signedUp: Date;

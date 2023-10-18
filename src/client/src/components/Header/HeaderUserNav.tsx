@@ -4,8 +4,10 @@ import { AppDispatch, logout } from '../../store';
 import { Link } from 'react-router-dom';
 import { HeaderUserNavProps } from './types';
 import { headerUserNavLinks } from './assets/links';
+import { HeaderUserStatus } from './HeaderUserStatus';
 
 export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
+  socket,
   userData,
   menuRef,
   handleInsideClick,
@@ -46,8 +48,8 @@ export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
       <nav ref={menuRef} className='header-user-nav'>
         <div className='header-user-nav-data-wrapper'>
           <Link
-            onClick={handleInsideClick}
             to={`/profile/${userId}`}
+            onClick={handleInsideClick}
             className='header-user-nav-data'
           >
             <img
@@ -59,6 +61,7 @@ export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
               {firstName} {lastName}
             </span>
           </Link>
+          <HeaderUserStatus socket={socket} />
         </div>
         <div className='header-user-nav-links'>{renderLinks()}</div>
       </nav>

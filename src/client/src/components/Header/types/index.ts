@@ -1,5 +1,10 @@
 import React, { MouseEventHandler, ReactNode } from 'react';
 import { UserData } from '../../../store';
+import { Socket } from 'socket.io-client';
+
+export interface HeaderProps {
+  socket: Socket;
+}
 
 export interface HeaderUserNavLink {
   name: string;
@@ -12,6 +17,7 @@ export interface HeaderUserNavProps {
   menuRef: React.RefObject<HTMLDivElement>;
   showMenu: boolean;
   handleInsideClick: MouseEventHandler<Element>;
+  socket: Socket;
 }
 
 export interface HeaderSearchBoxProps {
@@ -36,4 +42,8 @@ export interface HeaderNotificationsProps {
 
 export interface HeaderNotificationProps {
   children: ReactNode;
+}
+
+export interface HeaderUserStatusProps {
+  socket: Socket;
 }
