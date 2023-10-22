@@ -22,11 +22,11 @@ export interface IUser extends Document {
   email: string;
   password: string;
   status: {
-    lastSeen: Date;
+    lastSeen: number;
     previousOnlineStatus: UserStatus;
     onlineStatus: UserStatus;
   },
-  signedUp: Date;
+  signedUp: number;
 }
 
 export interface ChatMember {
@@ -72,11 +72,11 @@ export interface IProfile extends Document {
   age: number;
   about: AboutProfile;
   status: {
-    lastSeen: Date;
+    lastSeen: number;
     previousOnlineStatus: UserStatus;
     onlineStatus: UserStatus;
   },
-  signedUp: Date;
+  signedUp: number;
 }
 
 export interface UserId {

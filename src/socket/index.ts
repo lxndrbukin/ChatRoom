@@ -7,8 +7,20 @@ export const io = (socketIO: any): void => {
     console.log(`User ${socket.id} just connected`);
 
     socket.on('event://update-user-status', async (data: any) => {
-      await User.findOneAndUpdate({ userId: data.userId }, { 'status.onlineStatus': data.status, 'status.lastSeen': new Date() }).select('-_id -__v -password');
-      await Profile.findOneAndUpdate({ userId: data.userId }, { 'status.onlineStatus': data.status, 'status.lastSeen': new Date() });
+      await User.findOneAndUpdate(
+        { userId: data.userId },
+        {
+          'status.onlineStatus': data.status,
+          'status.previousOnlineStatus': data.previousStatus,
+          'status.lastSeen': new Date()
+        }).select('-_id -__v -password');
+      await Profile.findOneAndUpdate(
+        { userId: data.userId },
+        {
+          'status.onlineStatus': data.status,
+          'status.previousOnlineStatus': data.previousStatus,
+          'status.lastSeen': new Date()
+        });
       socketIO.emit('event://update-user-status-res', data.status);
       console.log(`Status updated to ${data.status}`);
     });

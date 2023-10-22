@@ -14,10 +14,10 @@ const UserSchema: Schema = new Schema<IUser>({
   password: { type: String, required: true },
   status: {
     onlineStatus: { type: String, default: UserStatus.Online },
-    previousOnlineStatus: String,
-    lastSeen: { type: Date, default: new Date() }
+    previousOnlineStatus: { type: String, default: UserStatus.Online },
+    lastSeen: { type: Number, default: new Date().getTime() }
   },
-  signedUp: { type: Date, default: new Date() },
+  signedUp: { type: Number, default: new Date().getTime() },
 });
 
 export default mongoose.model<IUser>('user', UserSchema);

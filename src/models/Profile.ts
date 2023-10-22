@@ -23,10 +23,10 @@ const ProfileSchema: Schema = new Schema<IProfile>({
   },
   status: {
     onlineStatus: { type: String, default: UserStatus.Online },
-    previousOnlineStatus: String,
-    lastSeen: { type: Date, default: new Date() }
+    previousOnlineStatus: { type: String, default: UserStatus.Online },
+    lastSeen: { type: Number, default: new Date().getTime() }
   },
-  signedUp: { type: Date, default: new Date() },
+  signedUp: { type: Number, default: new Date().getTime() },
 });
 
 export default mongoose.model<IProfile>('profile', ProfileSchema);
