@@ -6,11 +6,14 @@ import { BiChevronDown } from 'react-icons/bi';
 
 export const HeaderUserStatus: React.FC<HeaderUserStatusProps> = ({
   socket,
+  statusFrameRef,
+  statusMenuRef,
 }): JSX.Element => {
   const { status, userId } = useSelector(
     (state: RootState) => state.session.userData!
   );
   const [onlineStatus, setOnlineStatus] = useState(status.onlineStatus);
+  const [dropdown, showDropdown] = useState(false);
 
   const handleUpdateUserStatus = (status: OnlineStatus) => {
     setOnlineStatus(status);
@@ -18,6 +21,7 @@ export const HeaderUserStatus: React.FC<HeaderUserStatusProps> = ({
       userId,
       status,
     });
+    showDropdown(false);
   };
 
   const statusTypes = [
@@ -31,7 +35,10 @@ export const HeaderUserStatus: React.FC<HeaderUserStatusProps> = ({
     return statusTypes.map((status: OnlineStatus): JSX.Element => {
       return (
         <div
-          onClick={() => handleUpdateUserStatus(status)}
+          key={status}
+          onClick={() => {
+            handleUpdateUserStatus(status);
+          }}
           className='header-profile-user-status-type'
         >
           <div
@@ -43,14 +50,24 @@ export const HeaderUserStatus: React.FC<HeaderUserStatusProps> = ({
     });
   };
 
-  return (
-    <div className='header-profile-user-status'>
-      <div className='header-profile-user-status-name'>
-        <span>{onlineStatus}</span> <BiChevronDown />
-      </div>
-      <div className='header-profile-user-status-list'>
+  const renderStatusDropdown = (): JSX.Element => {
+    return (
+      <div ref={statusMenuRef} className='header-profile-user-status-list'>
         {renderStatusTypes()}
       </div>
+    );
+  };
+
+  return (
+    <div className='header-profile-user-status'>
+      <div
+        ref={statusFrameRef}
+        onClick={() => showDropdown(!dropdown)}
+        className='header-profile-user-status-name'
+      >
+        <span>{onlineStatus}</span> <BiChevronDown />
+      </div>
+      {dropdown && renderStatusDropdown()}
     </div>
   );
 };

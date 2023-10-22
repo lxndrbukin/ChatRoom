@@ -15,6 +15,8 @@ export interface HeaderUserNavLink {
 export interface HeaderUserNavProps {
   userData: UserData;
   menuRef: React.RefObject<HTMLDivElement>;
+  statusFrameRef: React.RefObject<HTMLDivElement>;
+  statusMenuRef: React.RefObject<HTMLDivElement>;
   showMenu: boolean;
   handleInsideClick: MouseEventHandler<Element>;
   socket: Socket;
@@ -46,4 +48,6 @@ export interface HeaderNotificationProps {
 
 export interface HeaderUserStatusProps {
   socket: Socket;
+  statusFrameRef: React.RefObject<HTMLDivElement>;
+  statusMenuRef: React.RefObject<HTMLDivElement>;
 }

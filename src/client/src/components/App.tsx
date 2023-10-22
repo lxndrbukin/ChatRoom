@@ -28,13 +28,15 @@ export const App: React.FC<AppProps> = ({ socket }): JSX.Element => {
     if (isLoggedIn && userData) {
       socket.emit('event://update-user-status', {
         userId: userData.userId,
-        status: OnlineStatus.Online,
+        status: userData.status.previousOnlineStatus,
+        previousStatus: userData.status.previousOnlineStatus,
       });
       dispatch(getUserFriends(userData.userId));
       window.addEventListener('unload', () => {
         socket.emit('event://update-user-status', {
           userId: userData.userId,
           status: OnlineStatus.Offline,
+          previousStatus: userData.status.onlineStatus,
         });
       });
       return () => {
@@ -42,6 +44,7 @@ export const App: React.FC<AppProps> = ({ socket }): JSX.Element => {
           socket.emit('event://update-user-status', {
             userId: userData.userId,
             status: OnlineStatus.Offline,
+            previousStatus: userData.status.onlineStatus,
           });
         });
       };

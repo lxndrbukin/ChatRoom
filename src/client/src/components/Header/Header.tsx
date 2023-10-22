@@ -15,6 +15,8 @@ import { HeaderNotifications } from './HeaderNotifications';
 export const Header: React.FC<HeaderProps> = ({ socket }): JSX.Element => {
   const profileFrame = useRef<HTMLDivElement>(null);
   const profileMenu = useRef<HTMLDivElement>(null);
+  const statusFrame = useRef<HTMLDivElement>(null);
+  const statusMenu = useRef<HTMLDivElement>(null);
   const notificationsFrame = useRef<HTMLDivElement>(null);
   const notificationsBox = useRef<HTMLDivElement>(null);
 
@@ -27,6 +29,7 @@ export const Header: React.FC<HeaderProps> = ({ socket }): JSX.Element => {
 
   useEffect(() => {
     document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
   }, []);
 
   const handleOutsideClick = (e: MouseEvent): void => {
@@ -80,7 +83,7 @@ export const Header: React.FC<HeaderProps> = ({ socket }): JSX.Element => {
             />
             <GoTriangleDown size={16} />
             <div
-              className={`header-profile-icon-status-${onlineStatus.toLowerCase()}`}
+              className={`header-profile-icon-status ${onlineStatus.toLowerCase()}`}
             ></div>
           </div>
           <HeaderUserNav
@@ -88,6 +91,8 @@ export const Header: React.FC<HeaderProps> = ({ socket }): JSX.Element => {
             showMenu={menu}
             handleInsideClick={() => showMenu(!menu)}
             menuRef={profileMenu}
+            statusFrameRef={statusFrame}
+            statusMenuRef={statusMenu}
             userData={userData!}
           />
         </div>

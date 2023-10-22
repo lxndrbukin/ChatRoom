@@ -182,8 +182,7 @@
           cursor: pointer;
         }
 
-        .header-profile-icon-status-online {
-          background-color: green;
+        .header-profile-icon-status {
           height: 10px;
           width: 10px;
           position: absolute;
@@ -192,14 +191,20 @@
           bottom: 7px;
         }
 
-        .header-profile-icon-status-offline {
-          background-color: grey;
-          height: 10px;
-          width: 10px;
-          position: absolute;
-          right: 16px;
-          border-radius: 50%;
-          bottom: 7px;
+        .online {
+          background-color: $status-green;
+        }
+
+        .offline {
+          background-color: $dark-grey;
+        }
+
+        .busy {
+          background-color: $status-red;
+        }
+
+        .away {
+          background-color: $status-orange;
         }
 
         .header-profile-avatar {
@@ -217,6 +222,7 @@
       .header-profile-wrapper {
         width: fit-content;
         align-items: center;
+        position: relative;
 
         .header-profile-icon {
           width: fit-content;
@@ -232,9 +238,11 @@
           border: 1px solid $light-blue;
           width: 250px;
           top: 50px;
+          z-index: 0;
 
           .header-user-nav-data-wrapper {
             padding: $spacing-lg;
+            position: relative;
 
             .header-user-nav-data {
               display: grid;
@@ -270,6 +278,7 @@
               background-color: $light-grey;
               border-radius: 0 0 5px 5px;
               padding: 0 $spacing-lg;
+              height: fit-content;
 
               .header-profile-user-status-name {
                 cursor: pointer;
@@ -288,38 +297,42 @@
                 border: 1px solid $light-blue;
                 top: 18px;
                 left: 0;
-                padding: $spacing-sm;
-
-                .header-profile-user-status-type-icon {
-                  border-radius: 50%;
-                  width: 15px;
-                  height: 15px;
-                }
-
-                .online {
-                  background-color: green;
-                }
-
-                .offline {
-                  background-color: grey;
-                }
-
-                .busy {
-                  background-color: red;
-                }
-
-                .away {
-                  background-color: yellow;
-                }
+                padding: $spacing-sm 0;
+                font-size: 12px;
+                z-index: 2;
 
                 .header-profile-user-status-type {
                   display: grid;
+                  align-items: center;
                   grid-template-columns: 15px 1fr;
                   gap: 5px;
                   cursor: pointer;
+                  padding: $spacing-sm;
 
                   &:hover {
                     background-color: $light-blue
+                  }
+
+                  .header-profile-user-status-type-icon {
+                    border-radius: 50%;
+                    width: 12px;
+                    height: 12px;
+                  }
+
+                  .online {
+                    background-color: $status-green;
+                  }
+
+                  .offline {
+                    background-color: $dark-grey;
+                  }
+
+                  .busy {
+                    background-color: $status-red;
+                  }
+
+                  .away {
+                    background-color: $status-orange;
                   }
                 }
               }

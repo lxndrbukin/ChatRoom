@@ -10,6 +10,8 @@ export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
   socket,
   userData,
   menuRef,
+  statusFrameRef,
+  statusMenuRef,
   handleInsideClick,
   showMenu,
 }): JSX.Element | null => {
@@ -61,7 +63,11 @@ export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
               {firstName} {lastName}
             </span>
           </Link>
-          <HeaderUserStatus socket={socket} />
+          <HeaderUserStatus
+            statusFrameRef={statusFrameRef}
+            statusMenuRef={statusMenuRef}
+            socket={socket}
+          />
         </div>
         <div className='header-user-nav-links'>{renderLinks()}</div>
       </nav>

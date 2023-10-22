@@ -24,6 +24,7 @@ export interface UserData {
   status: {
     onlineStatus: OnlineStatus;
     lastSeen: Date;
+    previousOnlineStatus: OnlineStatus;
   };
   signedUp: Date;
 }
@@ -96,6 +97,7 @@ export interface ProfileInfo {
   status: {
     onlineStatus: OnlineStatus;
     lastSeen: Date;
+    previousOnlineStatus: OnlineStatus;
   };
   signedUp: Date;
 }
