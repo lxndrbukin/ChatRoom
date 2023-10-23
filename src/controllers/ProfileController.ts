@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { controller, use, get, post } from './decorators';
-import { MulterRequest } from './types';
 import Multer from 'multer';
 import Profile from '../models/Profile';
 import User from '../models/User';
@@ -32,8 +31,16 @@ class ProfileController {
     const response = await cloudinary.uploader.upload(dataURI, {
       resource_type: 'auto',
     });
-    const user = await User.findOneAndUpdate({ userId: req.session!.userId }, { mainPhoto: response.url }, { new: true }).select('-_id -password -__v');
-    const profile = await Profile.findOneAndUpdate({ userId: req.session!.userId }, { mainPhoto: response.url }, { new: true }).select('-_id -__v');
+    const user = await User.findOneAndUpdate(
+      { userId: req.session!.userId },
+      { mainPhoto: response.url },
+      { new: true }
+    ).select('-_id -password -__v');
+    const profile = await Profile.findOneAndUpdate(
+      { userId: req.session!.userId },
+      { mainPhoto: response.url },
+      { new: true }
+    ).select('-_id -__v');
     req.session = user;
     return res.send({ user, profile });
   }

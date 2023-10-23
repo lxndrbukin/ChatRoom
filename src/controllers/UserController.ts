@@ -36,9 +36,4 @@ class UserController {
     }
     return res.send(null);
   }
-
-  @post('/users/:userId/edit')
-  async updateUser(req: Request, res: Response) {
-
-  }
 }
