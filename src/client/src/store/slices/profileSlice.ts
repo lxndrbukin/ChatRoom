@@ -12,7 +12,15 @@ const initialState: ProfileState = {
 const profileSlice = createSlice({
   name: Slices.Profile,
   initialState,
-  reducers: {},
+  reducers: {
+    updateProfileStatus(state, action) {
+      if (state.info) {
+        state.info.status = {
+          ...action.payload
+        };
+      }
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getProfile.fulfilled,
@@ -30,3 +38,4 @@ const profileSlice = createSlice({
 });
 
 export default profileSlice.reducer;
+export const { updateProfileStatus } = profileSlice.actions;

@@ -23,6 +23,7 @@ export type AppDispatch = typeof store.dispatch;
 export * from './slices/types';
 export * from './thunks/types';
 export * from './slices/sessionSlice';
+export * from './slices/profileSlice';
 export * from './slices/chatsSlice';
 export * from './slices/searchSlice';
 export * from './thunks/signup';

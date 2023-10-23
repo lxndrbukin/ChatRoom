@@ -8,6 +8,8 @@ import {
   getUserFriends,
   RootState,
   OnlineStatus,
+  updateSessionStatus,
+  updateProfileStatus,
 } from '../store';
 import { Header } from './Header/Header';
 import { Outlet } from 'react-router-dom';
@@ -28,23 +30,27 @@ export const App: React.FC<AppProps> = ({ socket }): JSX.Element => {
     if (isLoggedIn && userData) {
       socket.emit('event://update-user-status', {
         userId: userData.userId,
-        status: userData.status.previousOnlineStatus,
-        previousStatus: userData.status.previousOnlineStatus,
+        onlineStatus: userData.status.previousOnlineStatus,
+        previousOnlineStatus: userData.status.previousOnlineStatus,
       });
       dispatch(getUserFriends(userData.userId));
-      window.addEventListener('unload', () => {
+      socket.on('event://update-user-status-res', (data) => {
+        dispatch(updateSessionStatus(data));
+        dispatch(updateProfileStatus(data));
+      });
+      window.addEventListener('beforeunload', () => {
         socket.emit('event://update-user-status', {
           userId: userData.userId,
-          status: OnlineStatus.Offline,
-          previousStatus: userData.status.onlineStatus,
+          onlineStatus: OnlineStatus.Offline,
+          previousOnlineStatus: userData.status.onlineStatus,
         });
       });
       return () => {
         window.removeEventListener('unload', () => {
           socket.emit('event://update-user-status', {
             userId: userData.userId,
-            status: OnlineStatus.Offline,
-            previousStatus: userData.status.onlineStatus,
+            onlineStatus: OnlineStatus.Offline,
+            previousOnlineStatus: userData.status.onlineStatus,
           });
         });
       };

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserState, UserData, Slices, UpdateProfilePayload } from './types';
+import { UserState, UserData, Slices, UpdateProfilePayload, UserOnlineStatus } from './types';
 import { signup } from '../thunks/signup';
 import { login } from '../thunks/login';
 import { logout } from '../thunks/logout';
@@ -15,7 +15,15 @@ const initialState: UserState = {
 const sessionSlice = createSlice({
   name: Slices.Session,
   initialState,
-  reducers: {},
+  reducers: {
+    updateSessionStatus(state: UserState, action: PayloadAction<UserOnlineStatus>) {
+      if (state.userData) {
+        state.userData.status = {
+          ...action.payload
+        };
+      }
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(signup.fulfilled, (state: UserState, action: PayloadAction<UserData>) => {
       state.isLoggedIn = true;
@@ -45,3 +53,4 @@ const sessionSlice = createSlice({
 });
 
 export default sessionSlice.reducer;
+export const { updateSessionStatus } = sessionSlice.actions;

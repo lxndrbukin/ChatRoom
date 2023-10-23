@@ -15,11 +15,12 @@ export const HeaderUserStatus: React.FC<HeaderUserStatusProps> = ({
   const [onlineStatus, setOnlineStatus] = useState(status.onlineStatus);
   const [dropdown, showDropdown] = useState(false);
 
-  const handleUpdateUserStatus = (status: OnlineStatus) => {
-    setOnlineStatus(status);
+  const handleUpdateUserStatus = (userStatus: OnlineStatus) => {
+    setOnlineStatus(userStatus);
     socket.emit('event://update-user-status', {
       userId,
-      status,
+      onlineStatus: userStatus,
+      previousOnlineStatus: userStatus,
     });
     showDropdown(false);
   };

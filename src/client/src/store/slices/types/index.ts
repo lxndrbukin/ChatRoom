@@ -13,6 +13,12 @@ export enum OnlineStatus {
   Offline = 'Offline'
 }
 
+export interface UserOnlineStatus {
+  onlineStatus: OnlineStatus;
+  lastSeen: Date;
+  previousOnlineStatus: OnlineStatus;
+}
+
 export interface UserData {
   userId: number;
   fullName: {
@@ -21,11 +27,7 @@ export interface UserData {
   };
   mainPhoto: string;
   domain: string;
-  status: {
-    onlineStatus: OnlineStatus;
-    lastSeen: Date;
-    previousOnlineStatus: OnlineStatus;
-  };
+  status: UserOnlineStatus;
   signedUp: Date;
 }
 
@@ -94,11 +96,7 @@ export interface ProfileInfo {
   age: number | null;
   about: AboutProfile;
   friends: UserData[];
-  status: {
-    onlineStatus: OnlineStatus;
-    lastSeen: Date;
-    previousOnlineStatus: OnlineStatus;
-  };
+  status: UserOnlineStatus;
   signedUp: Date;
 }
 

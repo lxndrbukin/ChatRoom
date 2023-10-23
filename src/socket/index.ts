@@ -7,22 +7,24 @@ export const io = (socketIO: any): void => {
     console.log(`User ${socket.id} just connected`);
 
     socket.on('event://update-user-status', async (data: any) => {
+      const { onlineStatus, previousOnlineStatus } = data;
+      console.log(onlineStatus, previousOnlineStatus);
       await User.findOneAndUpdate(
         { userId: data.userId },
         {
-          'status.onlineStatus': data.status,
-          'status.previousOnlineStatus': data.previousStatus,
-          'status.lastSeen': new Date()
+          'status.onlineStatus': onlineStatus,
+          'status.previousOnlineStatus': previousOnlineStatus,
+          'status.lastSeen': new Date().getTime()
         }).select('-_id -__v -password');
       await Profile.findOneAndUpdate(
         { userId: data.userId },
         {
-          'status.onlineStatus': data.status,
-          'status.previousOnlineStatus': data.previousStatus,
-          'status.lastSeen': new Date()
+          'status.onlineStatus': onlineStatus,
+          'status.previousOnlineStatus': previousOnlineStatus,
+          'status.lastSeen': new Date().getTime()
         });
-      socketIO.emit('event://update-user-status-res', data.status);
-      console.log(`Status updated to ${data.status}`);
+      socketIO.emit('event://update-user-status-res', { onlineStatus, previousOnlineStatus });
+      console.log(`Status updated to ${onlineStatus}`);
     });
 
     socket.on('event://create-chat', async (data: any) => {
