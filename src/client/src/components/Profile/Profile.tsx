@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch, getProfile, getProfileFriends } from '../../store';
 import { ProfileHeader } from './ProfileHeader';
 import { ProfileFriends } from './ProfileFriends';
+import { ProfilePostForm } from './ProfilePostForm';
+import { ProfilePosts } from './ProfilePosts';
 
 export const Profile: React.FC = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -20,7 +22,15 @@ export const Profile: React.FC = (): JSX.Element => {
   return (
     <div className='profile'>
       <ProfileHeader />
-      <ProfileFriends />
+      <div className='profile-body'>
+        <div className='profile-body-left'>
+          <ProfilePostForm />
+          <ProfilePosts />
+        </div>
+        <div className='profile-body-right'>
+          <ProfileFriends />
+        </div>
+      </div>
     </div>
   );
 };

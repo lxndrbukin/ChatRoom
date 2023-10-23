@@ -38,7 +38,7 @@ export const SignupAuth: React.FC<AuthFormProps> = (): JSX.Element => {
   }
   return (
     <div className='auth'>
-      <form onSubmit={signupUser} className='auth-form'>
+      <form onSubmit={signupUser} className='auth-form box'>
         <label htmlFor='email'>Email:</label>
         <input placeholder='Email' id='email' name='email' />
         <label htmlFor='first-name'>First Name:</label>

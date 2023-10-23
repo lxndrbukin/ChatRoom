@@ -8,5 +8,22 @@
   .auth-form {
     display: flex;
     flex-direction: column;
+
+    input {
+      padding: $spacing-sm $spacing-md;
+      border: 1px solid $light-blue;
+      background-color: $white;
+    }
+
+    .auto-form-button {
+      padding: $spacing-sm $spacing-md;
+    }
+  }
+
+  .box {
+    border-radius: 7px;
+    background-color: $white;
+    border: 1px solid $light-blue;
+    padding: $spacing-md;
   }
 }

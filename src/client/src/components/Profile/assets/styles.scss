@@ -10,9 +10,6 @@
     width: 100%;
     display: grid;
     grid-template-rows: 270px 100px;
-    background-color: $white;
-    border-radius: 7px;
-    border: 1px solid $light-blue;
 
     .profile-header-bg-img {
       background-color: $grey;
@@ -83,10 +80,47 @@
           font-size: 35px;
           font-weight: bold;
           width: fit-content;
-
         }
       }
+    }
+  }
 
+  .profile-body {
+    display: grid;
+    grid-template-columns: 70% 1fr;
+
+    .profile-friends {
+      width: 100%;
+      min-height: 100px;
+    }
+
+    .profile-post-form {
+      display: grid;
+      grid-template-columns: 20px 1fr 20px;
+      min-height: 50px;
+
+      form {
+        textarea {
+          background-color: transparent;
+        }
+
+        button {
+          background-color: transparent;
+          border: none;
+          width: fit-content;
+        }
+      }
+    }
+  }
+
+  .box {
+    border-radius: 7px;
+    border: 1px solid $light-blue;
+    background-color: $white;
+
+    .box-header {
+      font-size: 17px;
+      font-weight: bold;
     }
   }
 }

@@ -22,6 +22,16 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <input
+        type='text'
+        name='firstName'
+        defaultValue={userData?.fullName.firstName}
+      />
+      <input
+        type='text'
+        name='lastName'
+        defaultValue={userData?.fullName.lastName}
+      />
       <input type='file' onChange={handleSetFile} />
       <button>Submit</button>
     </form>

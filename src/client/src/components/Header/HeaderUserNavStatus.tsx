@@ -4,7 +4,7 @@ import { RootState, OnlineStatus } from '../../store';
 import { HeaderUserStatusProps } from './types';
 import { BiChevronDown } from 'react-icons/bi';
 
-export const HeaderUserStatus: React.FC<HeaderUserStatusProps> = ({
+export const HeaderUserNavStatus: React.FC<HeaderUserStatusProps> = ({
   socket,
   statusFrameRef,
   statusMenuRef,

@@ -1,77 +1,97 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch, logout } from '../../store';
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { GoTriangleDown } from 'react-icons/go';
+import { BiSolidMessage } from 'react-icons/bi';
+import { FaBell } from 'react-icons/fa';
+import { RootState } from '../../store';
 import { HeaderUserNavProps } from './types';
-import { headerUserNavLinks } from './assets/links';
-import { HeaderUserStatus } from './HeaderUserStatus';
+import { HeaderNotifications } from './HeaderNotifications';
+import { HeaderUserNavMenu } from './HeaderUserNavMenu';
 
 export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
   socket,
-  userData,
-  menuRef,
-  statusFrameRef,
-  statusMenuRef,
-  handleInsideClick,
-  showMenu,
-}): JSX.Element | null => {
-  const dispatch = useDispatch<AppDispatch>();
+}): JSX.Element => {
+  const profileFrame = useRef<HTMLDivElement>(null);
+  const profileMenu = useRef<HTMLDivElement>(null);
+  const statusFrame = useRef<HTMLDivElement>(null);
+  const statusMenu = useRef<HTMLDivElement>(null);
+  const notificationsFrame = useRef<HTMLDivElement>(null);
+  const notificationsBox = useRef<HTMLDivElement>(null);
 
-  const { firstName, lastName } = userData.fullName;
-  const { mainPhoto, userId } = userData;
+  const { userData } = useSelector((state: RootState) => state.session);
+  const [menu, showMenu] = useState(false);
+  const [notifications, showNotifications] = useState(false);
 
-  const handleLogout = (): void => {
-    dispatch(logout());
+  const { onlineStatus } = userData!.status;
+
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, []);
+
+  const handleOutsideClick = (e: MouseEvent): void => {
+    if (
+      profileFrame &&
+      !profileFrame.current?.contains(e.target as Element) &&
+      !profileMenu.current?.contains(e.target as Element)
+    ) {
+      showMenu(false);
+    }
+    if (
+      notificationsFrame &&
+      !notificationsFrame.current?.contains(e.target as Element) &&
+      !notificationsBox.current?.contains(e.target as Element)
+    ) {
+      showNotifications(false);
+    }
   };
 
-  const renderLinks = (): JSX.Element[] => {
-    return headerUserNavLinks.map((link) => {
-      return (
-        <Link
-          onClick={(e) => {
-            if (link.path === '/') {
-              handleLogout();
-            }
-            handleInsideClick(e);
-          }}
-          className='header-user-nav-link'
-          key={link.name}
-          to={link.path}
+  return (
+    <div className='header-profile'>
+      <div className='header-notifications-wrapper'>
+        <div
+          onClick={() => showNotifications(!notifications)}
+          ref={notificationsFrame}
+          className='header-notifications-icon'
         >
-          {link.icon}
-          <span className='header-user-nav-link-text'>{link.name}</span>
-        </Link>
-      );
-    });
-  };
-
-  if (showMenu) {
-    return (
-      <nav ref={menuRef} className='header-user-nav'>
-        <div className='header-user-nav-data-wrapper'>
-          <Link
-            to={`/profile/${userId}`}
-            onClick={handleInsideClick}
-            className='header-user-nav-data'
-          >
-            <img
-              className='header-user-nav-avatar'
-              src={mainPhoto}
-              alt={`${firstName} ${lastName}`}
-            />
-            <span className='header-user-nav-fullname'>
-              {firstName} {lastName}
-            </span>
-          </Link>
-          <HeaderUserStatus
-            statusFrameRef={statusFrameRef}
-            statusMenuRef={statusMenuRef}
-            socket={socket}
-          />
+          <FaBell size={25} />
         </div>
-        <div className='header-user-nav-links'>{renderLinks()}</div>
-      </nav>
-    );
-  }
-  return null;
+        <HeaderNotifications
+          showNotifications={notifications}
+          notificationsBoxRef={notificationsBox}
+          handleInsideClick={() => showNotifications(!notifications)}
+        />
+      </div>
+      <Link to='/IM' className='header-messages-icon'>
+        <BiSolidMessage size={26} />
+      </Link>
+      <div className='header-profile-wrapper'>
+        <div
+          onClick={() => showMenu(!menu)}
+          ref={profileFrame}
+          className='header-profile-icon'
+        >
+          <img
+            src={userData?.mainPhoto}
+            alt={userData?.fullName.firstName}
+            className='header-profile-avatar'
+          />
+          <GoTriangleDown size={16} />
+          <div
+            className={`header-profile-icon-status ${onlineStatus.toLowerCase()}`}
+          ></div>
+        </div>
+        <HeaderUserNavMenu
+          socket={socket}
+          showMenu={menu}
+          handleInsideClick={() => showMenu(!menu)}
+          menuRef={profileMenu}
+          statusFrameRef={statusFrame}
+          statusMenuRef={statusMenu}
+          userData={userData!}
+        />
+      </div>
+    </div>
+  );
 };

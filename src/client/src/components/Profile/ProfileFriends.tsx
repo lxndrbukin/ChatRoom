@@ -23,5 +23,10 @@ export const ProfileFriends: React.FC = (): JSX.Element => {
     return <span className='profile-friends-empty'>No Friends</span>;
   };
 
-  return <div className='profile-friends'>{renderFriends()}</div>;
+  return (
+    <div className='profile-friends box'>
+      <div className='profile-friends-header box-header'>Friends</div>
+      <div className='profile-friends-list'>{renderFriends()}</div>
+    </div>
+  );
 };

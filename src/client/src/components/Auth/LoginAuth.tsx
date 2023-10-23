@@ -28,11 +28,11 @@ export const LoginAuth: React.FC<AuthFormProps> = (): JSX.Element => {
   }
   return (
     <div className='auth'>
-      <form onSubmit={loginUser} className='auth-form'>
+      <form onSubmit={loginUser} className='auth-form box'>
         <label htmlFor='email'>Email:</label>
-        <input id='email' name='email' />
+        <input id='email' type='email' name='email' />
         <label htmlFor='password'>Password:</label>
-        <input id='password' name='password' />
+        <input id='password' type='password' name='password' />
         <button>Log In</button>
         <span>
           Or sign up <Link to='/signup'>here</Link>

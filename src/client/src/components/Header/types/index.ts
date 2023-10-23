@@ -13,6 +13,10 @@ export interface HeaderUserNavLink {
 }
 
 export interface HeaderUserNavProps {
+  socket: Socket;
+}
+
+export interface HeaderUserNavMenuProps {
   userData: UserData;
   menuRef: React.RefObject<HTMLDivElement>;
   statusFrameRef: React.RefObject<HTMLDivElement>;

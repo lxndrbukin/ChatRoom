@@ -12,7 +12,7 @@ export const ProfileHeader: React.FC = (): JSX.Element | null => {
     const { onlineStatus } = status;
     const profileUserData = { userId: info.userId, fullName };
     return (
-      <div className='profile-header'>
+      <div className='profile-header box'>
         <div className='profile-header-bg-img'></div>
         <div className='profile-header-main'>
           <div className='profile-header-details'>
