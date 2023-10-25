@@ -39,8 +39,8 @@ export interface UserState {
 
 export interface ChatsListItem {
   chatId: string;
-  chatName: string;
-  password?: string;
+  members: UserData[];
+  lastMessage: string;
 }
 
 export interface Chat {

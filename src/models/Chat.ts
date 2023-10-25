@@ -1,12 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
-import { IChat, ChatMember, ChatMessage } from './types';
+import { IChat, ChatMemberId, ChatMessage, Schemas } from './types';
 
 const ChatSchema: Schema = new Schema<IChat>({
   chatId: Number,
-  chatName: { type: String, required: true },
-  members: Array<ChatMember>,
+  memberIds: Array<ChatMemberId>,
   messages: Array<ChatMessage>,
   password: { type: String, required: false },
 });
 
-export default mongoose.model<IChat>('chat', ChatSchema);
+export default mongoose.model<IChat>(Schemas.Chat, ChatSchema);

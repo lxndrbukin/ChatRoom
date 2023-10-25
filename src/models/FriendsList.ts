@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { IFriendsList, UserId, Requests } from './types';
+import { IFriendsList, UserId, Requests, Schemas } from './types';
 
 const FriendsListSchema = new Schema<IFriendsList>({
   userId: Number,
@@ -8,4 +8,4 @@ const FriendsListSchema = new Schema<IFriendsList>({
   sentRequests: Array<UserId>
 });
 
-export default mongoose.model<IFriendsList>('friendsList', FriendsListSchema);
+export default mongoose.model<IFriendsList>(Schemas.FriendsList, FriendsListSchema);

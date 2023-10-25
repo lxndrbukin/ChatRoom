@@ -31,21 +31,12 @@ class FriendsListController {
 
   @get('/friend_requests')
   async getFriendRequest(req: Request, res: Response) {
-    let requestsList: any = [];
-    const response = await FriendsList.findOne({
+    const listRes = await FriendsList.findOne({
       userId: req.query.userId,
     }).select('-friendsList -sentRequests');
-    response!.requestsList.map(async (request) => {
+    const requestsList = listRes!.requestsList.map(async (request) => {
       const { userId } = request;
-      const userRes = await User.findOne({ userId }).select('-_id -__v -password');
-      if (userRes) {
-        const user = {
-          userId: userRes?.userId,
-          fullName: userRes?.fullName,
-          mainPhoto: userRes?.mainPhoto,
-        };
-        requestsList = [...requestsList, user];
-      }
+      return await User.findOne({ userId }).select('-_id -__v -password');
     });
     console.log(requestsList.length);
     return res.send(requestsList);
@@ -115,60 +106,6 @@ class FriendsListController {
           );
           break;
       }
-
-      //     if (req.body.requestAction === FriendRequestAction.Send) {
-      //       if (currentUserReqs) {
-      //         currentUserReqs = await FriendsList.findOneAndUpdate(
-      //           { userId: sessionUserId },
-      //           { $push: { sentRequests: { userId: otherUserId } } },
-      //           { new: true }
-      //         );
-      //       }
-      //       currentUserReqs = await FriendsList.create({
-      //         userId: req.session.userId,
-      //         sentRequests: [{ userId: otherUserId }],
-      //       });
-
-      // if (otherUserReqs) {
-      //   otherUserReqs = await FriendsList.findOneAndUpdate(
-      //     { userId: otherUserId },
-      //     {
-      //       $push: { requestsList: { userId: sessionUserId, checked: false } },
-      //     },
-      //     { new: true }
-      //   );
-      // }
-      // otherUserReqs = await FriendsList.create({
-      //   userId: req.body.userId,
-      //   requestsList: [{ userId: sessionUserId, checked: false }],
-      // });
-
-      //     } else if (
-      //       req.body.requestAction === FriendRequestAction.Accept ||
-      //       req.body.requestAction === FriendRequestAction.Decline
-      //     ) {
-      //       currentUserReqs = await FriendsList.findOneAndUpdate(
-      //         { userId: sessionUserId },
-      //         { $pull: { requestsList: { userId: otherUserId } } },
-      //         { new: true }
-      //       );
-      //       otherUserReqs = await FriendsList.findOneAndUpdate(
-      //         { userId: otherUserId },
-      //         { $pull: { sentRequests: { userId: sessionUserId } } },
-      //         { new: true }
-      //       );
-      //     } else if (req.body.requestAction === FriendRequestAction.Cancel) {
-      //       currentUserReqs = await FriendsList.findOneAndUpdate(
-      //         { userId: sessionUserId },
-      //         { $pull: { sentRequests: { userId: otherUserId } } },
-      //         { new: true }
-      //       );
-      //       otherUserReqs = await FriendsList.findOneAndUpdate(
-      //         { userId: otherUserId },
-      //         { $pull: { requestsList: { userId: sessionUserId } } },
-      //         { new: true }
-      //       );
-      //     }
       return res.send(currentUserReqs);
     }
   }

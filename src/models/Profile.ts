@@ -1,6 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { IProfile } from './types';
-import { UserStatus } from './types';
+import { IProfile, UserStatus, Schemas } from './types';
 
 const ProfileSchema: Schema = new Schema<IProfile>({
   userId: Number,
@@ -29,4 +28,4 @@ const ProfileSchema: Schema = new Schema<IProfile>({
   signedUp: { type: Number, default: new Date().getTime() },
 });
 
-export default mongoose.model<IProfile>('profile', ProfileSchema);
+export default mongoose.model<IProfile>(Schemas.Profile, ProfileSchema);

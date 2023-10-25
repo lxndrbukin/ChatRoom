@@ -1,3 +1,10 @@
+export enum Schemas {
+  Chat = 'chat',
+  User = 'user',
+  FriendsList = 'friendsList',
+  Profile = 'profile'
+}
+
 export enum UserRoles {
   Admin = 'Administrator',
   Moderator = 'Moderator',
@@ -29,23 +36,22 @@ export interface IUser extends Document {
   signedUp: number;
 }
 
-export interface ChatMember {
+export interface ChatMemberId {
   userId: number;
-  nickname: string;
-  role: UserRoles;
 }
 
 export interface ChatMessage {
-  messageId: string;
   userId: number;
-  nickname: string;
-  message: string;
+  message: {
+    id: string;
+    content: string;
+  };
+  sentAt: number;
 }
 
 export interface IChat extends Document {
   chatId: string;
-  chatName: string;
-  members: ChatMember[];
+  memberIds: ChatMemberId[];
   messages: ChatMessage[];
   password?: string;
 }

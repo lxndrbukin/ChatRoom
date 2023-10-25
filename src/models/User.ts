@@ -1,6 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { UserStatus } from './types';
-import { IUser } from './types';
+import { UserStatus, IUser, Schemas } from './types';
 
 const UserSchema: Schema = new Schema<IUser>({
   userId: Number,
@@ -20,4 +19,4 @@ const UserSchema: Schema = new Schema<IUser>({
   signedUp: { type: Number, default: new Date().getTime() },
 });
 
-export default mongoose.model<IUser>('user', UserSchema);
+export default mongoose.model<IUser>(Schemas.User, UserSchema);
