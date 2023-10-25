@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { controller, get, post } from './decorators';
 import { FriendRequestAction } from './types';
+import { UserId } from '../models/types';
 import FriendsList from '../models/FriendsList';
 import User from '../models/User';
 
@@ -34,7 +35,7 @@ class FriendsListController {
     const listRes = await FriendsList.findOne({
       userId: req.query.userId,
     }).select('-friendsList -sentRequests');
-    const requestsList = listRes!.requestsList.map(async (request) => {
+    const requestsList = listRes!.requestsList.map(async (request: UserId) => {
       const { userId } = request;
       return await User.findOne({ userId }).select('-_id -__v -password');
     });

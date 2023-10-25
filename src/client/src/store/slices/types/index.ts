@@ -37,12 +37,6 @@ export interface UserState {
   message: string | undefined;
 }
 
-export interface ChatsListItem {
-  chatId: string;
-  members: UserData[];
-  lastMessage: string;
-}
-
 export interface Chat {
   chatId: number;
   members: UserData[];
@@ -56,7 +50,6 @@ export interface ChatMessage {
     firstName: string;
     lastName: string;
   };
-  username: string;
   message: string;
   sentAt: number;
 }
@@ -67,7 +60,7 @@ export interface SendMessageRes extends ChatMessage {
 
 export interface ChatsState {
   currentChat: Chat | undefined;
-  chatsList: ChatsListItem[];
+  chatsList: Chat[];
 }
 
 export interface SearchState {

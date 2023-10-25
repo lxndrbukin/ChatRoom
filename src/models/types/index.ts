@@ -47,6 +47,7 @@ export interface ChatMessage {
     content: string;
   };
   sentAt: number;
+  read: boolean;
 }
 
 export interface IChat extends Document {

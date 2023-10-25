@@ -31,6 +31,7 @@ export * from './thunks/login';
 export * from './thunks/logout';
 export * from './thunks/getSession';
 export * from './thunks/getChat';
+export * from './thunks/getChats';
 export * from './thunks/findUser';
 export * from './thunks/getProfile';
 export * from './thunks/updateProfile';
