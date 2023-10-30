@@ -36,10 +36,6 @@ export const router = createBrowserRouter([
         element: <Chats />,
         children: [
           {
-            path: '',
-            element: <ChatsList socket={socket} />,
-          },
-          {
             path: '/IM',
             element: (
               <React.Fragment>

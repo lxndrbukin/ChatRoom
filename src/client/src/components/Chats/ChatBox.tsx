@@ -57,7 +57,6 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
       message: { value: string };
     };
     if (currentChat) {
-      console.log('send');
       if (chatId === JSON.stringify(currentChat.chatId)) {
         socket.emit('event://send-message', {
           chatId,
