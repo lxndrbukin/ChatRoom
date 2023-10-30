@@ -10,7 +10,6 @@ import { ProfileEdit } from '../components/Profile/ProfileEdit';
 import { Chats } from '../components/Chats/Chats';
 import { ChatsList } from '../components/Chats/ChatsList';
 import { ChatBox } from '../components/Chats/ChatBox';
-import { CreateChat } from '../components/Chats/CreateChat';
 import { Friends } from '../components/Friends/Friends';
 import { FriendSearchForm } from '../components/Friends/FriendSearchForm';
 import { FriendSearchList } from '../components/Friends/FriendSearchList';
@@ -41,17 +40,13 @@ export const router = createBrowserRouter([
             element: <ChatsList socket={socket} />,
           },
           {
-            path: '/IM/:chatId',
+            path: '/IM',
             element: (
               <React.Fragment>
                 <ChatsList socket={socket} />
                 <ChatBox socket={socket} />
               </React.Fragment>
             ),
-          },
-          {
-            path: 'create',
-            element: <CreateChat socket={socket} />,
           },
         ],
       },

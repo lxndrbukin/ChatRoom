@@ -31,19 +31,72 @@ export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
     );
   };
 
+  const personalBtns = (userId: number) => {
+    return (
+      <React.Fragment>
+        <Link to={`/profile/${userId}/edit`}>
+          <button className='ui-button'>Edit Profile</button>
+        </Link>
+        <Link to='/settings' className='profile-settings'>
+          <button className='ui-button'>Settings</button>
+        </Link>
+      </React.Fragment>
+    );
+  };
+
+  const acceptBtn = () => {
+    return (
+      <button
+        onClick={() => handleFriendStatus(FriendRequestAction.Accept)}
+        className='ui-button'
+      >
+        Follows You
+      </button>
+    );
+  };
+
+  const sentBtn = () => {
+    return (
+      <button
+        onClick={() => handleFriendStatus(FriendRequestAction.Cancel)}
+        className='ui-button'
+      >
+        Request Sent
+      </button>
+    );
+  };
+
+  const friendBtns = (userId: number) => {
+    return (
+      <React.Fragment>
+        <button className='ui-icon-button'>
+          <BsPersonCheckFill
+            onClick={() => handleFriendStatus(FriendRequestAction.Remove)}
+            size={22}
+          />
+        </button>
+        <Link className='ui-button' to={`/IM?id=${userId}`}>
+          Message
+        </Link>
+      </React.Fragment>
+    );
+  };
+
+  const sendBtn = () => {
+    return (
+      <button className='ui-icon-button'>
+        <BsPersonPlusFill
+          onClick={() => handleFriendStatus(FriendRequestAction.Send)}
+          size={22}
+        />
+      </button>
+    );
+  };
+
   if (userData && isLoggedIn) {
     const { userId } = userData;
     if (profileUserData.userId === userId) {
-      return (
-        <React.Fragment>
-          <Link to={`/profile/${userId}/edit`}>
-            <button className='ui-button'>Edit Profile</button>
-          </Link>
-          <Link to='/settings' className='profile-settings'>
-            <button className='ui-button'>Settings</button>
-          </Link>
-        </React.Fragment>
-      );
+      return personalBtns(userId);
     } else {
       if (requestsList.length) {
         if (
@@ -51,14 +104,7 @@ export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
             (request) => request.userId === profileUserData.userId
           )
         ) {
-          return (
-            <button
-              onClick={() => handleFriendStatus(FriendRequestAction.Accept)}
-              className='ui-button'
-            >
-              Follows You
-            </button>
-          );
+          return acceptBtn();
         }
       }
       if (sentRequests.length) {
@@ -67,36 +113,15 @@ export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
             (request) => request.userId === profileUserData.userId
           )
         ) {
-          return (
-            <button
-              onClick={() => handleFriendStatus(FriendRequestAction.Cancel)}
-              className='ui-button'
-            >
-              Request Sent
-            </button>
-          );
+          return sentBtn();
         }
       }
       if (info && info.friends) {
         if (info.friends.find((friend) => friend.userId === userId)) {
-          return (
-            <button className='ui-icon-button'>
-              <BsPersonCheckFill
-                onClick={() => handleFriendStatus(FriendRequestAction.Remove)}
-                size={22}
-              />
-            </button>
-          );
+          return friendBtns(userId);
         }
       }
-      return (
-        <button className='ui-icon-button'>
-          <BsPersonPlusFill
-            onClick={() => handleFriendStatus(FriendRequestAction.Send)}
-            size={22}
-          />
-        </button>
-      );
+      return sendBtn();
     }
   }
   return null;
