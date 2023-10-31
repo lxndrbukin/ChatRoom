@@ -30,11 +30,9 @@ export const io = (socketIO: any): void => {
     socket.on('event://create-chat', async (data: any) => {
       const id = await Chat.count() + 1;
       const chat = await Chat.create({ chatId: id, chatName: data.chatName, messages: [], members: [data.createdBy], password: data.password });
-      const { chatId, chatName, members, messages } = chat;
+      const { chatId, messages } = chat;
       socketIO.emit('event://create-chat-res', {
         chatId,
-        chatName,
-        members,
         messages,
       });
     });

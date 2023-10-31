@@ -4,6 +4,9 @@
   width: 100%;
   padding: $spacing-lg 0 0 0;
   box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 372px 1fr;
+  gap: 10px;
 
   .profile-header {
     height: 370px;
@@ -88,27 +91,55 @@
   .profile-body {
     display: grid;
     grid-template-columns: 70% 1fr;
+    gap: 10px;
 
-    .profile-friends {
-      width: 100%;
-      min-height: 100px;
+    .profile-body-left {
+      display: grid;
+      grid-template-rows: 52px 1fr;
+      gap: 10px;
+
+      .profile-post-form {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        gap: 8px;
+        min-height: 50px;
+        align-items: center;
+        justify-content: center;
+
+        .profile-post-form-avatar {
+          width: 30px;
+          height: 30px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+
+        form {
+          width: 100%;
+          display: flex;
+
+          textarea {
+            background-color: transparent;
+            border: none;
+            width: 100%;
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          button {
+            background-color: transparent;
+            border: none;
+            width: fit-content;
+          }
+        }
+      }
     }
 
-    .profile-post-form {
-      display: grid;
-      grid-template-columns: 20px 1fr 20px;
-      min-height: 50px;
-
-      form {
-        textarea {
-          background-color: transparent;
-        }
-
-        button {
-          background-color: transparent;
-          border: none;
-          width: fit-content;
-        }
+    .profile-body-right {
+      .profile-friends {
+        width: 100%;
+        min-height: 100px;
       }
     }
   }
@@ -117,6 +148,8 @@
     border-radius: 7px;
     border: 1px solid $light-blue;
     background-color: $white;
+    padding: 8px;
+    box-sizing: border-box;
 
     .box-header {
       font-size: 17px;

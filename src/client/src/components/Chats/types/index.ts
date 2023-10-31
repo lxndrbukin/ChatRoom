@@ -1,6 +1,6 @@
 import { FormEventHandler, RefObject } from 'react';
 import { Socket } from 'socket.io-client';
-import { ChatsListItem, ChatMessage } from '../../../store';
+import { Chat, ChatMessage } from '../../../store';
 
 export interface ChatSharedProps {
   socket: Socket;
@@ -25,7 +25,7 @@ export interface ChatMessageProps {
 }
 
 export interface ChatsListItemProps {
-  chat: ChatsListItem;
+  chat: Chat;
 }
 
 export interface ChatFormProps {

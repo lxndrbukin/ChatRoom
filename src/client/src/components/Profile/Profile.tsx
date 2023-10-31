@@ -17,7 +17,7 @@ export const Profile: React.FC = (): JSX.Element => {
       dispatch(getProfile(userId));
       dispatch(getProfileFriends(JSON.parse(userId)));
     }
-  }, [dispatch, userId]);
+  }, [userId]);
 
   return (
     <div className='profile'>

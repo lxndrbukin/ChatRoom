@@ -74,8 +74,8 @@ class AuthController {
       userId: userNum + 1,
       friendsList: [],
     });
-    const { userId, role } = user;
-    req.session = { userId, email, fullName, role };
+    const { userId } = user;
+    req.session = { userId, email, fullName };
     return res.send(req.session);
   }
 

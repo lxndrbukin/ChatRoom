@@ -11,7 +11,7 @@ export const ChatsListItem: React.FC<ChatsListItemProps> = ({
       to={`/IM?chat=${chat.chatId}`}
       className='chat-item'
     >
-      <div className='chat-item-name'>{chat.chatName}</div>
+      <div className='chat-item-name'>{chat.chatId}</div>
     </Link>
   );
 };

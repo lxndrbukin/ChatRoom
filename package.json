@@ -6,6 +6,7 @@
   "scripts": {
     "start:build": "tsc -w",
     "start:run": "nodemon build/index.js",
+    "start:client": "npm run start --prefix src/client",
     "start": "concurrently npm:start:*"
   },
   "author": "",

@@ -82,7 +82,19 @@ class FriendsListController {
             requestsList: [{ userId: sessionUserId, checked: false }],
           });
           break;
-        case FriendRequestAction.Accept || FriendRequestAction.Decline:
+        case FriendRequestAction.Accept:
+          currentUserReqs = await FriendsList.findOneAndUpdate(
+            { userId: sessionUserId },
+            { $pull: { requestsList: { userId: otherUserId } }, $push: { friendsList: { userId: otherUserId } } },
+            { new: true }
+          );
+          otherUserReqs = await FriendsList.findOneAndUpdate(
+            { userId: otherUserId },
+            { $pull: { sentRequests: { userId: sessionUserId } }, $push: { friendsList: { userId: sessionUserId } } },
+            { new: true }
+          );
+          break;
+        case FriendRequestAction.Decline:
           currentUserReqs = await FriendsList.findOneAndUpdate(
             { userId: sessionUserId },
             { $pull: { requestsList: { userId: otherUserId } } },
