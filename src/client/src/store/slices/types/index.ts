@@ -95,7 +95,7 @@ export interface ProfileInfo {
 
 export interface ProfileState {
   info: ProfileInfo | undefined;
-  friends: UserData[] | undefined;
+  friends: UserData[];
 }
 
 export interface UpdateProfilePayload {

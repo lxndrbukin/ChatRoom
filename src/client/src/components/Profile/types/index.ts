@@ -1,3 +1,9 @@
+import { Socket } from 'socket.io-client';
+
+export interface ProfileProps {
+  socket: Socket;
+}
+
 export interface ProfileHeaderButtonsProps {
   profileUserData: {
     userId: number;
@@ -8,10 +14,11 @@ export interface ProfileHeaderButtonsProps {
   };
 }
 
+export interface ProfileFriendsProps {
+  socket: Socket;
+}
+
 export interface ProfileFriendProps {
-  fullName: {
-    firstName: string;
-    lastName: string;
-  };
-  mainPhoto: string;
+  socket: Socket;
+  userId: number;
 }

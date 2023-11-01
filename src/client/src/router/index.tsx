@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/profile/:userId',
-        element: <Profile />,
+        element: <Profile socket={socket} />,
         children: [],
       },
       {

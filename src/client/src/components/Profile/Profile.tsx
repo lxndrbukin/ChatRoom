@@ -1,5 +1,6 @@
 import './assets/styles.scss';
 import React, { useEffect } from 'react';
+import { ProfileProps } from './types';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, getProfile, getProfileFriends } from '../../store';
@@ -8,7 +9,7 @@ import { ProfileFriends } from './ProfileFriends';
 import { ProfilePostForm } from './ProfilePostForm';
 import { ProfilePosts } from './ProfilePosts';
 
-export const Profile: React.FC = (): JSX.Element => {
+export const Profile: React.FC<ProfileProps> = ({ socket }): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
   const { userId } = useParams();
 
@@ -28,7 +29,7 @@ export const Profile: React.FC = (): JSX.Element => {
           <ProfilePosts />
         </div>
         <div className='profile-body-right'>
-          <ProfileFriends />
+          <ProfileFriends socket={socket} />
         </div>
       </div>
     </div>

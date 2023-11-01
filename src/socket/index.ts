@@ -6,6 +6,11 @@ export const io = (socketIO: any): void => {
   socketIO.on('connection', (socket: any): void => {
     console.log(`User ${socket.id} just connected`);
 
+    socket.on('event://get-user', async (data: any) => {
+      const user = await User.findOne({ userId: data });
+      socketIO.emit('event://get-user-res', user);
+    });
+
     socket.on('event://update-user-status', async (data: any) => {
       const { onlineStatus, previousOnlineStatus } = data;
       console.log(onlineStatus, previousOnlineStatus);
