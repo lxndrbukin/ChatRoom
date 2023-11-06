@@ -6,9 +6,9 @@ export const io = (socketIO: any): void => {
   socketIO.on('connection', (socket: any): void => {
     console.log(`User ${socket.id} just connected`);
 
-    socket.on('event://get-user', async (data: any) => {
-      const user = await User.findOne({ userId: data });
-      socketIO.emit('event://get-user-res', user);
+    socket.on('event://fetch-friends', async (data: any) => {
+      const user = await User.findOne({ userId: data }).select('-_id -__v -password');
+      socketIO.emit('event://fetch-friend-res', user);
     });
 
     socket.on('event://update-user-status', async (data: any) => {

@@ -19,6 +19,10 @@ export interface ProfileFriendsProps {
 }
 
 export interface ProfileFriendProps {
-  socket: Socket;
   userId: number;
+  fullName: {
+    firstName: string;
+    lastName: string;
+  };
+  mainPhoto: string;
 }
