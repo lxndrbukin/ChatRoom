@@ -12,7 +12,7 @@ class FriendsListController {
     const lists = await FriendsList.findOne({
       userId: req.query.userId,
     }).select('-_id -__v');
-    return res.send(lists);
+    return res.send(lists?.friendsList);
   }
 
   @get('/profile_friends_list')
@@ -21,6 +21,12 @@ class FriendsListController {
       userId: req.query.userId,
     }).select('-_id -__v -sentRequests -requestsList');
     return res.send(listRes?.friendsList);
+  }
+
+  @get('/profile_friend')
+  async getProfileFriend(req: Request, res: Response) {
+    const friend = await User.findOne({ userId: req.query.userId }).select('-_id -__v -password');
+    return res.send(friend);
   }
 
   @get('/friend_requests')

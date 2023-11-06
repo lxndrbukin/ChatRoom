@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { ProfileProps } from './types';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { AppDispatch, getProfile, getProfileFriends } from '../../store';
+import { AppDispatch, getProfile } from '../../store';
 import { ProfileHeader } from './ProfileHeader';
 import { ProfileFriends } from './ProfileFriends';
 import { ProfilePostForm } from './ProfilePostForm';
@@ -16,7 +16,6 @@ export const Profile: React.FC<ProfileProps> = ({ socket }): JSX.Element => {
   useEffect(() => {
     if (userId) {
       dispatch(getProfile(userId));
-      dispatch(getProfileFriends(JSON.parse(userId)));
     }
   }, [userId]);
 
