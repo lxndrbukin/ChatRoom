@@ -25,4 +25,7 @@ export interface ProfileFriendProps {
     lastName: string;
   };
   mainPhoto: string;
+  status: {
+    onlineStatus: string;
+  };
 }

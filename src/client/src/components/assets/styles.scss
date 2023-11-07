@@ -16,10 +16,16 @@
   border: 1px solid $light-blue;
   background-color: $light-blue;
   border-radius: 7px;
-  padding: $spacing-md $spacing-lg;
+  padding: 0 $spacing-lg;
   font-weight: bold;
   cursor: pointer;
   color: $dark-blue;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 14px;
+  height: 33px;
+  box-sizing: border-box;
 }
 
 body {

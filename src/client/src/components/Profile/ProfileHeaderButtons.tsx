@@ -20,7 +20,7 @@ export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
   const { requestsList, sentRequests } = useSelector(
     (state: RootState) => state.friends
   );
-  const { info } = useSelector((state: RootState) => state.profile);
+  const { info, friends } = useSelector((state: RootState) => state.profile);
 
   const handleFriendStatus = (requestAction: FriendRequestAction) => {
     dispatch(
@@ -34,11 +34,11 @@ export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
   const personalBtns = (userId: number) => {
     return (
       <React.Fragment>
-        <Link to={`/profile/${userId}/edit`}>
-          <button className='ui-button'>Edit Profile</button>
+        <Link className='ui-button' to={`/profile/${userId}/edit`}>
+          Edit Profile
         </Link>
-        <Link to='/settings' className='profile-settings'>
-          <button className='ui-button'>Settings</button>
+        <Link className='ui-button' to='/settings'>
+          Settings
         </Link>
       </React.Fragment>
     );
@@ -116,8 +116,8 @@ export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
           return sentBtn();
         }
       }
-      if (info && info.friends) {
-        if (info.friends.find((friend) => friend.userId === userId)) {
+      if (friends) {
+        if (friends.find((friend) => friend.userId === userId)) {
           return friendBtns(userId);
         }
       }

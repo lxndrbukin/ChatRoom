@@ -6,14 +6,8 @@ export const io = (socketIO: any): void => {
   socketIO.on('connection', (socket: any): void => {
     console.log(`User ${socket.id} just connected`);
 
-    socket.on('event://fetch-friends', async (data: any) => {
-      const user = await User.findOne({ userId: data }).select('-_id -__v -password');
-      socketIO.emit('event://fetch-friend-res', user);
-    });
-
     socket.on('event://update-user-status', async (data: any) => {
       const { onlineStatus, previousOnlineStatus } = data;
-      console.log(onlineStatus, previousOnlineStatus);
       await User.findOneAndUpdate(
         { userId: data.userId },
         {
@@ -28,8 +22,7 @@ export const io = (socketIO: any): void => {
           'status.previousOnlineStatus': previousOnlineStatus,
           'status.lastSeen': new Date().getTime()
         });
-      socketIO.emit('event://update-user-status-res', { onlineStatus, previousOnlineStatus });
-      console.log(`Status updated to ${onlineStatus}`);
+      socketIO.emit('event://update-user-status-res', { userId: data.userId, onlineStatus, previousOnlineStatus });
     });
 
     socket.on('event://create-chat', async (data: any) => {

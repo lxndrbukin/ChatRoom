@@ -1,5 +1,5 @@
 import './assets/styles.scss';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -24,6 +24,7 @@ export const App: React.FC<AppProps> = ({ socket }): JSX.Element => {
   const { isLoggedIn, userData } = useSelector(
     (state: RootState) => state.session
   );
+  const [status, setStatus] = useState(userData?.status.onlineStatus);
 
   useEffect(() => {
     dispatch(getSession());
@@ -35,14 +36,16 @@ export const App: React.FC<AppProps> = ({ socket }): JSX.Element => {
       });
       dispatch(getUserFriends(userData.userId));
       socket.on('event://update-user-status-res', (data) => {
-        dispatch(updateSessionStatus(data));
-        dispatch(updateProfileStatus(data));
+        if (data.userId === userData.userId) {
+          dispatch(updateSessionStatus(data));
+          dispatch(updateProfileStatus(data));
+        }
       });
-      window.addEventListener('beforeunload', () => {
+      window.addEventListener('unload', () => {
         socket.emit('event://update-user-status', {
           userId: userData.userId,
           onlineStatus: OnlineStatus.Offline,
-          previousOnlineStatus: userData.status.onlineStatus,
+          previousOnlineStatus: status,
         });
       });
       return () => {
@@ -50,7 +53,7 @@ export const App: React.FC<AppProps> = ({ socket }): JSX.Element => {
           socket.emit('event://update-user-status', {
             userId: userData.userId,
             onlineStatus: OnlineStatus.Offline,
-            previousOnlineStatus: userData.status.onlineStatus,
+            previousOnlineStatus: status,
           });
         });
       };

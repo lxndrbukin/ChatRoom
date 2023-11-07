@@ -23,7 +23,7 @@ export const ProfileHeader: React.FC = (): JSX.Element | null => {
                 alt={`${firstName} ${lastName}`}
               />
               <div
-                className={`profile-header-details-avatar-status-${onlineStatus.toLowerCase()}`}
+                className={`profile-header-details-avatar-status ${onlineStatus.toLowerCase()}`}
               ></div>
             </div>
             <div className='profile-header-data'>

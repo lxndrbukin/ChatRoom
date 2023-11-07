@@ -3,7 +3,9 @@ import { controller, get, post } from './decorators';
 import { FriendRequestAction } from './types';
 import { UserId } from '../models/types';
 import FriendsList from '../models/FriendsList';
+import { IUser } from '../models/types';
 import User from '../models/User';
+
 
 @controller('/_api')
 class FriendsListController {
@@ -12,7 +14,7 @@ class FriendsListController {
     const lists = await FriendsList.findOne({
       userId: req.query.userId,
     }).select('-_id -__v');
-    return res.send(lists?.friendsList);
+    return res.send(lists);
   }
 
   @get('/profile_friends_list')
@@ -20,7 +22,17 @@ class FriendsListController {
     const listRes = await FriendsList.findOne({
       userId: req.query.userId,
     }).select('-_id -__v -sentRequests -requestsList');
-    return res.send(listRes?.friendsList);
+    if (listRes) {
+      const promises: any = listRes.friendsList.map(async (friend) => {
+        try {
+          return await User.findOne({ userId: friend.userId });
+        } catch (error) {
+          console.log(error);
+        }
+      });
+      const friends = await Promise.all(promises);
+      return res.send(friends);
+    }
   }
 
   @get('/profile_friend')
@@ -38,7 +50,6 @@ class FriendsListController {
       const { userId } = request;
       return await User.findOne({ userId }).select('-_id -__v -password');
     });
-    console.log(requestsList.length);
     return res.send(requestsList);
   }
 

@@ -183,12 +183,13 @@
         }
 
         .header-profile-icon-status {
-          height: 10px;
-          width: 10px;
+          height: 7px;
+          width: 7px;
           position: absolute;
           right: 16px;
           border-radius: 50%;
           bottom: 7px;
+          border: 2px solid $white;
         }
 
         .online {
@@ -315,8 +316,9 @@
 
                   .header-profile-user-status-type-icon {
                     border-radius: 50%;
-                    width: 12px;
-                    height: 12px;
+                    width: 10px;
+                    height: 10px;
+                    border: 2px solid $white;
                   }
 
                   .online {
