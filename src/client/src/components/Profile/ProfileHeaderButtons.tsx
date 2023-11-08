@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { ProfileHeaderButtonsProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -8,7 +7,13 @@ import {
   RootState,
   changeFriendStatus,
 } from '../../store';
-import { BsPersonPlusFill, BsPersonCheckFill } from 'react-icons/bs';
+import {
+  PersonalButtons,
+  AcceptButton,
+  SentButton,
+  FriendButtons,
+  SendButton,
+} from './ProfileHeaderButtonItems';
 
 export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
   profileUserData,
@@ -20,7 +25,7 @@ export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
   const { requestsList, sentRequests } = useSelector(
     (state: RootState) => state.friends
   );
-  const { info, friends } = useSelector((state: RootState) => state.profile);
+  const { friends } = useSelector((state: RootState) => state.profile);
 
   const handleFriendStatus = (requestAction: FriendRequestAction) => {
     dispatch(
@@ -31,72 +36,10 @@ export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
     );
   };
 
-  const personalBtns = (userId: number) => {
-    return (
-      <React.Fragment>
-        <Link className='ui-button' to={`/profile/${userId}/edit`}>
-          Edit Profile
-        </Link>
-        <Link className='ui-button' to='/settings'>
-          Settings
-        </Link>
-      </React.Fragment>
-    );
-  };
-
-  const acceptBtn = () => {
-    return (
-      <button
-        onClick={() => handleFriendStatus(FriendRequestAction.Accept)}
-        className='ui-button'
-      >
-        Follows You
-      </button>
-    );
-  };
-
-  const sentBtn = () => {
-    return (
-      <button
-        onClick={() => handleFriendStatus(FriendRequestAction.Cancel)}
-        className='ui-button'
-      >
-        Request Sent
-      </button>
-    );
-  };
-
-  const friendBtns = (userId: number) => {
-    return (
-      <React.Fragment>
-        <button className='ui-icon-button'>
-          <BsPersonCheckFill
-            onClick={() => handleFriendStatus(FriendRequestAction.Remove)}
-            size={22}
-          />
-        </button>
-        <Link className='ui-button' to={`/IM?id=${userId}`}>
-          Message
-        </Link>
-      </React.Fragment>
-    );
-  };
-
-  const sendBtn = () => {
-    return (
-      <button className='ui-icon-button'>
-        <BsPersonPlusFill
-          onClick={() => handleFriendStatus(FriendRequestAction.Send)}
-          size={22}
-        />
-      </button>
-    );
-  };
-
   if (userData && isLoggedIn) {
     const { userId } = userData;
     if (profileUserData.userId === userId) {
-      return personalBtns(userId);
+      return <PersonalButtons userId={userId} />;
     } else {
       if (requestsList.length) {
         if (
@@ -104,7 +47,7 @@ export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
             (request) => request.userId === profileUserData.userId
           )
         ) {
-          return acceptBtn();
+          return <AcceptButton handleFriendStatus={handleFriendStatus} />;
         }
       }
       if (sentRequests.length) {
@@ -113,15 +56,20 @@ export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
             (request) => request.userId === profileUserData.userId
           )
         ) {
-          return sentBtn();
+          return <SentButton handleFriendStatus={handleFriendStatus} />;
         }
       }
       if (friends) {
         if (friends.find((friend) => friend.userId === userId)) {
-          return friendBtns(userId);
+          return (
+            <FriendButtons
+              userId={userId}
+              handleFriendStatus={handleFriendStatus}
+            />
+          );
         }
       }
-      return sendBtn();
+      return <SendButton handleFriendStatus={handleFriendStatus} />;
     }
   }
   return null;

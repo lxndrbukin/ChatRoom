@@ -14,6 +14,14 @@ export interface ProfileHeaderButtonsProps {
   };
 }
 
+export interface ButtonItemsProps {
+  userId?: number;
+}
+
+export interface RequestButtonItemsProps extends ButtonItemsProps {
+  handleFriendStatus: Function;
+}
+
 export interface ProfileFriendsProps {
   socket: Socket;
 }
