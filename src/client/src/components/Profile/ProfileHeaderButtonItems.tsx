@@ -28,7 +28,7 @@ export const AcceptButton: React.FC<RequestButtonItemsProps> = ({
       onClick={() => handleFriendStatus(FriendRequestAction.Accept)}
       className='ui-button'
     >
-      Follows You
+      Follows You <BiSolidChevronDown />
     </button>
   );
 };
@@ -37,18 +37,12 @@ export const SentButton: React.FC<RequestButtonItemsProps> = ({
   handleFriendStatus,
 }): JSX.Element => {
   return (
-    <React.Fragment>
-      <button
-        onClick={() => handleFriendStatus(FriendRequestAction.Cancel)}
-        className='ui-button'
-      >
-        Request Sent <BiSolidChevronDown />
-      </button>
-      <div className='profile-handle-request-buttons'>
-        <button>Cancel Request</button>
-        <button>Block User</button>
-      </div>
-    </React.Fragment>
+    <button
+      onClick={() => handleFriendStatus(FriendRequestAction.Cancel)}
+      className='ui-button'
+    >
+      Request Sent <BiSolidChevronDown />
+    </button>
   );
 };
 

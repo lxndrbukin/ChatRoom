@@ -16,6 +16,7 @@ export interface ProfileHeaderButtonsProps {
 
 export interface ButtonItemsProps {
   userId?: number;
+  children?: React.ReactNode;
 }
 
 export interface RequestButtonItemsProps extends ButtonItemsProps {

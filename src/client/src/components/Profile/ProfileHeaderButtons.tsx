@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ProfileHeaderButtonsProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -18,6 +18,9 @@ import {
 export const ProfileHeaderButtons: React.FC<ProfileHeaderButtonsProps> = ({
   profileUserData,
 }): JSX.Element | null => {
+  const actionRef = useRef<HTMLButtonElement>(null);
+  const actionBox = useRef<HTMLDivElement>(null);
+
   const dispatch = useDispatch<AppDispatch>();
   const { userData, isLoggedIn } = useSelector(
     (state: RootState) => state.session
