@@ -1,4 +1,5 @@
 import { Socket } from 'socket.io-client';
+import { ChangeEventHandler } from 'react';
 
 export interface ProfileProps {
   socket: Socket;
@@ -37,4 +38,13 @@ export interface ProfileFriendProps {
   status: {
     onlineStatus: string;
   };
+}
+
+
+export interface ProfileEditInputProps {
+  label: string;
+  name: string;
+  placeholder?: string;
+  defaultValue?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }

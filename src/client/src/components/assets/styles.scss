@@ -28,6 +28,21 @@
   box-sizing: border-box;
 }
 
+.ui-form-button {
+  border: 1px solid $light-blue;
+  background-color: $light-blue;
+  border-radius: 7px;
+  padding: 0 $spacing-lg;
+  cursor: pointer;
+  color: $dark-blue;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 14px;
+  height: 33px;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;

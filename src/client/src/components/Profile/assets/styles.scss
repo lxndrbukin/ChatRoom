@@ -148,6 +148,8 @@
         .profile-friends-list {
           display: flex;
           flex-wrap: wrap;
+          width: 100%;
+          padding: 0 $spacing-sm;
 
           .profile-friend {
             display: flex;
@@ -199,18 +201,107 @@
       }
     }
   }
+}
 
-  .box {
-    border-radius: 7px;
-    border: 1px solid $light-blue;
-    background-color: $white;
-    padding: 8px;
-    box-sizing: border-box;
+.profile-edit {
+  padding: $spacing-lg 0 0 0;
+  display: grid;
+  grid-template-columns: 60% 1fr;
+  height: fit-content;
 
-    .box-header {
-      font-size: 17px;
-      font-weight: bold;
-      padding: 0 0 $spacing-md 0;
+  .profile-edit-main-info {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    gap: 10px;
+    padding: 0 $spacing-md $spacing-xl $spacing-md;
+
+    .profile-edit-main-info-avatar {
+      height: 90px;
+      width: 90px;
+      border-radius: 50%;
+      justify-self: right;
     }
+
+    .profile-edit-main-info-name {
+      height: fit-content;
+      align-self: flex-end;
+      display: inline-grid;
+      grid-template-columns: min-content min-content;
+      gap: $spacing-md;
+
+      span {
+        width: fit-content;
+      }
+    }
+  }
+
+  .profile-edit-form-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .profile-edit-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: fit-content;
+
+      .profile-edit-input-wrapper {
+        display: grid;
+        grid-template-columns: 25% 1fr;
+        gap: 10px;
+        padding-bottom: $spacing-lg;
+
+        label {
+          font-size: 13px;
+          text-align: right;
+          padding-top: 6px;
+        }
+
+        .profile-edit-input {
+          width: 300px;
+          height: 30px;
+          padding: $spacing-sm $spacing-md;
+          box-sizing: border-box;
+          border-radius: 7px;
+          border: 1px solid $grey;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .profile-edit-textarea {
+          width: 300px;
+          height: 100px;
+          padding: $spacing-sm $spacing-md;
+          box-sizing: border-box;
+          border-radius: 7px;
+          border: 1px solid $grey;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+      }
+
+      .profile-edit-form-submit {
+        align-self: center;
+      }
+    }
+  }
+}
+
+.box {
+  border-radius: 7px;
+  border: 1px solid $light-blue;
+  background-color: $white;
+  padding: 10px;
+  box-sizing: border-box;
+
+  .box-header {
+    font-size: 17px;
+    font-weight: bold;
+    padding: 0 0 $spacing-md 0;
   }
 }
