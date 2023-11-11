@@ -6,24 +6,52 @@
   align-items: center;
 
   .auth-form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    gap: 5px;
+    padding: $spacing-lg;
 
     input {
-      padding: $spacing-sm $spacing-md;
-      border: 1px solid $light-blue;
-      background-color: $white;
+      width: 270px;
+      height: 36px;
     }
 
-    .auto-form-button {
-      padding: $spacing-sm $spacing-md;
+    .ui-form-button {
+      width: 100%;
+      height: 36px;
+      display: flex;
+      background-color: $dark-blue;
+      color: $white;
+      font-weight: bold;
+      justify-content: center;
     }
-  }
 
-  .box {
-    border-radius: 7px;
-    background-color: $white;
-    border: 1px solid $light-blue;
-    padding: $spacing-md;
+    .or-separator {
+      position: relative;
+      height: 40px;
+      display: grid;
+      align-items: center;
+
+      .or-separator-icon {
+        padding: $spacing-md;
+        border-radius: 50%;
+        background-color: $light-blue;
+        width: 40px;
+        height: 40px;
+        box-sizing: border-box;
+        font-size: 14px;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $dark-blue;
+      }
+
+      .separator {
+        width: 90%;
+      }
+    }
   }
 }

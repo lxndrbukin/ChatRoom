@@ -39,15 +39,16 @@ export const SignupAuth: React.FC<AuthFormProps> = (): JSX.Element => {
   return (
     <div className='auth'>
       <form onSubmit={signupUser} className='auth-form box'>
-        <label htmlFor='email'>Email:</label>
-        <input placeholder='Email' id='email' name='email' />
-        <label htmlFor='first-name'>First Name:</label>
-        <input placeholder='First Name' id='first-name' name='firstName' />
-        <label htmlFor='last-name'>Last Name:</label>
-        <input placeholder='Last Name' id='last-name' name='lastName' />
-        <label htmlFor='password'>Password:</label>
-        <input placeholder='Password' id='password' name='password' />
-        <button className='auth-form-button'>Sign Up</button>
+        <div className='box-header'>Sign Up</div>
+        <input className='form-input' placeholder='Email' name='email' />
+        <input
+          className='form-input'
+          placeholder='First Name'
+          name='firstName'
+        />
+        <input className='form-input' placeholder='Last Name' name='lastName' />
+        <input className='form-input' placeholder='Password' name='password' />
+        <button className='ui-form-button'>Sign Up</button>
       </form>
       {message && renderErrorMessage()}
     </div>

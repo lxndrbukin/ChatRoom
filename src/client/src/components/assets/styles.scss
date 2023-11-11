@@ -39,8 +39,41 @@
   align-items: center;
   text-decoration: none;
   font-size: 14px;
-  height: 33px;
+  height: 30px;
   box-sizing: border-box;
+}
+
+.box {
+  border-radius: 7px;
+  border: 1px solid $light-blue;
+  background-color: $white;
+  padding: 12px;
+  box-sizing: border-box;
+
+  .box-header {
+    font-size: 17px;
+    font-weight: bold;
+    padding: 0 0 $spacing-md 0;
+  }
+}
+
+.form-input {
+  height: 30px;
+  padding: $spacing-sm $spacing-md;
+  box-sizing: border-box;
+  border-radius: 7px;
+  border: 1px solid $grey;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.separator {
+  height: 2px;
+  border: none;
+  width: 70%;
+  background-color: $light-blue;
 }
 
 body {

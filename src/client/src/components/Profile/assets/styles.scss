@@ -211,26 +211,46 @@
 
   .profile-edit-main-info {
     display: grid;
-    grid-template-columns: 25% 1fr;
-    gap: 10px;
-    padding: 0 $spacing-md $spacing-xl $spacing-md;
+    grid-template-rows: 130px 70px;
+    padding: 0 0 $spacing-xl 0;
+    position: relative;
+    height: 200px;
+    box-sizing: border-box;
 
-    .profile-edit-main-info-avatar {
-      height: 90px;
-      width: 90px;
-      border-radius: 50%;
-      justify-self: right;
+    .profile-edit-main-info-bg {
+      height: 130px;
+      width: 100%;
+      z-index: 0;
+      background-size: cover;
     }
 
-    .profile-edit-main-info-name {
-      height: fit-content;
+    .profile-edit-main-info-data {
       align-self: flex-end;
-      display: inline-grid;
-      grid-template-columns: min-content min-content;
-      gap: $spacing-md;
+      padding: $spacing-xl $spacing-xl;
+      box-sizing: border-box;
+      z-index: 1;
 
-      span {
-        width: fit-content;
+      .profile-edit-main-info-avatar {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        justify-self: right;
+        align-self: flex-end;
+
+        border: 3px solid $white;
+        box-sizing: border-box;
+      }
+
+      .profile-edit-main-info-name {
+        height: fit-content;
+        align-self: flex-end;
+        display: inline-grid;
+        grid-template-columns: min-content min-content;
+        gap: $spacing-md;
+
+        span {
+          width: fit-content;
+        }
       }
     }
   }
@@ -289,19 +309,5 @@
         align-self: center;
       }
     }
-  }
-}
-
-.box {
-  border-radius: 7px;
-  border: 1px solid $light-blue;
-  background-color: $white;
-  padding: 10px;
-  box-sizing: border-box;
-
-  .box-header {
-    font-size: 17px;
-    font-weight: bold;
-    padding: 0 0 $spacing-md 0;
   }
 }

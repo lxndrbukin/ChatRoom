@@ -4,6 +4,7 @@ import { AuthFormProps } from './types';
 import { Navigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, AppDispatch, RootState } from '../../store';
+import { PiArrowsDownUpBold } from 'react-icons/pi';
 
 export const LoginAuth: React.FC<AuthFormProps> = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -29,14 +30,29 @@ export const LoginAuth: React.FC<AuthFormProps> = (): JSX.Element => {
   return (
     <div className='auth'>
       <form onSubmit={loginUser} className='auth-form box'>
-        <label htmlFor='email'>Email:</label>
-        <input id='email' type='email' name='email' />
-        <label htmlFor='password'>Password:</label>
-        <input id='password' type='password' name='password' />
-        <button>Log In</button>
-        <span>
-          Or sign up <Link to='/signup'>here</Link>
-        </span>
+        <div className='box-header'>Login</div>
+        <input
+          className='form-input'
+          type='email'
+          name='email'
+          placeholder='Email'
+        />
+        <input
+          className='form-input'
+          type='password'
+          name='password'
+          placeholder='Password'
+        />
+        <button className='ui-form-button'>Log In</button>
+        <div className='or-separator'>
+          <div className='or-separator-icon'>
+            <PiArrowsDownUpBold size={19} />
+          </div>
+          <hr className='separator' />
+        </div>
+        <Link to='/signup' className='ui-form-button'>
+          Sign Up
+        </Link>
       </form>
     </div>
   );

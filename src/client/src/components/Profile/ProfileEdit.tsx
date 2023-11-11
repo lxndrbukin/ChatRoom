@@ -29,14 +29,25 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
       <div className='profile-edit-form-wrapper box'>
         <div className='box-header'>Profile</div>
         <div className='profile-edit-main-info'>
-          <img
-            className='profile-edit-main-info-avatar'
-            src={userData?.mainPhoto}
-            alt={userData?.fullName.firstName}
-          />
-          <div className='profile-edit-main-info-name'>
-            <span>{firstName}</span>
-            <span>{lastName}</span>
+          <div
+            style={{
+              backgroundImage: `url(https://primary.jwwb.nl/public/o/e/c/temp-jqisaigwopnxxlyuaxqc/xnug1j/grunge-sith-logo-artwork-v0nobz86mo1la5z4.jpg)`,
+            }}
+            className='profile-edit-main-info-bg'
+          ></div>
+          <div className='profile-edit-main-info-data'>
+            <div className='profile-edit-main-info-avatar-wrapper'>
+              <img
+                className='profile-edit-main-info-avatar'
+                src={userData?.mainPhoto}
+                alt={userData?.fullName.firstName}
+              />
+              <div className='profile-edit-main-info-avatar-change'></div>
+            </div>
+            <div className='profile-edit-main-info-name'>
+              <span>{firstName}</span>
+              <span>{lastName}</span>
+            </div>
           </div>
         </div>
         <form className='profile-edit-form' onSubmit={handleSubmit}>
