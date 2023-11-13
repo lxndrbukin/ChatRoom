@@ -137,6 +137,20 @@
             width: fit-content;
           }
         }
+
+        .profile-post-emojis-wrapper {
+          position: relative;
+
+          svg {
+            color: $dark-grey;
+            cursor: pointer;
+          }
+
+          .profile-post-emojis-box-wrapper {
+            position: absolute;
+            right: 0;
+          }
+        }
       }
     }
 
@@ -220,7 +234,6 @@
     .profile-edit-main-info-bg {
       height: 130px;
       width: 100%;
-      z-index: 0;
       background-size: cover;
     }
 
@@ -228,17 +241,54 @@
       align-self: flex-end;
       padding: $spacing-xl $spacing-xl;
       box-sizing: border-box;
-      z-index: 1;
+      display: grid;
+      grid-template-columns: 100px 1fr;
 
-      .profile-edit-main-info-avatar {
-        height: 100px;
-        width: 100px;
-        border-radius: 50%;
-        justify-self: right;
-        align-self: flex-end;
+      .profile-edit-main-info-avatar-wrapper {
+        position: relative;
 
-        border: 3px solid $white;
-        box-sizing: border-box;
+        .profile-edit-main-info-avatar {
+          height: 100px;
+          width: 100px;
+          border-radius: 50%;
+          justify-self: right;
+          align-self: flex-end;
+          cursor: pointer;
+          border: 3px solid $white;
+          box-sizing: border-box;
+        }
+
+        .profile-edit-main-info-avatar-change {
+          position: absolute;
+          background-color: $white;
+          padding: $spacing-md;
+          border-radius: 7px;
+          border: 1px solid $light-blue;
+          width: 130px;
+          box-shadow: $box-shadow;
+
+          button {
+            width: 100%;
+            display: inline-grid;
+            grid-template-columns: 20px 1fr;
+            border: none;
+            border-radius: 7px;
+            background-color: transparent;
+            cursor: pointer;
+            padding: $spacing-sm $spacing-md;
+            text-align: left;
+            align-items: center;
+            gap: 10px;
+
+            &:hover {
+              background-color: $light-blue;
+            }
+
+            svg {
+              color: $dark-blue;
+            }
+          }
+        }
       }
 
       .profile-edit-main-info-name {
@@ -246,7 +296,7 @@
         align-self: flex-end;
         display: inline-grid;
         grid-template-columns: min-content min-content;
-        gap: $spacing-md;
+        gap: $spacing-sm;
 
         span {
           width: fit-content;
@@ -309,5 +359,39 @@
         align-self: center;
       }
     }
+  }
+}
+
+.profile-edit-avatar-modal {
+  font-size: 15px;
+  width: 400px;
+  height: 200px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+
+  svg {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    color: $grey;
+    cursor: pointer;
+
+    &:hover {
+      color: $dark-grey;
+    }
+  }
+
+  label {
+    width: fit-content;
+    justify-self: center;
+  }
+
+  #upload-photo {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
   }
 }

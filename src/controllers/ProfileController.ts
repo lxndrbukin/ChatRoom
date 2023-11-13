@@ -24,21 +24,31 @@ class ProfileController {
 
 
   @post('/profile/edit')
-  @use(upload.single('my_file'))
+  @use(upload.single('photo'))
   async postUpdateProfile(req: Request, res: Response) {
-    const b64 = Buffer.from(req.file!.buffer).toString('base64');
-    const dataURI = 'data:' + req.file!.mimetype + ';base64,' + b64;
-    const response = await cloudinary.uploader.upload(dataURI, {
-      resource_type: 'auto',
-    });
+    let mainPhoto;
+    if (req.file) {
+      const b64 = Buffer.from(req.file.buffer).toString('base64');
+      const dataURI = 'data:' + req.file!.mimetype + ';base64,' + b64;
+      const response = await cloudinary.uploader.upload(dataURI, {
+        resource_type: 'auto',
+      });
+      mainPhoto = response.url;
+    }
+    for (let key in req.body) {
+      if (typeof req.body[key] === 'string') {
+        req.body = { ...req.body, [key]: JSON.parse(req.body[key]) };
+      }
+    }
+    console.log(req.body);
     const user = await User.findOneAndUpdate(
       { userId: req.session!.userId },
-      { mainPhoto: response.url },
+      { ...req.body, mainPhoto },
       { new: true }
     ).select('-_id -password -__v');
     const profile = await Profile.findOneAndUpdate(
       { userId: req.session!.userId },
-      { mainPhoto: response.url },
+      { ...req.body, mainPhoto },
       { new: true }
     ).select('-_id -__v');
     req.session = user;
