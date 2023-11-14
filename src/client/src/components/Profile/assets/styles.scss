@@ -99,7 +99,7 @@
 
     .profile-body-left {
       display: grid;
-      grid-template-rows: 52px 1fr;
+      grid-template-rows: minmax(52px, auto) 1fr;
       gap: 10px;
 
       .profile-post-form {
@@ -107,6 +107,7 @@
         grid-template-columns: 30px 1fr;
         gap: 8px;
         min-height: 50px;
+        height: fit-content;
         align-items: center;
         justify-content: center;
 
@@ -119,7 +120,10 @@
 
         form {
           width: 100%;
-          display: flex;
+          display: grid;
+          grid-template-columns: 1fr 25px;
+          gap: 10px;
+          align-items: center;
 
           textarea {
             background-color: transparent;
@@ -140,6 +144,7 @@
 
         .profile-post-emojis-wrapper {
           position: relative;
+          height: fit-content;
 
           svg {
             color: $dark-grey;
@@ -151,6 +156,10 @@
             right: 0;
           }
         }
+      }
+
+      .profile-posts {
+        align-self: flex-start;
       }
     }
 
@@ -308,6 +317,13 @@
   .profile-edit-form-wrapper {
     display: flex;
     flex-direction: column;
+
+    .profile-edit-form-header {
+      border-bottom: 3px solid $light-blue;
+      padding: $spacing-sm;
+      margin-bottom: $spacing-md;
+      width: fit-content;
+    }
 
     .profile-edit-form {
       display: flex;

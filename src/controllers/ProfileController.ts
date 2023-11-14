@@ -35,12 +35,16 @@ class ProfileController {
       });
       mainPhoto = response.url;
     }
+    console.log(req.body);
     for (let key in req.body) {
-      if (typeof req.body[key] === 'string') {
-        req.body = { ...req.body, [key]: JSON.parse(req.body[key]) };
+      try {
+        if (typeof req.body[key] === 'string') {
+          req.body = { ...req.body, [key]: JSON.parse(req.body[key]) };
+        }
+      } catch (err) {
+        req.body = { ...req.body, [key]: req.body[key] };
       }
     }
-    console.log(req.body);
     const user = await User.findOneAndUpdate(
       { userId: req.session!.userId },
       { ...req.body, mainPhoto },

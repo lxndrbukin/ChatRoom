@@ -10,6 +10,7 @@ import { ProfileEditModal } from './assets/ProfileEditModal';
 export const ProfileEdit: React.FC = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
   const { userData } = useSelector((state: RootState) => state.session);
+  const { info } = useSelector((state: RootState) => state.profile);
   const [file, setFile] = useState<File | null>(null);
   const [firstName, setFirstName] = useState(userData?.fullName.firstName);
   const [lastName, setLastName] = useState(userData?.fullName.lastName);
@@ -46,6 +47,7 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
     const target = e.target as typeof e.target & {
       firstName: { value: string };
       lastName: { value: string };
+      brief: { value: string };
     };
     data.append(
       'fullName',
@@ -57,6 +59,7 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
     if (file) {
       data.append('photo', file as File);
     }
+    data.append('about.info.brief', target.brief.value);
     dispatch(updateProfile(data));
   };
 
@@ -80,7 +83,7 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
     <React.Fragment>
       <div className='profile-edit'>
         <div className='profile-edit-form-wrapper box'>
-          <div className='box-header'>Profile</div>
+          <div className='profile-edit-form-header box-header'>Profile</div>
           <div className='profile-edit-main-info'>
             <div
               style={{
@@ -124,6 +127,7 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
               label='Brief Information:'
               name='brief'
               placeholder='Tell us about yourself'
+              defaultValue={info?.about.info.brief!}
             />
             <button className='profile-edit-form-submit ui-form-button'>
               Submit

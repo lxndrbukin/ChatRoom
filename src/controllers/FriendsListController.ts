@@ -25,7 +25,7 @@ class FriendsListController {
     if (listRes) {
       const promises: any = listRes.friendsList.map(async (friend) => {
         try {
-          return await User.findOne({ userId: friend.userId });
+          return await User.findOne({ userId: friend.userId }).select('-_id -__v -password -email');
         } catch (error) {
           console.log(error);
         }
