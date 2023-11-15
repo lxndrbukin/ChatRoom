@@ -3,9 +3,9 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState, updateProfile } from '../../store';
 import { ProfileEditInput, ProfileEditTextarea } from './assets/ProfileInputs';
-import { AiFillDelete } from 'react-icons/ai';
-import { HiPencil } from 'react-icons/hi';
 import { ProfileEditModal } from './assets/ProfileEditModal';
+import { ProfileEditMain } from './ProfileEditMain';
+import { ProfileEditForm } from './ProfileEditForm';
 
 export const ProfileEdit: React.FC = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,7 +14,6 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
   const [file, setFile] = useState<File | null>(null);
   const [firstName, setFirstName] = useState(userData?.fullName.firstName);
   const [lastName, setLastName] = useState(userData?.fullName.lastName);
-  const [box, showBox] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const handleSetFile = (e: ChangeEvent) => {
@@ -63,54 +62,17 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
     dispatch(updateProfile(data));
   };
 
-  const renderChangeAvatar = (): JSX.Element => {
-    return (
-      <div
-        onMouseOut={() => showBox(false)}
-        className='profile-edit-main-info-avatar-change'
-      >
-        <button onClick={() => handleToggleModal(true)}>
-          <HiPencil size={20} /> Update Photo
-        </button>
-        <button>
-          <AiFillDelete size={20} /> Delete
-        </button>
-      </div>
-    );
-  };
-
   return (
     <React.Fragment>
       <div className='profile-edit'>
         <div className='profile-edit-form-wrapper box'>
           <div className='profile-edit-form-header box-header'>Profile</div>
-          <div className='profile-edit-main-info'>
-            <div
-              style={{
-                backgroundImage: `url(https://primary.jwwb.nl/public/o/e/c/temp-jqisaigwopnxxlyuaxqc/xnug1j/grunge-sith-logo-artwork-v0nobz86mo1la5z4.jpg)`,
-              }}
-              className='profile-edit-main-info-bg'
-            ></div>
-            <div className='profile-edit-main-info-data'>
-              <div
-                onMouseOver={() => showBox(true)}
-                onMouseOut={() => showBox(false)}
-                className='profile-edit-main-info-avatar-wrapper'
-              >
-                <img
-                  className='profile-edit-main-info-avatar'
-                  src={userData?.mainPhoto}
-                  alt={userData?.fullName.firstName}
-                />
-                {box && renderChangeAvatar()}
-              </div>
-              <div className='profile-edit-main-info-name'>
-                <span>{firstName}</span>
-                <span>{lastName}</span>
-              </div>
-            </div>
-          </div>
-          <form className='profile-edit-form' onSubmit={handleSubmit}>
+          <ProfileEditMain
+            firstName={firstName!}
+            lastName={lastName!}
+            handleToggleModal={handleToggleModal}
+          />
+          <ProfileEditForm handleSubmit={handleSubmit}>
             <ProfileEditInput
               label='First Name:'
               name='firstName'
@@ -129,10 +91,7 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
               placeholder='Tell us about yourself'
               defaultValue={info?.about.info.brief!}
             />
-            <button className='profile-edit-form-submit ui-form-button'>
-              Submit
-            </button>
-          </form>
+          </ProfileEditForm>
         </div>
       </div>
       <ProfileEditModal

@@ -1,5 +1,5 @@
 import { Socket } from 'socket.io-client';
-import { ChangeEventHandler, MouseEventHandler } from 'react';
+import { ChangeEventHandler, FormEventHandler, MouseEventHandler, ReactNode } from 'react';
 
 export interface ProfileProps {
   socket: Socket;
@@ -55,4 +55,19 @@ export interface ProfileEditModalProps {
   };
   handleClose: MouseEventHandler;
   handleSetFile: ChangeEventHandler;
+}
+
+export interface ProfileEditFormProps {
+  handleSubmit: FormEventHandler;
+  children?: ReactNode;
+}
+
+export interface ProfileEditMainProps {
+  firstName: string;
+  lastName: string;
+  handleToggleModal: Function;
+}
+
+export interface ProfileEditSelectProps {
+  options: string[];
 }

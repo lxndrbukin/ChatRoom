@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileEditInputProps } from '../types';
+import { ProfileEditInputProps, ProfileEditSelectProps } from '../types';
 
 export const ProfileEditInput: React.FC<ProfileEditInputProps> = ({
   label,
@@ -40,4 +40,16 @@ export const ProfileEditTextarea: React.FC<ProfileEditInputProps> = ({
       />
     </div>
   );
+};
+
+export const ProfileEditSelect: React.FC<ProfileEditSelectProps> = ({
+  options,
+}): JSX.Element => {
+  const renderOptions = (): JSX.Element[] => {
+    return options.map((option) => {
+      return <option>{option}</option>;
+    });
+  };
+
+  return <select className='profile-edit-select'>{renderOptions()}</select>;
 };

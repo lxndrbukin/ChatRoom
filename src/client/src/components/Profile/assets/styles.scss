@@ -369,6 +369,15 @@
           }
         }
 
+        .profile-edit-select {
+          width: fit-content;
+          height: 30px;
+          padding: $spacing-sm $spacing-md;
+          box-sizing: border-box;
+          border-radius: 7px;
+          border: 1px solid $grey;
+        }
+
       }
 
       .profile-edit-form-submit {
