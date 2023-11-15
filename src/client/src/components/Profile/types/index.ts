@@ -40,6 +40,19 @@ export interface ProfileFriendProps {
   };
 }
 
+export interface ProfileEditProps {
+  children: ReactNode;
+}
+
+export interface ProfileEditMainProps {
+  header: string;
+  children: ReactNode;
+}
+export interface ProfileEditMainFormProps {
+  handleToggleModal: MouseEventHandler;
+  handleSubmit: FormEventHandler;
+}
+
 export interface ProfileEditInputProps {
   label: string;
   name: string;
@@ -62,7 +75,7 @@ export interface ProfileEditFormProps {
   children?: ReactNode;
 }
 
-export interface ProfileEditMainProps {
+export interface ProfileEditUserInfoProps {
   firstName: string;
   lastName: string;
   handleToggleModal: Function;
