@@ -49,8 +49,7 @@ export interface ProfileEditMainProps {
   children: ReactNode;
 }
 export interface ProfileEditMainFormProps {
-  handleToggleModal: MouseEventHandler;
-  handleSubmit: FormEventHandler;
+
 }
 
 export interface ProfileEditInputProps {

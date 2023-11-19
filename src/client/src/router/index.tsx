@@ -7,6 +7,8 @@ import { SignupAuth } from '../components/Auth/SignupAuth';
 import { LoginAuth } from '../components/Auth/LoginAuth';
 import { Profile } from '../components/Profile/Profile';
 import { ProfileEdit } from '../components/Profile/ProfileEdit';
+import { ProfileEditMain } from '../components/Profile/ProfileEditMain';
+import { ProfileEditMainForm } from '../components/Profile/ProfileEditMainForm';
 import { Chats } from '../components/Chats/Chats';
 import { ChatsList } from '../components/Chats/ChatsList';
 import { ChatBox } from '../components/Chats/ChatBox';
@@ -30,6 +32,16 @@ export const router = createBrowserRouter([
       {
         path: '/profile/:userId/edit',
         element: <ProfileEdit />,
+        children: [
+          {
+            path: '',
+            element: (
+              <ProfileEditMain header='Profile'>
+                <ProfileEditMainForm />
+              </ProfileEditMain>
+            ),
+          },
+        ],
       },
       {
         path: 'IM',

@@ -8,8 +8,6 @@ import { ProfileEditMain } from './ProfileEditMain';
 import { ProfileEditModal } from './assets/ProfileEditModal';
 
 export const ProfileEdit: React.FC = (): JSX.Element => {
-  const dispatch = useDispatch<AppDispatch>();
-
   const [file, setFile] = useState<File | null>(null);
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -39,37 +37,9 @@ export const ProfileEdit: React.FC = (): JSX.Element => {
     setIsOpen(bool);
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = new FormData();
-    const target = e.target as typeof e.target & {
-      firstName: { value: string };
-      lastName: { value: string };
-      brief: { value: string };
-    };
-    data.append(
-      'fullName',
-      JSON.stringify({
-        firstName: target.firstName.value,
-        lastName: target.lastName.value,
-      })
-    );
-    if (file) {
-      data.append('photo', file as File);
-    }
-    data.append('about.info.brief', target.brief.value);
-    dispatch(updateProfile(data));
-  };
-
   return (
     <React.Fragment>
       <Outlet />
-      <ProfileEditModal
-        styles={customStyles}
-        isOpen={modalIsOpen}
-        handleSetFile={handleSetFile}
-        handleClose={() => handleToggleModal(false)}
-      />
     </React.Fragment>
   );
 };
