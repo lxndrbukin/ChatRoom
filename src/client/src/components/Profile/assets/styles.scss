@@ -226,162 +226,211 @@
   }
 }
 
-.profile-edit {
-  padding: $spacing-lg 0 0 0;
+.profile-edit-wrapper {
   display: grid;
   grid-template-columns: 60% 1fr;
-  height: fit-content;
 
-  .profile-edit-main-info {
-    display: grid;
-    grid-template-rows: 130px 70px;
-    padding: 0 0 $spacing-xl 0;
-    position: relative;
-    height: 200px;
-    box-sizing: border-box;
+  .profile-edit {
+    padding: $spacing-lg 0 0 0;
+    height: fit-content;
 
-    .profile-edit-main-info-bg {
-      height: 130px;
-      width: 100%;
-      background-size: cover;
-    }
-
-    .profile-edit-main-info-data {
-      align-self: flex-end;
-      padding: $spacing-xl $spacing-xl;
-      box-sizing: border-box;
+    .profile-edit-main-info {
       display: grid;
-      grid-template-columns: 100px 1fr;
+      grid-template-rows: 130px 70px;
+      padding: 0 0 $spacing-xl 0;
+      position: relative;
+      height: 200px;
+      box-sizing: border-box;
 
-      .profile-edit-main-info-avatar-wrapper {
-        position: relative;
+      .profile-edit-main-info-bg {
+        height: 130px;
+        width: 100%;
+        background-size: cover;
+      }
 
-        .profile-edit-main-info-avatar {
-          height: 100px;
-          width: 100px;
-          border-radius: 50%;
-          justify-self: right;
-          align-self: flex-end;
-          cursor: pointer;
-          border: 3px solid $white;
-          box-sizing: border-box;
-        }
+      .profile-edit-main-info-data {
+        align-self: flex-end;
+        padding: $spacing-xl $spacing-xl;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 100px 1fr;
 
-        .profile-edit-main-info-avatar-change {
-          position: absolute;
-          background-color: $white;
-          padding: $spacing-md;
-          border-radius: 7px;
-          border: 1px solid $light-blue;
-          width: 130px;
-          box-shadow: $box-shadow;
+        .profile-edit-main-info-avatar-wrapper {
+          position: relative;
 
-          button {
-            width: 100%;
-            display: inline-grid;
-            grid-template-columns: 20px 1fr;
-            border: none;
-            border-radius: 7px;
-            background-color: transparent;
+          .profile-edit-main-info-avatar {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            justify-self: right;
+            align-self: flex-end;
             cursor: pointer;
-            padding: $spacing-sm $spacing-md;
-            text-align: left;
-            align-items: center;
-            gap: 10px;
+            border: 3px solid $white;
+            box-sizing: border-box;
+          }
 
-            &:hover {
-              background-color: $light-blue;
-            }
+          .profile-edit-main-info-avatar-change {
+            position: absolute;
+            background-color: $white;
+            padding: $spacing-md;
+            border-radius: 7px;
+            border: 1px solid $light-blue;
+            width: 130px;
+            box-shadow: $box-shadow;
 
-            svg {
-              color: $dark-blue;
+            button {
+              width: 100%;
+              display: inline-grid;
+              grid-template-columns: 20px 1fr;
+              border: none;
+              border-radius: 7px;
+              background-color: transparent;
+              cursor: pointer;
+              padding: $spacing-sm $spacing-md;
+              text-align: left;
+              align-items: center;
+              gap: 10px;
+
+              &:hover {
+                background-color: $light-blue;
+              }
+
+              svg {
+                color: $dark-blue;
+              }
             }
           }
         }
+
+        .profile-edit-main-info-name {
+          height: fit-content;
+          align-self: flex-end;
+          display: inline-grid;
+          grid-template-columns: min-content min-content;
+          gap: $spacing-sm;
+
+          span {
+            width: fit-content;
+          }
+        }
+      }
+    }
+
+    .profile-edit-form-wrapper {
+      display: flex;
+      flex-direction: column;
+
+      .profile-edit-form-header {
+        border-bottom: 3px solid $light-blue;
+        padding: $spacing-sm;
+        margin-bottom: $spacing-md;
+        width: fit-content;
       }
 
-      .profile-edit-main-info-name {
+      .profile-edit-form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
         height: fit-content;
-        align-self: flex-end;
-        display: inline-grid;
-        grid-template-columns: min-content min-content;
-        gap: $spacing-sm;
 
-        span {
-          width: fit-content;
+        .profile-edit-input-wrapper {
+          display: grid;
+          grid-template-columns: 25% 1fr;
+          gap: 10px;
+          padding-bottom: $spacing-lg;
+
+          label {
+            font-size: 13px;
+            text-align: right;
+            padding-top: 6px;
+          }
+
+          .profile-edit-input {
+            width: 300px;
+            height: 30px;
+            padding: $spacing-sm $spacing-md;
+            box-sizing: border-box;
+            border-radius: 7px;
+            border: 1px solid $grey;
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          .profile-edit-textarea {
+            width: 300px;
+            height: 100px;
+            padding: $spacing-sm $spacing-md;
+            box-sizing: border-box;
+            border-radius: 7px;
+            border: 1px solid $grey;
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          .profile-edit-select {
+            width: fit-content;
+            height: 30px;
+            padding: $spacing-sm $spacing-md;
+            box-sizing: border-box;
+            border-radius: 7px;
+            border: 1px solid $grey;
+          }
+
+        }
+
+        .profile-edit-form-submit {
+          align-self: center;
         }
       }
     }
   }
 
-  .profile-edit-form-wrapper {
+  .profile-edit-menu {
     display: flex;
     flex-direction: column;
 
-    .profile-edit-form-header {
-      border-bottom: 3px solid $light-blue;
-      padding: $spacing-sm;
-      margin-bottom: $spacing-md;
-      width: fit-content;
-    }
-
-    .profile-edit-form {
-      display: flex;
-      flex-direction: column;
+    .profile-edit-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
       width: 100%;
-      height: fit-content;
 
-      .profile-edit-input-wrapper {
-        display: grid;
-        grid-template-columns: 25% 1fr;
-        gap: 10px;
-        padding-bottom: $spacing-lg;
+      .profile-edit-link {
+        padding-right: $spacing-md;
+        cursor: pointer;
+        display: flex;
 
-        label {
-          font-size: 13px;
-          text-align: right;
-          padding-top: 6px;
-        }
+        a {
+          color: $dark;
+          display: grid;
+          grid-template-columns: 24px 1fr;
+          grid-gap: 10px;
+          text-decoration: none;
+          align-self: center;
+          width: 100%;
+          padding: 0 $spacing-md;
+          border-radius: 5px;
+          height: 35px;
 
-        .profile-edit-input {
-          width: 300px;
-          height: 30px;
-          padding: $spacing-sm $spacing-md;
-          box-sizing: border-box;
-          border-radius: 7px;
-          border: 1px solid $grey;
+          &:hover {
+            background-color: $light-blue;
+          }
 
-          &:focus {
-            outline: none;
+          .profile-edit-link-name {
+            align-self: center;
+          }
+
+          svg {
+            color: $dark-blue;
+            align-self: center;
+            justify-self: center;
           }
         }
-
-        .profile-edit-textarea {
-          width: 300px;
-          height: 100px;
-          padding: $spacing-sm $spacing-md;
-          box-sizing: border-box;
-          border-radius: 7px;
-          border: 1px solid $grey;
-
-          &:focus {
-            outline: none;
-          }
-        }
-
-        .profile-edit-select {
-          width: fit-content;
-          height: 30px;
-          padding: $spacing-sm $spacing-md;
-          box-sizing: border-box;
-          border-radius: 7px;
-          border: 1px solid $grey;
-        }
-
-      }
-
-      .profile-edit-form-submit {
-        align-self: center;
       }
     }
   }
