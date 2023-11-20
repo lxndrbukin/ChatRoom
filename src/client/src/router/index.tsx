@@ -9,6 +9,7 @@ import { Profile } from '../components/Profile/Profile';
 import { ProfileEdit } from '../components/Profile/ProfileEdit';
 import { ProfileEditMain } from '../components/Profile/ProfileEditMain';
 import { ProfileEditMainForm } from '../components/Profile/ProfileEditMainForm';
+import { ProfileEditContactForm } from '../components/Profile/ProfileEditContactForm';
 import { Chats } from '../components/Chats/Chats';
 import { ChatsList } from '../components/Chats/ChatsList';
 import { ChatBox } from '../components/Chats/ChatBox';
@@ -38,6 +39,14 @@ export const router = createBrowserRouter([
             element: (
               <ProfileEditMain header='Profile'>
                 <ProfileEditMainForm />
+              </ProfileEditMain>
+            ),
+          },
+          {
+            path: '/contacts',
+            element: (
+              <ProfileEditMain header='Contacts'>
+                <ProfileEditContactForm />
               </ProfileEditMain>
             ),
           },

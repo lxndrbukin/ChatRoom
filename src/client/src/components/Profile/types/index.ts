@@ -62,9 +62,6 @@ export interface ProfileEditInputProps {
 
 export interface ProfileEditModalProps {
   isOpen: boolean;
-  styles?: {
-    [key: string]: string | object;
-  };
   handleClose: MouseEventHandler;
   handleSetFile: ChangeEventHandler;
 }

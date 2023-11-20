@@ -1,10 +1,11 @@
-import React, { useState, useContext, FormEvent } from 'react';
+import React, { useState, useContext, FormEvent, ChangeEvent } from 'react';
 import { ProfileEditMainFormProps } from './types';
 import { RootState, AppDispatch, updateProfile } from '../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { ProfileEditUserInfo } from './ProfileEditUserInfo';
 import { ProfileEditForm } from './ProfileEditForm';
 import { ProfileEditInput, ProfileEditTextarea } from './assets/ProfileInputs';
+import { ProfileEditModal } from './assets/ProfileEditModal';
 
 export const ProfileEditMainForm: React.FC<
   ProfileEditMainFormProps
@@ -16,6 +17,17 @@ export const ProfileEditMainForm: React.FC<
 
   const dispatch = useDispatch<AppDispatch>();
   const [file, setFile] = useState<File | null>(null);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const handleSetFile = (e: ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    setFile(file);
+  };
+
+  const handleToggleModal = (bool: boolean): void => {
+    setIsOpen(bool);
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,11 +52,11 @@ export const ProfileEditMainForm: React.FC<
   };
 
   return (
-    <div>
+    <React.Fragment>
       <ProfileEditUserInfo
         firstName={firstName!}
         lastName={lastName!}
-        handleToggleModal={handlers.handleToggleModal}
+        handleToggleModal={handleToggleModal}
       />
       <ProfileEditForm handleSubmit={handleSubmit}>
         <ProfileEditInput
@@ -66,6 +78,11 @@ export const ProfileEditMainForm: React.FC<
           defaultValue={info?.about.info.brief!}
         />
       </ProfileEditForm>
-    </div>
+      <ProfileEditModal
+        isOpen={modalIsOpen}
+        handleClose={() => handleToggleModal(false)}
+        handleSetFile={handleSetFile}
+      />
+    </React.Fragment>
   );
 };
