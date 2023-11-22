@@ -4,7 +4,12 @@ import { RootState, AppDispatch, updateProfile } from '../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { ProfileEditUserInfo } from './ProfileEditUserInfo';
 import { ProfileEditForm } from './ProfileEditForm';
-import { ProfileEditInput, ProfileEditTextarea } from './assets/ProfileInputs';
+import {
+  ProfileEditInput,
+  ProfileEditTextarea,
+  ProfileEditSelect,
+} from './assets/ProfileInputs';
+import { days, months, years } from './assets/dob';
 import { ProfileEditModal } from './assets/ProfileEditModal';
 
 export const ProfileEditMainForm: React.FC<
@@ -77,6 +82,14 @@ export const ProfileEditMainForm: React.FC<
           placeholder='Tell us about yourself'
           defaultValue={info?.about.info.brief!}
         />
+        <div className='profile-edit-dob'>
+          <label>Date Of Birth:</label>
+          <div className='profile-edit-dob-options'>
+            <ProfileEditSelect name='dd' options={days} />
+            <ProfileEditSelect name='mm' options={months} />
+            <ProfileEditSelect name='yyyy' options={years} />
+          </div>
+        </div>
       </ProfileEditForm>
       <ProfileEditModal
         isOpen={modalIsOpen}

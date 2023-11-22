@@ -78,5 +78,6 @@ export interface ProfileEditUserInfoProps {
 }
 
 export interface ProfileEditSelectProps {
-  options: string[];
+  name: string;
+  options: number[] | string[];
 }
