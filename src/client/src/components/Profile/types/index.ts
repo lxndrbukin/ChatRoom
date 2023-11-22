@@ -79,5 +79,5 @@ export interface ProfileEditUserInfoProps {
 
 export interface ProfileEditSelectProps {
   name: string;
-  options: number[] | string[];
+  options: (month?: string | number, year?: number) => Array<string | number>;
 }

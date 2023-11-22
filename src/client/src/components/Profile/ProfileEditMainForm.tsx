@@ -82,14 +82,6 @@ export const ProfileEditMainForm: React.FC<
           placeholder='Tell us about yourself'
           defaultValue={info?.about.info.brief!}
         />
-        <div className='profile-edit-dob'>
-          <label>Date Of Birth:</label>
-          <div className='profile-edit-dob-options'>
-            <ProfileEditSelect name='dd' options={days} />
-            <ProfileEditSelect name='mm' options={months} />
-            <ProfileEditSelect name='yyyy' options={years} />
-          </div>
-        </div>
       </ProfileEditForm>
       <ProfileEditModal
         isOpen={modalIsOpen}

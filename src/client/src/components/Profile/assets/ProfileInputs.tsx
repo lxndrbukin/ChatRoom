@@ -47,7 +47,7 @@ export const ProfileEditSelect: React.FC<ProfileEditSelectProps> = ({
   options,
 }): JSX.Element => {
   const renderOptions = (): JSX.Element[] => {
-    return options.map((option) => {
+    return options().map((option: string | number) => {
       return <option>{option}</option>;
     });
   };
