@@ -229,9 +229,10 @@
 .profile-edit-wrapper {
   display: grid;
   grid-template-columns: 60% 1fr;
+  gap: 15px;
+  padding: $spacing-lg 0 0 0;
 
   .profile-edit {
-    padding: $spacing-lg 0 0 0;
     height: fit-content;
 
     .profile-edit-main-info {
@@ -267,6 +268,7 @@
             cursor: pointer;
             border: 3px solid $white;
             box-sizing: border-box;
+            object-fit: cover;
           }
 
           .profile-edit-main-info-avatar-change {
@@ -378,6 +380,11 @@
             box-sizing: border-box;
             border-radius: 7px;
             border: 1px solid $grey;
+            cursor: pointer;
+
+            &:focus {
+              outline: none;
+            }
           }
 
         }
@@ -392,30 +399,28 @@
   .profile-edit-menu {
     display: flex;
     flex-direction: column;
+    height: fit-content;
 
-    .profile-edit-list {
+    .profile-edit-menu-list {
       list-style-type: none;
       padding: 0;
       margin: 0;
       font-size: 13px;
       width: 100%;
 
-      .profile-edit-link {
-        padding-right: $spacing-md;
+      .profile-edit-menu-link {
         cursor: pointer;
-        display: flex;
 
         a {
+          display: flex;
+          align-items: center;
           color: $dark;
-          display: grid;
-          grid-template-columns: 24px 1fr;
-          grid-gap: 10px;
           text-decoration: none;
-          align-self: center;
           width: 100%;
           padding: 0 $spacing-md;
           border-radius: 5px;
           height: 35px;
+          box-sizing: border-box;
 
           &:hover {
             background-color: $light-blue;

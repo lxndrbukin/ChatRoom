@@ -1,10 +1,30 @@
 import Chat from '../models/Chat';
 import User from '../models/User';
 import Profile from '../models/Profile';
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: 'dpjgiuxf2',
+  api_key: '469618289571349',
+  api_secret: '0PUkvOQmZmpYQYPN3Ljx94gVFVQ'
+});
 
 export const io = (socketIO: any): void => {
   socketIO.on('connection', (socket: any): void => {
     console.log(`User ${socket.id} just connected`);
+
+    socket.on('event://upload-img', async (data: any) => {
+      const b64 = Buffer.from(data.buffer).toString('base64');
+      const dataURI = 'data:' + data.mimetype + ';base64,' + b64;
+      try {
+        const res = await cloudinary.uploader.upload(dataURI, {
+          resource_type: 'auto',
+        });
+        console.log(res.url);
+      } catch (err) {
+        console.log('err');
+      }
+    });
 
     socket.on('event://update-user-status', async (data: any) => {
       const { onlineStatus, previousOnlineStatus } = data;

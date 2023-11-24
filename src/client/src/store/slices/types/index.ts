@@ -86,7 +86,11 @@ export interface ProfileInfo {
   mainPhoto: string;
   email: string;
   domain: string | null;
-  age: number | null;
+  dob: {
+    dd: string;
+    mm: string;
+    yyyy: string;
+  },
   about: AboutProfile;
   friends: UserData[];
   status: UserOnlineStatus;

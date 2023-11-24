@@ -13,13 +13,14 @@ export const months = () => {
 
 export const days = () => {
   let dd: Array<number | string> = [];
-  let i = 1;
-  while (i < 32) {
-    dd = [...dd, i];
-    i++;
+  for (let i = 1; i < 32; i++) {
+    if (i < 10) {
+      dd = [...dd, `0${i}`];
+    } else {
+      dd = [...dd, i];
+    }
   }
   return dd;
-
 };
 
 export const years = () => {

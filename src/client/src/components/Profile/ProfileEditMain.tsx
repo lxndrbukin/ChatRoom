@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React from 'react';
 import { ProfileEditMainProps } from './types';
 
 export const ProfileEditMain: React.FC<ProfileEditMainProps> = ({

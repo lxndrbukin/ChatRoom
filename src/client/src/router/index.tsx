@@ -38,12 +38,12 @@ export const router = createBrowserRouter([
             path: '',
             element: (
               <ProfileEditMain header='Profile'>
-                <ProfileEditMainForm />
+                <ProfileEditMainForm socket={socket} />
               </ProfileEditMain>
             ),
           },
           {
-            path: '/contacts',
+            path: 'contacts',
             element: (
               <ProfileEditMain header='Contacts'>
                 <ProfileEditContactForm />

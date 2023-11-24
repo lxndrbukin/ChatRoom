@@ -44,6 +44,7 @@ export const ProfileEditTextarea: React.FC<ProfileEditInputProps> = ({
 
 export const ProfileEditSelect: React.FC<ProfileEditSelectProps> = ({
   name,
+  defaultValue,
   options,
 }): JSX.Element => {
   const renderOptions = (): JSX.Element[] => {
@@ -53,7 +54,11 @@ export const ProfileEditSelect: React.FC<ProfileEditSelectProps> = ({
   };
 
   return (
-    <select name={name} className='profile-edit-select'>
+    <select
+      defaultValue={defaultValue}
+      name={name}
+      className='profile-edit-select'
+    >
       {renderOptions()}
     </select>
   );

@@ -9,7 +9,11 @@ const ProfileSchema: Schema = new Schema<IProfile>({
   },
   email: String,
   domain: { type: String, default: null },
-  age: { type: Number, default: null },
+  dob: {
+    dd: { type: String, default: null },
+    mm: { type: String, default: null },
+    yyyy: { type: String, default: null }
+  },
   mainPhoto: { type: String, default: 'https://alumni.engineering.utoronto.ca/files/2022/05/Avatar-Placeholder-400x400-1.jpg' },
   about: {
     occupation: {

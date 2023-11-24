@@ -1,4 +1,4 @@
-import React, { useState, useContext, FormEvent, ChangeEvent } from 'react';
+import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { ProfileEditMainFormProps } from './types';
 import { RootState, AppDispatch, updateProfile } from '../../store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,9 +12,9 @@ import {
 import { days, months, years } from './assets/dob';
 import { ProfileEditModal } from './assets/ProfileEditModal';
 
-export const ProfileEditMainForm: React.FC<
-  ProfileEditMainFormProps
-> = (): JSX.Element => {
+export const ProfileEditMainForm: React.FC<ProfileEditMainFormProps> = ({
+  socket,
+}): JSX.Element => {
   const { userData } = useSelector((state: RootState) => state.session);
   const { info } = useSelector((state: RootState) => state.profile);
   const [firstName, setFirstName] = useState(userData?.fullName.firstName);
@@ -41,12 +41,23 @@ export const ProfileEditMainForm: React.FC<
       firstName: { value: string };
       lastName: { value: string };
       brief: { value: string };
+      dd: { value: string };
+      mm: { value: string };
+      yyyy: { value: string };
     };
     data.append(
       'fullName',
       JSON.stringify({
         firstName: target.firstName.value,
         lastName: target.lastName.value,
+      })
+    );
+    data.append(
+      'dbo',
+      JSON.stringify({
+        dd: target.dd.value,
+        mm: target.mm.value,
+        yyyy: target.yyyy.value,
       })
     );
     if (file) {
@@ -76,6 +87,26 @@ export const ProfileEditMainForm: React.FC<
           defaultValue={userData?.fullName.lastName!}
           onChange={(e) => setLastName(e.target.value)}
         />
+        <div className='profile-edit-input-wrapper'>
+          <label>Date Of Birth:</label>
+          <div className='profile-edit-dob-options'>
+            <ProfileEditSelect
+              defaultValue={info?.dob.dd!}
+              name='dd'
+              options={days}
+            />
+            <ProfileEditSelect
+              defaultValue={info?.dob.mm!}
+              name='mm'
+              options={months}
+            />
+            <ProfileEditSelect
+              defaultValue={info?.dob.yyyy!}
+              name='yyyy'
+              options={years}
+            />
+          </div>
+        </div>
         <ProfileEditTextarea
           label='Brief Information:'
           name='brief'
@@ -84,6 +115,7 @@ export const ProfileEditMainForm: React.FC<
         />
       </ProfileEditForm>
       <ProfileEditModal
+        socket={socket}
         isOpen={modalIsOpen}
         handleClose={() => handleToggleModal(false)}
         handleSetFile={handleSetFile}

@@ -76,7 +76,11 @@ export interface IProfile extends Document {
   mainPhoto: string;
   email: string;
   username: string;
-  age: number;
+  dob: {
+    dd: string;
+    mm: string;
+    yyyy: string;
+  };
   about: AboutProfile;
   status: {
     lastSeen: number;

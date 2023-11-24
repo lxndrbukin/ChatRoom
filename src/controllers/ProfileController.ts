@@ -22,7 +22,6 @@ class ProfileController {
     return res.send(profile);
   }
 
-
   @post('/profile/edit')
   @use(upload.single('photo'))
   async postUpdateProfile(req: Request, res: Response) {

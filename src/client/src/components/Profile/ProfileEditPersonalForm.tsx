@@ -17,14 +17,6 @@ export const ProfileEditPersonalForm: React.FC = (): JSX.Element => {
       <ProfileEditForm handleSubmit={handleSubmit}>
         <ProfileEditInput name='country' label='Country:' />
         <ProfileEditInput name='city' label='City:' />
-        <div className='profile-edit-dob'>
-          <label>Date Of Birth:</label>
-          <div className='profile-edit-dob-options'>
-            <ProfileEditSelect name='dd' options={days} />
-            <ProfileEditSelect name='mm' options={months} />
-            <ProfileEditSelect name='yyyy' options={years} />
-          </div>
-        </div>
       </ProfileEditForm>
     </React.Fragment>
   );

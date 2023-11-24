@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { ProfileEditModalProps } from '../types';
 import Modal from 'react-modal';
 import { IoClose } from 'react-icons/io5';
@@ -9,6 +9,7 @@ export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
   isOpen,
   handleClose,
   handleSetFile,
+  socket,
 }): JSX.Element => {
   const customStyles = {
     content: {
@@ -24,6 +25,12 @@ export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
     },
   };
 
+  const handleUploadFile = (e: ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    socket.emit('event://upload-img', file);
+  };
+
   return (
     <Modal style={customStyles} isOpen={isOpen} onRequestClose={handleClose}>
       <div className='profile-edit-avatar-modal'>
@@ -35,7 +42,7 @@ export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
         <label htmlFor='upload-photo' className='ui-form-button'>
           Select a file
         </label>
-        <input id='upload-photo' type='file' onChange={handleSetFile} />
+        <input id='upload-photo' type='file' onChange={handleUploadFile} />
       </div>
     </Modal>
   );

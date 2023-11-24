@@ -49,7 +49,7 @@ export interface ProfileEditMainProps {
   children: ReactNode;
 }
 export interface ProfileEditMainFormProps {
-
+  socket: Socket;
 }
 
 export interface ProfileEditInputProps {
@@ -64,6 +64,7 @@ export interface ProfileEditModalProps {
   isOpen: boolean;
   handleClose: MouseEventHandler;
   handleSetFile: ChangeEventHandler;
+  socket: Socket;
 }
 
 export interface ProfileEditFormProps {
@@ -79,5 +80,6 @@ export interface ProfileEditUserInfoProps {
 
 export interface ProfileEditSelectProps {
   name: string;
+  defaultValue: string;
   options: (month?: string | number, year?: number) => Array<string | number>;
 }

@@ -1,10 +1,12 @@
 import './assets/styles.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ProfileEditMenu } from './ProfileEditMenu';
 
 export const ProfileEdit: React.FC = (): JSX.Element => {
-  const queryParams = new URLSearchParams(window.location.search);
+  useEffect(() => {
+    document.title = 'Edit Profile';
+  }, []);
 
   return (
     <div className='profile-edit-wrapper'>

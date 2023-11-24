@@ -22,6 +22,7 @@ export const ProfileEditMenu: React.FC = (): JSX.Element => {
 
   return (
     <nav className='profile-edit-menu box'>
+      <div className='box-header'>Edit Profile</div>
       <ul className='profile-edit-menu-list'>{renderLinks()}</ul>
     </nav>
   );

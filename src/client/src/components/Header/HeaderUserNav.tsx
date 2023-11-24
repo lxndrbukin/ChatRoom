@@ -70,7 +70,7 @@ export const HeaderUserNav: React.FC<HeaderUserNavProps> = ({
         <div
           onClick={() => showMenu(!menu)}
           ref={profileFrame}
-          className='header-profile-icon'
+          className={`header-profile-icon ${menu ? 'selected' : ''}`}
         >
           <img
             src={userData?.mainPhoto}

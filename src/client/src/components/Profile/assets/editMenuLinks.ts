@@ -1,6 +1,6 @@
 export const editMenuLinks = [
   {
-    name: 'Main Info',
+    name: 'Profile',
     path: ''
   },
   {
