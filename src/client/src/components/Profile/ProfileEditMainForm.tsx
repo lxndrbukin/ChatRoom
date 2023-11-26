@@ -12,23 +12,17 @@ import {
 import { days, months, years } from './assets/dob';
 import { ProfileEditModal } from './assets/ProfileEditModal';
 
-export const ProfileEditMainForm: React.FC<ProfileEditMainFormProps> = ({
-  socket,
-}): JSX.Element => {
+export const ProfileEditMainForm: React.FC<
+  ProfileEditMainFormProps
+> = (): JSX.Element => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const { userData } = useSelector((state: RootState) => state.session);
   const { info } = useSelector((state: RootState) => state.profile);
   const [firstName, setFirstName] = useState(userData?.fullName.firstName);
   const [lastName, setLastName] = useState(userData?.fullName.lastName);
-
-  const dispatch = useDispatch<AppDispatch>();
-  const [file, setFile] = useState<File | null>(null);
+  const [avatar, setAvatar] = useState<string | null>(null);
   const [modalIsOpen, setIsOpen] = useState(false);
-
-  const handleSetFile = (e: ChangeEvent) => {
-    const target = e.target as HTMLInputElement;
-    const file: File = (target.files as FileList)[0];
-    setFile(file);
-  };
 
   const handleToggleModal = (bool: boolean): void => {
     setIsOpen(bool);
@@ -60,9 +54,6 @@ export const ProfileEditMainForm: React.FC<ProfileEditMainFormProps> = ({
         yyyy: target.yyyy.value,
       })
     );
-    if (file) {
-      data.append('photo', file as File);
-    }
     data.append('about.info.brief', target.brief.value);
     dispatch(updateProfile(data));
   };
@@ -115,10 +106,10 @@ export const ProfileEditMainForm: React.FC<ProfileEditMainFormProps> = ({
         />
       </ProfileEditForm>
       <ProfileEditModal
-        socket={socket}
         isOpen={modalIsOpen}
         handleClose={() => handleToggleModal(false)}
-        handleSetFile={handleSetFile}
+        avatar={avatar}
+        handleSetAvatar={setAvatar}
       />
     </React.Fragment>
   );

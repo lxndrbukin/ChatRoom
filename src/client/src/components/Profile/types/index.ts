@@ -49,7 +49,7 @@ export interface ProfileEditMainProps {
   children: ReactNode;
 }
 export interface ProfileEditMainFormProps {
-  socket: Socket;
+
 }
 
 export interface ProfileEditInputProps {
@@ -63,8 +63,8 @@ export interface ProfileEditInputProps {
 export interface ProfileEditModalProps {
   isOpen: boolean;
   handleClose: MouseEventHandler;
-  handleSetFile: ChangeEventHandler;
-  socket: Socket;
+  avatar: string | null;
+  handleSetAvatar: Function;
 }
 
 export interface ProfileEditFormProps {

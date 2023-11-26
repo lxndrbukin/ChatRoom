@@ -22,6 +22,30 @@ class ProfileController {
     return res.send(profile);
   }
 
+  @post('/profile/upload_img')
+  @use(upload.single('photo'))
+  async postUploadImg(req: Request, res: Response) {
+    let mainPhoto;
+    if (req.file) {
+      const b64 = Buffer.from(req.file.buffer).toString('base64');
+      const dataURI = 'data:' + req.file!.mimetype + ';base64,' + b64;
+      const response = await cloudinary.uploader.upload(dataURI, {
+        resource_type: 'auto',
+      });
+      mainPhoto = response.url;
+    }
+    return res.send(mainPhoto);
+  }
+
+  @post('/profile/delete_img')
+  async postDeleteImg(req: Request, res: Response) {
+    const { img } = req.body;
+    const arr = img.split('/');
+    const id = arr[arr.length - 1].split('.')[0];
+    await cloudinary.uploader.destroy(id);
+    return res.send({});
+  }
+
   @post('/profile/edit')
   @use(upload.single('photo'))
   async postUpdateProfile(req: Request, res: Response) {
@@ -34,7 +58,6 @@ class ProfileController {
       });
       mainPhoto = response.url;
     }
-    console.log(req.body);
     for (let key in req.body) {
       try {
         if (typeof req.body[key] === 'string') {

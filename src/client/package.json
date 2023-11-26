@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.2.7",
     "@types/react-redux": "^7.1.26",
     "axios": "^1.4.0",
+    "cloudinary": "^1.41.0",
     "emoji-picker-react": "^4.5.15",
     "http-proxy-middleware": "^1.0.6",
     "react": "^18.2.0",

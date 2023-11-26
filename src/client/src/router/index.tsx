@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
             path: '',
             element: (
               <ProfileEditMain header='Profile'>
-                <ProfileEditMainForm socket={socket} />
+                <ProfileEditMainForm />
               </ProfileEditMain>
             ),
           },
