@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserState, UserData, Slices, UpdateProfilePayload, UserOnlineStatus } from './types';
+import { UserState, UserData, Slices, UserOnlineStatus } from './types';
 import { signup } from '../thunks/signup';
 import { login } from '../thunks/login';
 import { logout } from '../thunks/logout';
 import { getSession } from '../thunks/getSession';
-import { updateProfile } from '../thunks/updateProfile';
+import { updateUser } from '../thunks/updateUser';
 
 const initialState: UserState = {
   isLoggedIn: false,
@@ -46,8 +46,8 @@ const sessionSlice = createSlice({
         state.userData = action.payload;
       }
     });
-    builder.addCase(updateProfile.fulfilled, (state: UserState, action: PayloadAction<UpdateProfilePayload>) => {
-      state.userData = action.payload.user;
+    builder.addCase(updateUser.fulfilled, (state: UserState, action: PayloadAction<UserData>) => {
+      state.userData = action.payload;
     });
   }
 });

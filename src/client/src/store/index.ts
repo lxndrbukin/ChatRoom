@@ -35,6 +35,7 @@ export * from './thunks/getChats';
 export * from './thunks/findUser';
 export * from './thunks/getProfile';
 export * from './thunks/updateProfile';
+export * from './thunks/updateUser';
 export * from './thunks/changeFriendStatus';
 export * from './thunks/getProfileFriends';
 export * from './thunks/getUserFriends';

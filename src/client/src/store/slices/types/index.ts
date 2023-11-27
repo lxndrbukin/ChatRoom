@@ -102,10 +102,6 @@ export interface ProfileState {
   friends: UserData[];
 }
 
-export interface UpdateProfilePayload {
-  user: UserData;
-  profile: ProfileInfo;
-}
 
 export interface RequestsList {
   userId: number;

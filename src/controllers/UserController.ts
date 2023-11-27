@@ -1,6 +1,10 @@
 import { Request, Response } from 'express';
 import { controller, get, post } from './decorators';
+import Multer from 'multer';
 import User from '../models/User';
+
+const storage = Multer.memoryStorage();
+const upload = Multer({ storage });
 
 @controller('/_api')
 class UserController {
@@ -40,7 +44,11 @@ class UserController {
   @post('/user/edit')
   async postEditUser(req: Request, res: Response) {
     if (req.session) {
-      const user = await User.updateOne({ userId: req.session.userId }, { ...req.body }, { new: true }).select('-_id -password -__v');
+      const user = await User.updateOne(
+        { userId: req.session.userId },
+        { ...req.body },
+        { new: true }
+      ).select('-_id -password -__v');
       return res.send(user);
     }
   }

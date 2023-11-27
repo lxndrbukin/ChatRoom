@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import { ProfileEditMainFormProps } from './types';
-import { RootState, AppDispatch, updateProfile } from '../../store';
+import { RootState, AppDispatch, updateProfile, updateUser } from '../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { ProfileEditUserInfo } from './ProfileEditUserInfo';
 import { ProfileEditForm } from './ProfileEditForm';
@@ -59,6 +59,7 @@ export const ProfileEditMainForm: React.FC<
     );
     data.append('about.info.brief', target.brief.value);
     dispatch(updateProfile(data));
+    dispatch(updateUser(data));
   };
 
   return (

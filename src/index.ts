@@ -6,6 +6,13 @@ import http from 'http';
 import { Router } from './router';
 import { keys } from './services/keys';
 import { io } from './socket';
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: keys.cloud_name,
+  api_key: keys.cloudinary_key,
+  api_secret: keys.cloudinary_secret
+});
 
 import './controllers/AuthController';
 import './controllers/UserController';
