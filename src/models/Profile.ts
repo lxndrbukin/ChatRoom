@@ -22,6 +22,10 @@ const ProfileSchema: Schema = new Schema<IProfile>({
     },
     info: {
       brief: { type: String, default: null }
+    },
+    personal: {
+      country: { type: String, default: null },
+      city: { type: String, default: null }
     }
   },
   status: {

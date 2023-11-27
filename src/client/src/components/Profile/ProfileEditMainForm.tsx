@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, ChangeEvent } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { ProfileEditMainFormProps } from './types';
 import { RootState, AppDispatch, updateProfile } from '../../store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,7 +28,7 @@ export const ProfileEditMainForm: React.FC<
     setIsOpen(bool);
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     const data = new FormData();
     const target = e.target as typeof e.target & {
@@ -46,6 +46,9 @@ export const ProfileEditMainForm: React.FC<
         lastName: target.lastName.value,
       })
     );
+    if (avatar) {
+      data.append('mainPhoto', avatar);
+    }
     data.append(
       'dbo',
       JSON.stringify({

@@ -65,6 +65,10 @@ export interface AboutProfile {
   info: {
     brief: string;
   };
+  personal: {
+    country: string;
+    city: string;
+  };
 }
 
 export interface IProfile extends Document {

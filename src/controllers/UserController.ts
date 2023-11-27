@@ -36,4 +36,13 @@ class UserController {
     }
     return res.send(null);
   }
+
+  @post('/user/edit')
+  async postEditUser(req: Request, res: Response) {
+    if (req.session) {
+      const user = await User.updateOne({ userId: req.session.userId }, { ...req.body }, { new: true }).select('-_id -password -__v');
+      return res.send(user);
+    }
+  }
 }
+

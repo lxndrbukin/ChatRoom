@@ -25,16 +25,16 @@ class ProfileController {
   @post('/profile/upload_img')
   @use(upload.single('photo'))
   async postUploadImg(req: Request, res: Response) {
-    let mainPhoto;
+    let img;
     if (req.file) {
       const b64 = Buffer.from(req.file.buffer).toString('base64');
       const dataURI = 'data:' + req.file!.mimetype + ';base64,' + b64;
       const response = await cloudinary.uploader.upload(dataURI, {
         resource_type: 'auto',
       });
-      mainPhoto = response.url;
+      img = response.url;
     }
-    return res.send(mainPhoto);
+    return res.send(img);
   }
 
   @post('/profile/delete_img')
@@ -49,15 +49,6 @@ class ProfileController {
   @post('/profile/edit')
   @use(upload.single('photo'))
   async postUpdateProfile(req: Request, res: Response) {
-    let mainPhoto;
-    if (req.file) {
-      const b64 = Buffer.from(req.file.buffer).toString('base64');
-      const dataURI = 'data:' + req.file!.mimetype + ';base64,' + b64;
-      const response = await cloudinary.uploader.upload(dataURI, {
-        resource_type: 'auto',
-      });
-      mainPhoto = response.url;
-    }
     for (let key in req.body) {
       try {
         if (typeof req.body[key] === 'string') {
@@ -69,12 +60,12 @@ class ProfileController {
     }
     const user = await User.findOneAndUpdate(
       { userId: req.session!.userId },
-      { ...req.body, mainPhoto },
+      { ...req.body },
       { new: true }
     ).select('-_id -password -__v');
     const profile = await Profile.findOneAndUpdate(
       { userId: req.session!.userId },
-      { ...req.body, mainPhoto },
+      { ...req.body },
       { new: true }
     ).select('-_id -__v');
     req.session = user;
