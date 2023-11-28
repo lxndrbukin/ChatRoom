@@ -1,4 +1,5 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieSession from 'cookie-session';
@@ -27,6 +28,7 @@ import './models/FriendsList';
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cookieSession({
     keys: ['123safa'],

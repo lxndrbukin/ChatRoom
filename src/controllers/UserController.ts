@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { controller, get, post } from './decorators';
+import { controller, get, post, use } from './decorators';
 import Multer from 'multer';
 import User from '../models/User';
 
@@ -42,15 +42,24 @@ class UserController {
   }
 
   @post('/user/edit')
+  @use(upload.fields([]))
   async postEditUser(req: Request, res: Response) {
-    if (req.session) {
-      const user = await User.updateOne(
-        { userId: req.session.userId },
-        { ...req.body },
-        { new: true }
-      ).select('-_id -password -__v');
-      return res.send(user);
+    console.log(req.body);
+    for (let key in req.body) {
+      try {
+        if (typeof req.body[key] === 'string') {
+          req.body = { ...req.body, [key]: JSON.parse(req.body[key]) };
+        }
+      } catch (err) {
+        req.body = { ...req.body, [key]: req.body[key] };
+      }
     }
+    const user = await User.findOneAndUpdate(
+      { userId: req.session!.userId },
+      { ...req.body },
+      { new: true }
+    ).select('-_id -password -__v');
+    return res.send(user);
   }
 }
 

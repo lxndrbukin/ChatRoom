@@ -50,7 +50,7 @@ export const ProfileEditMainForm: React.FC<
       data.append('mainPhoto', avatar);
     }
     data.append(
-      'dbo',
+      'dob',
       JSON.stringify({
         dd: target.dd.value,
         mm: target.mm.value,
@@ -58,6 +58,7 @@ export const ProfileEditMainForm: React.FC<
       })
     );
     data.append('about.info.brief', target.brief.value);
+    console.log(data);
     dispatch(updateProfile(data));
     dispatch(updateUser(data));
   };

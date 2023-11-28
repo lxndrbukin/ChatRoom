@@ -40,7 +40,9 @@ class ProfileController {
   }
 
   @post('/profile/edit')
+  @use(upload.fields([]))
   async postUpdateProfile(req: Request, res: Response) {
+    console.log(req.body);
     for (let key in req.body) {
       try {
         if (typeof req.body[key] === 'string') {
@@ -50,13 +52,11 @@ class ProfileController {
         req.body = { ...req.body, [key]: req.body[key] };
       }
     }
-    if (req.session) {
-      const profile = await Profile.findOneAndUpdate(
-        { userId: req.session.userId },
-        { ...req.body },
-        { new: true }
-      ).select('-_id -__v');
-      return res.send(profile);
-    }
+    const profile = await Profile.findOneAndUpdate(
+      { userId: req.session!.userId },
+      { ...req.body },
+      { new: true }
+    ).select('-_id -__v');
+    return res.send(profile);
   }
 }
