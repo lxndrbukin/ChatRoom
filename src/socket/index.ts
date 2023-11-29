@@ -1,13 +1,6 @@
 import Chat from '../models/Chat';
 import User from '../models/User';
 import Profile from '../models/Profile';
-import { v2 as cloudinary } from 'cloudinary';
-
-cloudinary.config({
-  cloud_name: 'dpjgiuxf2',
-  api_key: '469618289571349',
-  api_secret: '0PUkvOQmZmpYQYPN3Ljx94gVFVQ'
-});
 
 export const io = (socketIO: any): void => {
   socketIO.on('connection', (socket: any): void => {

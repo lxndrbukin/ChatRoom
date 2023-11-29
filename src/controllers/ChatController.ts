@@ -1,11 +1,38 @@
 import { Request, Response } from 'express';
-import { controller, get, post } from './decorators';
+import { controller, get, post, put } from './decorators';
 import { ChatMemberId, ChatMessage } from '../models/types';
 import Chat from '../models/Chat';
 import User from '../models/User';
 
 @controller('/_api')
 class ChatController {
+  @post('/chats')
+  async postChat(req: Request, res: Response) {
+    if (req.session) {
+      const { userId, fullName } = req.session;
+      const user = { userId, fullName };
+      const num = await Chat.count();
+      const chat = await Chat.create({
+        chatId: num + 1,
+        members: [user],
+        messages: [],
+      });
+      return res.send(chat);
+    }
+  }
+
+  @put('/chats/:chatId')
+  async putChat(req: Request, res: Response) {
+    const { userId, nickname, role } = req.body;
+    const user = { userId, nickname, role };
+    const chat = await Chat.findOneAndUpdate(
+      { chatId: req.params.chatId },
+      { $push: { members: user } },
+      { new: true }
+    );
+    return res.send(chat);
+  }
+
   @get('/chats')
   async getChats(req: Request, res: Response) {
     if (req.session) {
@@ -25,31 +52,6 @@ class ChatController {
       });
       return res.send(chats);
     }
-  }
-
-  @post('/chats')
-  async postChats(req: Request, res: Response) {
-    if (req.session) {
-      const num = await Chat.count();
-      const chat = await Chat.create({
-        chatId: num,
-        members: [req.body.user],
-        messages: [],
-      });
-      return res.send(chat);
-    }
-  }
-
-  @post('/chats/:chatId')
-  async postChat(req: Request, res: Response) {
-    const { userId, nickname, role } = req.body;
-    const user = { userId, nickname, role };
-    const chat = await Chat.findOneAndUpdate(
-      { chatId: req.params.chatId },
-      { $push: { members: user } },
-      { new: true }
-    );
-    return res.send(chat);
   }
 
   @get('/chats/:chatId')

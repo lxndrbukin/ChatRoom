@@ -9,13 +9,18 @@ export const ChatsList: React.FC<ChatsListProps> = ({
   socket,
 }): JSX.Element => {
   const dispatch = useDispatch();
+  const { userData } = useSelector((state: RootState) => state.session);
   const { chatsList } = useSelector((state: RootState) => state.chats);
 
   useEffect(() => {
-    socket.emit('event://fetch-chats');
-    socket.on('event://fetch-chats-res', (data) => {
-      dispatch(fetchAllChats(data));
-    });
+    if (userData) {
+      if (userData.userId) {
+        socket.emit('event://fetch-chats');
+        socket.on('event://fetch-chats-res', (data) => {
+          dispatch(fetchAllChats(data));
+        });
+      }
+    }
   }, [socket]);
 
   const renderChatList = (): JSX.Element | JSX.Element[] => {

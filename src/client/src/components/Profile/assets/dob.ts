@@ -31,10 +31,3 @@ export const years = () => {
   }
   return yyyy;
 };
-
-const numberValues = (twoDigit: number, fourDigit?: number) => {
-  const currentYear = new Date().getFullYear();
-  for (let i = fourDigit || 1; i <= (fourDigit ? currentYear : twoDigit); i++) {
-
-  }
-};

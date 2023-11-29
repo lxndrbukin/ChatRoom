@@ -10,8 +10,9 @@ export const ProfileEditInput: React.FC<ProfileEditInputProps> = ({
 }): JSX.Element => {
   return (
     <div className='profile-edit-input-wrapper'>
-      <label>{label}</label>
+      <label htmlFor={name}>{label}</label>
       <input
+        id={name}
         type='text'
         className='profile-edit-input'
         name={name}
@@ -31,8 +32,9 @@ export const ProfileEditTextarea: React.FC<ProfileEditInputProps> = ({
 }): JSX.Element => {
   return (
     <div className='profile-edit-input-wrapper'>
-      <label>{label}</label>
+      <label htmlFor={name}>{label}</label>
       <textarea
+        id={name}
         className='profile-edit-textarea'
         name={name}
         placeholder={placeholder}

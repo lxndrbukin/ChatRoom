@@ -7,17 +7,6 @@ import { createPassword, comparePasswords } from './helpers';
 
 @controller('/auth')
 class AuthController {
-  @get('/login')
-  getLogin(req: Request, res: Response) {
-    res.send(/*html*/ `
-    <form method='POST'>
-      <input name='email' type='text' />
-      <input name='password' type='password' />
-      <button>Submit</button>
-    </form>
-  `);
-  }
-
   @post('/login')
   async postLogin(req: Request, res: Response) {
     if (req.body.email) {
@@ -33,18 +22,6 @@ class AuthController {
       req.session = user;
       return res.send(req.session);
     }
-  }
-
-  @get('/signup')
-  getSignup(req: Request, res: Response) {
-    res.send(/*html*/ `
-    <form method='POST'>
-      <input name='nickname' type='text' />
-      <input name='email' type='email' />
-      <input name='password' type='password' />
-      <button>Submit</button>
-    </form>
-  `);
   }
 
   @post('/signup')
