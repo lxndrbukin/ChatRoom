@@ -10,6 +10,7 @@ import { ProfileEdit } from '../components/Profile/ProfileEdit';
 import { ProfileEditMain } from '../components/Profile/ProfileEditMain';
 import { ProfileEditMainForm } from '../components/Profile/ProfileEditMainForm';
 import { ProfileEditContactForm } from '../components/Profile/ProfileEditContactForm';
+import { ProfileEditAccessForm } from '../components/Profile/ProfileEditAccessForm';
 import { Chats } from '../components/Chats/Chats';
 import { ChatsList } from '../components/Chats/ChatsList';
 import { ChatBox } from '../components/Chats/ChatBox';
@@ -50,6 +51,14 @@ export const router = createBrowserRouter([
               </ProfileEditMain>
             ),
           },
+          {
+            path: 'access',
+            element: (
+              <ProfileEditMain header='Access Details'>
+                <ProfileEditAccessForm />
+              </ProfileEditMain>
+            ),
+          },
         ],
       },
       {
@@ -57,7 +66,7 @@ export const router = createBrowserRouter([
         element: <Chats />,
         children: [
           {
-            path: '/IM',
+            path: '',
             element: (
               <React.Fragment>
                 <ChatsList socket={socket} />

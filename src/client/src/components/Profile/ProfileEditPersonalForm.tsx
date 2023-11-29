@@ -9,8 +9,11 @@ export const ProfileEditPersonalForm: React.FC = (): JSX.Element => {
       country: { value: string };
       city: { value: string };
     };
-    data.append('about.personal.country', target.country.value);
-    data.append('about.personal.city', target.city.value);
+    const { city, country } = target;
+    data.append(
+      'about',
+      JSON.stringify({ personal: { country: country.value, city: city.value } })
+    );
   };
 
   return (

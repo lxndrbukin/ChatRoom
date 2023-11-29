@@ -7,4 +7,8 @@ export const editMenuLinks = [
     name: 'Contacts',
     path: '/contacts'
   },
+  {
+    name: 'Access Details',
+    path: '/access'
+  },
 ];

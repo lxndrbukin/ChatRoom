@@ -39,11 +39,12 @@ export const ProfileEditMainForm: React.FC<
       mm: { value: string };
       yyyy: { value: string };
     };
+    const { firstName, lastName, brief, dd, mm, yyyy } = target;
     data.append(
       'fullName',
       JSON.stringify({
-        firstName: target.firstName.value,
-        lastName: target.lastName.value,
+        firstName: firstName.value,
+        lastName: lastName.value,
       })
     );
     if (avatar) {
@@ -52,13 +53,12 @@ export const ProfileEditMainForm: React.FC<
     data.append(
       'dob',
       JSON.stringify({
-        dd: target.dd.value,
-        mm: target.mm.value,
-        yyyy: target.yyyy.value,
+        dd: dd.value,
+        mm: mm.value,
+        yyyy: yyyy.value,
       })
     );
-    data.append('about.info.brief', target.brief.value);
-    console.log(data);
+    data.append('about', JSON.stringify({ info: { brief: brief.value } }));
     dispatch(updateProfile(data));
     dispatch(updateUser(data));
   };

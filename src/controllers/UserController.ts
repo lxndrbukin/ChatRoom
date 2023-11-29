@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { controller, get, post, use } from './decorators';
+import { comparePasswords } from './helpers';
 import Multer from 'multer';
 import User from '../models/User';
 
@@ -44,17 +45,27 @@ class UserController {
   @post('/user/edit')
   @use(upload.fields([]))
   async postEditUser(req: Request, res: Response) {
-    console.log(req.body);
+    let user;
     for (let key in req.body) {
       try {
         if (typeof req.body[key] === 'string') {
           req.body = { ...req.body, [key]: JSON.parse(req.body[key]) };
+          if (key === 'passwords') {
+            const passwords = req.body[key];
+            const { currentPassword, newPassword, confirmNewPassword } = passwords;
+            user = await User.findOne({ userId: req.session!.userId });
+            if (user) {
+              if (await comparePasswords(user.password, currentPassword) && newPassword === confirmNewPassword) {
+                await user.updateOne({ password: newPassword });
+              }
+            }
+          }
         }
       } catch (err) {
         req.body = { ...req.body, [key]: req.body[key] };
       }
     }
-    const user = await User.findOneAndUpdate(
+    user = await User.findOneAndUpdate(
       { userId: req.session!.userId },
       { ...req.body },
       { new: true }
