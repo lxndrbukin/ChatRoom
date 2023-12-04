@@ -4,7 +4,7 @@
 .ui-icon-button {
   border: 1px solid $light-blue;
   background-color: $light-blue;
-  border-radius: 7px;
+  border-radius: $border-r7;
   padding: 0 $spacing-md;
   font-weight: bold;
   cursor: pointer;
@@ -15,7 +15,7 @@
 .ui-button {
   border: 1px solid $light-blue;
   background-color: $light-blue;
-  border-radius: 7px;
+  border-radius: $border-r7;
   padding: 0 $spacing-lg;
   font-weight: bold;
   cursor: pointer;
@@ -31,7 +31,7 @@
 .ui-form-button {
   border: 1px solid $light-blue;
   background-color: $light-blue;
-  border-radius: 7px;
+  border-radius: $border-r7;
   padding: 0 $spacing-lg;
   cursor: pointer;
   color: $dark-blue;
@@ -44,7 +44,7 @@
 }
 
 .box {
-  border-radius: 7px;
+  border-radius: $border-r7;
   border: 1px solid $light-blue;
   background-color: $white;
   padding: 12px;
@@ -61,7 +61,7 @@
   height: 30px;
   padding: $spacing-sm $spacing-md;
   box-sizing: border-box;
-  border-radius: 7px;
+  border-radius: $border-r7;
   border: 1px solid $grey;
 
   &:focus {
@@ -75,16 +75,6 @@
   width: 70%;
   background-color: $light-blue;
 }
-
-// .modal {
-//   top: 50%;
-//   left: 50%;
-//   right: auto;
-//   bottom: auto;
-//   margin-right: -50%;
-//   transform: translate(-50%, -50%);
-//   position: absolute;
-// }
 
 body {
   margin: 0;

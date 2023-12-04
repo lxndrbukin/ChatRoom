@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Navigate, useSearchParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { ChatBoxProps } from './types';
 import {
   sendMessage,
@@ -27,14 +27,20 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
     if (chatId) {
       dispatch(getChat(chatId));
     }
-    socket.on('event://send-message-res', (data: SendMessageRes): void => {
-      if (chatId === data.chatId) {
-        dispatch(sendMessage(data));
+    if (currentChat) {
+      if (
+        currentChat.members.find((member) => member.userId === userData?.userId)
+      ) {
+        socket.on('event://send-message-res', (data: SendMessageRes): void => {
+          if (chatId === data.chatId) {
+            dispatch(sendMessage(data));
+          }
+        });
+        socket.on('event://typing-message-res', (data: string): void => {
+          setTypingStatus(data);
+        });
       }
-    });
-    socket.on('event://typing-message-res', (data: string) => {
-      setTypingStatus(data);
-    });
+    }
     return () => {
       socket.off('event://send-message-res');
     };
@@ -45,10 +51,16 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
   }, [currentChat?.messages]);
 
   const handleTyping = (): void => {
-    socket.emit(
-      'event://typing-message',
-      `${firstName} ${lastName[0]}. is typing...`
-    );
+    if (currentChat) {
+      if (
+        currentChat.members.find((member) => member.userId === userData?.userId)
+      ) {
+        socket.emit(
+          'event://typing-message',
+          `${firstName} ${lastName[0]}. is typing...`
+        );
+      }
+    }
   };
 
   const handleSendMessage = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -58,20 +70,26 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ socket }): JSX.Element => {
     };
     if (currentChat) {
       if (chatId === JSON.stringify(currentChat.chatId)) {
-        socket.emit('event://send-message', {
-          chatId,
-          userId: userData?.userId,
-          message: target.message.value,
-        });
+        if (
+          currentChat.members.find(
+            (member) => member.userId === userData?.userId
+          )
+        ) {
+          socket.emit('event://send-message', {
+            chatId,
+            userId: userData?.userId,
+            message: target.message.value,
+          });
+        }
       }
     }
   };
 
   if (!isLoggedIn) {
-    return <Navigate to='/' />;
+    return <Navigate to="/" />;
   }
   return (
-    <div className='chat-box'>
+    <div className="chat-box">
       <ChatMessages
         typingStatus={typingStatus}
         lastMessageRef={lastMessageRef}

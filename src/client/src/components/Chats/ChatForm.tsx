@@ -6,9 +6,13 @@ export const ChatForm: React.FC<ChatFormProps> = ({
   handleTyping,
 }): JSX.Element => {
   return (
-    <form onSubmit={handleSendMessage}>
-      <input onKeyDown={handleTyping} name='message' />
-      <button className='chat-button'>Send</button>
+    <form className="message-form" onSubmit={handleSendMessage}>
+      <textarea
+        className="message-text-input"
+        onKeyDown={handleTyping}
+        name="message"
+      />
+      <button className="message-send-button ui-button">Send</button>
     </form>
   );
 };
