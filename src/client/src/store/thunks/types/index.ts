@@ -10,7 +10,7 @@ export enum FriendRequestAction {
   Decline = 'decline',
   Send = 'send',
   Remove = 'remove',
-  Cancel = 'cancel'
+  Cancel = 'cancel',
 }
 
 export interface FriendRequestData {
@@ -20,4 +20,12 @@ export interface FriendRequestData {
     lastName: string;
   };
   requestAction: FriendRequestAction;
+}
+
+export interface ChatMember {
+  userId: number;
+  fullName: {
+    firstName: string;
+    lastName: string;
+  };
 }

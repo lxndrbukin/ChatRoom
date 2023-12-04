@@ -2,7 +2,8 @@ export enum Schemas {
   Chat = 'chat',
   User = 'user',
   FriendsList = 'friendsList',
-  Profile = 'profile'
+  Profile = 'profile',
+  ChatsList = 'chatsList',
 }
 
 export enum UserRoles {
@@ -15,7 +16,7 @@ export enum UserStatus {
   Online = 'Online',
   Away = 'Away',
   Busy = 'Busy',
-  Offline = 'Offline'
+  Offline = 'Offline',
 }
 
 export interface IUser extends Document {
@@ -32,7 +33,7 @@ export interface IUser extends Document {
     lastSeen: number;
     previousOnlineStatus: UserStatus;
     onlineStatus: UserStatus;
-  },
+  };
   signedUp: number;
 }
 
@@ -90,7 +91,7 @@ export interface IProfile extends Document {
     lastSeen: number;
     previousOnlineStatus: UserStatus;
     onlineStatus: UserStatus;
-  },
+  };
   signedUp: number;
 }
 

@@ -3,6 +3,7 @@ import { controller, get, post, bodyValidator, use } from './decorators';
 import User from '../models/User';
 import Profile from '../models/Profile';
 import FriendsList from '../models/FriendsList';
+import ChatsList from '../models/ChatsList';
 import { createPassword, comparePasswords } from './helpers';
 
 @controller('/auth')
@@ -35,7 +36,7 @@ class AuthController {
         .status(403)
         .json({ message: 'Email or Nickname already in use.' });
     }
-    const userNum = await User.count();
+    const userNum = (await User.count()) + 1;
     const user = await User.create({
       userId: userNum + 1,
       fullName,
@@ -43,13 +44,17 @@ class AuthController {
       password: await createPassword(password),
     });
     await Profile.create({
-      userId: userNum + 1,
+      userId: userNum,
       fullName,
       email,
     });
     await FriendsList.create({
-      userId: userNum + 1,
+      userId: userNum,
       friendsList: [],
+    });
+    await ChatsList.create({
+      userId: userNum,
+      chatsList: [],
     });
     const { userId } = user;
     req.session = { userId, email, fullName };

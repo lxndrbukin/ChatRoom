@@ -12,7 +12,7 @@ import { v2 as cloudinary } from 'cloudinary';
 cloudinary.config({
   cloud_name: keys.cloud_name,
   api_key: keys.cloudinary_key,
-  api_secret: keys.cloudinary_secret
+  api_secret: keys.cloudinary_secret,
 });
 
 import './controllers/AuthController';
@@ -23,6 +23,7 @@ import './controllers/FriendsListController';
 
 import './models/User';
 import './models/Chat';
+import './models/ChatsList';
 import './models/Profile';
 import './models/FriendsList';
 

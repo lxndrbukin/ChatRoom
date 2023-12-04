@@ -12,7 +12,9 @@ class UserController {
   @get('/current_user')
   async getCurrentUser(req: Request, res: Response) {
     if (req.session && req.session.userId) {
-      const currentUser = await User.findOne({ userId: req.session.userId }).select('-_id -password -__v');
+      const currentUser = await User.findOne({
+        userId: req.session.userId,
+      }).select('-_id -password -__v');
       if (currentUser) {
         return res.send(currentUser);
       }
@@ -25,8 +27,8 @@ class UserController {
     const searchResults = await User.find({
       $or: [
         { 'fullName.firstName': { $regex: req.query.search } },
-        { 'fullName.lastName': { $regex: req.query.search } }
-      ]
+        { 'fullName.lastName': { $regex: req.query.search } },
+      ],
     }).select('-_id -__v -password');
     return res.send(searchResults);
   }
@@ -34,7 +36,9 @@ class UserController {
   @get('/users/:userId')
   async getUser(req: Request, res: Response) {
     if (req.params && req.params.userId) {
-      const user = await User.findOne({ userId: req.params.userId }).select('-password -email -__v -_id');
+      const user = await User.findOne({ userId: req.params.userId }).select(
+        '-password -email -__v -_id'
+      );
       if (user) {
         return res.send(user);
       }
@@ -52,10 +56,14 @@ class UserController {
           req.body = { ...req.body, [key]: JSON.parse(req.body[key]) };
           if (key === 'passwords') {
             const passwords = req.body[key];
-            const { currentPassword, newPassword, confirmNewPassword } = passwords;
+            const { currentPassword, newPassword, confirmNewPassword } =
+              passwords;
             user = await User.findOne({ userId: req.session!.userId });
             if (user) {
-              if (await comparePasswords(user.password, currentPassword) && newPassword === confirmNewPassword) {
+              if (
+                (await comparePasswords(user.password, currentPassword)) &&
+                newPassword === confirmNewPassword
+              ) {
                 await user.updateOne({ password: newPassword });
               }
             }
@@ -73,4 +81,3 @@ class UserController {
     return res.send(user);
   }
 }
-

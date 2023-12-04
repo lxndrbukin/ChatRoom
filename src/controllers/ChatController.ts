@@ -10,11 +10,12 @@ class ChatController {
   async postChat(req: Request, res: Response) {
     if (req.session) {
       const { userId, fullName } = req.session;
-      const user = { userId, fullName };
+      const { user } = req.body;
+      const sessionUser = { userId, fullName };
       const num = await Chat.count();
       const chat = await Chat.create({
         chatId: num + 1,
-        members: [user],
+        members: [sessionUser, user],
         messages: [],
       });
       return res.send(chat);
@@ -38,16 +39,20 @@ class ChatController {
     if (req.session) {
       const { userId } = req.session;
       const chatsRes = await Chat.find({ memberIds: { $in: [userId] } });
-      const chats = chatsRes.map(chat => {
+      const chats = chatsRes.map((chat) => {
         const { memberIds } = chat;
-        const messages = chat?.messages.filter((message: ChatMessage) => message.read === false);
+        const messages = chat?.messages.filter(
+          (message: ChatMessage) => message.read === false
+        );
         const members = memberIds.map(async (member) => {
-          return await User.findOne({ userId: member.userId }).select('-__v -_id -password');
+          return await User.findOne({ userId: member.userId }).select(
+            '-__v -_id -password'
+          );
         });
         return {
           ...chat,
           members,
-          messages
+          messages,
         };
       });
       return res.send(chats);
@@ -59,7 +64,9 @@ class ChatController {
     const { chatId } = req.params;
     const chatRes = await Chat.findOne({ chatId }).select('-__v -_id');
     const chatMembers = chatRes?.memberIds.map(async (member: ChatMemberId) => {
-      return await User.findOne({ userId: member.userId }).select('-_id -__v -password');
+      return await User.findOne({ userId: member.userId }).select(
+        '-_id -__v -password'
+      );
     });
     const chat = {
       ...chatRes,
