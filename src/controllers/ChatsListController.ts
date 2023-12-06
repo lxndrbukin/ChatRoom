@@ -12,9 +12,20 @@ class ChatsListController {
   async putChatsList(req: Request, res: Response) {
     let chat;
     const { user } = req.body;
-    const sessionChatsList = await ChatsList.findOne({
+    let sessionChatsList = await ChatsList.findOne({
       userId: req.session!.userId,
     });
-    const userChatsList = await ChatsList.findOne({ userId: user.userId });
+    let userChatsList = await ChatsList.findOne({ userId: user.userId });
+
+    if (sessionChatsList) {
+      const chatId = sessionChatsList.chatsList;
+      sessionChatsList = await sessionChatsList.updateOne(
+        { $push: { chatsList: chat } },
+        { new: true }
+      );
+    }
+    if (userChatsList) {
+      userChatsList.updateOne({ $push: { chatsList: chat } });
+    }
   }
 }

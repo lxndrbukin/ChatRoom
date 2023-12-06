@@ -29,7 +29,6 @@ export const router = createBrowserRouter([
       {
         path: '/profile/:userId',
         element: <Profile socket={socket} />,
-        children: [],
       },
       {
         path: '/profile/:userId/edit',
@@ -38,7 +37,7 @@ export const router = createBrowserRouter([
           {
             path: '',
             element: (
-              <ProfileEditMain header='Profile'>
+              <ProfileEditMain header="Profile">
                 <ProfileEditMainForm />
               </ProfileEditMain>
             ),
@@ -46,7 +45,7 @@ export const router = createBrowserRouter([
           {
             path: 'contacts',
             element: (
-              <ProfileEditMain header='Contacts'>
+              <ProfileEditMain header="Contacts">
                 <ProfileEditContactForm />
               </ProfileEditMain>
             ),
@@ -54,7 +53,7 @@ export const router = createBrowserRouter([
           {
             path: 'access',
             element: (
-              <ProfileEditMain header='Access Details'>
+              <ProfileEditMain header="Access Details">
                 <ProfileEditAccessForm />
               </ProfileEditMain>
             ),

@@ -3,9 +3,7 @@ import { controller, get, post } from './decorators';
 import { FriendRequestAction } from './types';
 import { UserId } from '../models/types';
 import FriendsList from '../models/FriendsList';
-import { IUser } from '../models/types';
 import User from '../models/User';
-
 
 @controller('/_api')
 class FriendsListController {
@@ -25,7 +23,9 @@ class FriendsListController {
     if (listRes) {
       const promises: any = listRes.friendsList.map(async (friend) => {
         try {
-          return await User.findOne({ userId: friend.userId }).select('-_id -__v -password -email');
+          return await User.findOne({ userId: friend.userId }).select(
+            '-_id -__v -password -email'
+          );
         } catch (error) {
           console.log(error);
         }
@@ -37,7 +37,9 @@ class FriendsListController {
 
   @get('/profile_friend')
   async getProfileFriend(req: Request, res: Response) {
-    const friend = await User.findOne({ userId: req.query.userId }).select('-_id -__v -password');
+    const friend = await User.findOne({ userId: req.query.userId }).select(
+      '-_id -__v -password'
+    );
     return res.send(friend);
   }
 
@@ -64,7 +66,6 @@ class FriendsListController {
       });
       const sessionUserId = req.session.userId;
       const otherUserId = req.body.userId;
-
       switch (req.body.requestAction) {
         case FriendRequestAction.Send:
           if (currentUserReqs) {
@@ -82,7 +83,9 @@ class FriendsListController {
             otherUserReqs = await FriendsList.findOneAndUpdate(
               { userId: otherUserId },
               {
-                $push: { requestsList: { userId: sessionUserId, checked: false } },
+                $push: {
+                  requestsList: { userId: sessionUserId, checked: false },
+                },
               },
               { new: true }
             );
@@ -95,12 +98,18 @@ class FriendsListController {
         case FriendRequestAction.Accept:
           currentUserReqs = await FriendsList.findOneAndUpdate(
             { userId: sessionUserId },
-            { $pull: { requestsList: { userId: otherUserId } }, $push: { friendsList: { userId: otherUserId } } },
+            {
+              $pull: { requestsList: { userId: otherUserId } },
+              $push: { friendsList: { userId: otherUserId } },
+            },
             { new: true }
           );
           otherUserReqs = await FriendsList.findOneAndUpdate(
             { userId: otherUserId },
-            { $pull: { sentRequests: { userId: sessionUserId } }, $push: { friendsList: { userId: sessionUserId } } },
+            {
+              $pull: { sentRequests: { userId: sessionUserId } },
+              $push: { friendsList: { userId: sessionUserId } },
+            },
             { new: true }
           );
           break;

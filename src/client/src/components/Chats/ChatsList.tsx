@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { ChatsListProps } from './types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { RootState, fetchAllChats } from '../../store';
 import { ChatsListItem } from './ChatsListItem';
 
@@ -29,12 +28,12 @@ export const ChatsList: React.FC<ChatsListProps> = ({
         return <ChatsListItem chat={chat} />;
       });
     }
-    return <div className='loading-spinner'>Loading...</div>;
+    return <div className="loading-spinner">Loading...</div>;
   };
 
   return (
-    <div className='chats-list-wrapper'>
-      <div className='chats-list'>{renderChatList()}</div>
+    <div className="chats-list-wrapper">
+      <div className="chats-list">{renderChatList()}</div>
     </div>
   );
 };
